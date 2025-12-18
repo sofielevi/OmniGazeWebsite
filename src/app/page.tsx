@@ -1,65 +1,165 @@
-import Image from "next/image";
+import { Header } from "@/components/marketing/header";
+import { Footer } from "@/components/marketing/footer";
+import { Hero } from "@/components/marketing/hero";
+import { Section, SectionHeader } from "@/components/marketing/section";
+import { ValuePyramid } from "@/components/marketing/value-pyramid";
+import { BridgeVisual } from "@/components/marketing/bridge-visual";
+import { ButtonLink } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <Header />
+
+      <main>
+        {/* Hero Section */}
+        <Hero />
+
+        {/* Value Pyramid Section - Core Differentiator */}
+        <Section id="pyramid" className="bg-gradient-to-b from-transparent via-[var(--bg-card)] to-transparent">
+          <SectionHeader
+            label="The OmniGaze Advantage"
+            title="From Servers to Strategy"
+            description="The only platform that spans the full value chain—from infrastructure discovery to strategic planning."
+          />
+
+          <ValuePyramid className="mb-16" />
+
+          <div className="text-center">
+            <p className="text-[var(--text-secondary)] mb-6 max-w-2xl mx-auto">
+              Most tools focus on just one layer. OmniGaze connects them all,
+              giving you complete visibility from 10,000+ infrastructure assets
+              to your 1-4 strategic initiatives.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <ButtonLink href="/features" variant="secondary">
+                See All Features
+              </ButtonLink>
+              <ButtonLink href="/pricing" variant="primary">
+                View Pricing
+                <ChevronRight size={16} />
+              </ButtonLink>
+            </div>
+          </div>
+        </Section>
+
+        {/* Bridge Section */}
+        <Section id="bridge">
+          <SectionHeader
+            label="Why OmniGaze"
+            title="One Platform, Complete Visibility"
+            description="Stop juggling separate tools for discovery and architecture. OmniGaze bridges operational IT and strategic planning."
+          />
+
+          <BridgeVisual />
+        </Section>
+
+        {/* Features Preview */}
+        <Section className="bg-[var(--bg-card)]">
+          <SectionHeader
+            label="Capabilities"
+            title="Everything You Need"
+            description="From auto-discovery to executive dashboards, all in one unified platform."
+          />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature) => (
+              <FeatureCard key={feature.title} {...feature} />
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <ButtonLink href="/features" variant="secondary">
+              Explore All Features
+              <ChevronRight size={16} />
+            </ButtonLink>
+          </div>
+        </Section>
+
+        {/* CTA Section */}
+        <Section>
+          <div className="relative bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-card)] border border-[var(--border-warm)] rounded-3xl p-12 md:p-20 text-center overflow-hidden">
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,var(--amber-glow),transparent)] pointer-events-none" />
+
+            <h2 className="font-display text-3xl md:text-5xl mb-4 relative z-10">
+              Ready to See Everything?
+            </h2>
+            <p className="font-display font-light text-lg text-[var(--text-secondary)] mb-8 relative z-10">
+              Join hundreds of IT teams who&apos;ve discovered a better way to understand their infrastructure.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 relative z-10">
+              <ButtonLink href="/register" variant="primary" size="lg">
+                Start Free Today
+              </ButtonLink>
+              <ButtonLink href="/contact" variant="secondary" size="lg">
+                Schedule a Demo
+              </ButtonLink>
+            </div>
+          </div>
+        </Section>
       </main>
+
+      <Footer />
+    </>
+  );
+}
+
+// Feature data
+const features = [
+  {
+    title: "Auto-Discovery",
+    description: "Automatically scan your network and discover servers, services, and connections without agents.",
+    icon: "🔍",
+    tier: "Community",
+  },
+  {
+    title: "3D Visualization",
+    description: "Explore your infrastructure in an immersive 3D environment. See connections like never before.",
+    icon: "🌐",
+    tier: "Starter",
+  },
+  {
+    title: "Process Mapping",
+    description: "Discover running processes and map application dependencies automatically.",
+    icon: "📊",
+    tier: "Starter",
+  },
+  {
+    title: "Vulnerability Scanning",
+    description: "Identify CVEs and security risks across your infrastructure with continuous monitoring.",
+    icon: "🛡️",
+    tier: "Professional",
+  },
+  {
+    title: "OData API",
+    description: "Full API access for integration with your existing tools and workflows.",
+    icon: "⚡",
+    tier: "Professional",
+  },
+  {
+    title: "Enterprise Architecture",
+    description: "FactSheets, business capabilities, and strategic planning integration.",
+    icon: "🏛️",
+    tier: "Enterprise",
+  },
+];
+
+function FeatureCard({ title, description, icon, tier }: {
+  title: string;
+  description: string;
+  icon: string;
+  tier: string;
+}) {
+  return (
+    <div className="p-6 bg-[var(--bg-elevated)] rounded-xl border border-[var(--border-subtle)] hover:border-[var(--border-warm)] transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl">
+      <div className="text-3xl mb-4">{icon}</div>
+      <h3 className="font-display text-lg mb-2">{title}</h3>
+      <p className="text-sm text-[var(--text-secondary)] mb-4">{description}</p>
+      <span className="inline-block px-2 py-1 bg-[var(--bg-card)] rounded text-xs text-[var(--amber-400)]">
+        {tier}+
+      </span>
     </div>
   );
 }

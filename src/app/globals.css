@@ -1,26 +1,196 @@
 @import "tailwindcss";
 
+/* OmniGaze Design System - "Warm Technical" Aesthetic */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background */
+  --bg-deep: #0d0f12;
+  --bg-card: #14171c;
+  --bg-elevated: #1a1e25;
+  --bg-hover: #22272f;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-warm: rgba(232, 175, 100, 0.2);
+
+  /* Text */
+  --text-primary: #f0ede8;
+  --text-secondary: #9a958d;
+  --text-muted: #5f5b54;
+
+  /* Amber - Primary Brand */
+  --amber-50: #fef7e8;
+  --amber-100: #fdecc8;
+  --amber-200: #f9d68a;
+  --amber-300: #f4b94d;
+  --amber-400: #e8a030;
+  --amber-500: #d4841c;
+  --amber-600: #b86814;
+  --amber-glow: rgba(232, 160, 48, 0.15);
+
+  /* Status */
+  --success: #4ade80;
+  --success-muted: rgba(74, 222, 128, 0.15);
+
+  /* Pyramid Layer Colors */
+  --pyramid-strategy: #7c6aef;
+  --pyramid-value-streams: #8b7cf5;
+  --pyramid-capabilities: #9d91f8;
+  --pyramid-applications: #b0a6fb;
+  --pyramid-infrastructure: #1e3a8a;
+
+  /* Animation timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-deep: var(--bg-deep);
+  --color-bg-card: var(--bg-card);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-hover: var(--bg-hover);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-warm: var(--border-warm);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-amber-50: var(--amber-50);
+  --color-amber-100: var(--amber-100);
+  --color-amber-200: var(--amber-200);
+  --color-amber-300: var(--amber-300);
+  --color-amber-400: var(--amber-400);
+  --color-amber-500: var(--amber-500);
+  --color-amber-600: var(--amber-600);
+  --color-amber-glow: var(--amber-glow);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-pyramid-strategy: var(--pyramid-strategy);
+  --color-pyramid-value-streams: var(--pyramid-value-streams);
+  --color-pyramid-capabilities: var(--pyramid-capabilities);
+  --color-pyramid-applications: var(--pyramid-applications);
+  --color-pyramid-infrastructure: var(--pyramid-infrastructure);
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-deep);
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--amber-200) 0%, var(--amber-400) 50%, var(--amber-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes pulse-node {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.6; transform: scale(1); }
+}
+
+@keyframes pyramid-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scaleY(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s var(--ease-out-expo) backwards;
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: blink 2s ease-in-out infinite;
+}
+
+/* Grid Pattern Background */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(232, 160, 48, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 160, 48, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 70%);
+}
+
+/* Glow Effect */
+.glow-amber {
+  box-shadow: 0 4px 20px var(--amber-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.glow-amber-lg {
+  box-shadow: 0 8px 40px var(--amber-glow);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-card);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-hover);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Selection */
+::selection {
+  background: var(--amber-500);
+  color: var(--bg-deep);
 }
