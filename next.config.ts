@@ -1,15 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Static export for hosting on web hotel (no server-side rendering)
-  output: 'export',
+  // Note: Static export removed to support API routes (checkout, webhooks, auth)
+  // For Vercel/Azure deployment, server-side features work automatically
+  // To restore static export: add `output: 'export'` and use external API only
 
-  // Trailing slashes for static hosting compatibility
+  // Trailing slashes for consistent URLs
   trailingSlash: true,
 
-  // Image optimization disabled for static export
+  // Image optimization (enabled for Vercel, disable for static hosts)
   images: {
-    unoptimized: true,
+    unoptimized: process.env.NODE_ENV !== 'production',
   },
 };
 

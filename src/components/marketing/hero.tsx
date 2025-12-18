@@ -1,20 +1,38 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Play } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import Image from "next/image";
+import { useState } from "react";
 
 export function Hero() {
+  const [showVideo, setShowVideo] = useState(false);
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20">
+      {/* Background Image */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <Image
+          src="/images/hero-network.png"
+          alt=""
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-deep)] via-transparent to-[var(--bg-deep)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-deep)] via-transparent to-[var(--bg-deep)]" />
+      </div>
+
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-grid-pattern" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-50" />
 
         {/* Glow orbs */}
         <div
-          className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-40 animate-float"
+          className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-30 animate-float"
           style={{
             background: "radial-gradient(circle, var(--amber-500) 0%, transparent 70%)",
             top: "-200px",
@@ -22,7 +40,7 @@ export function Hero() {
           }}
         />
         <div
-          className="absolute w-[400px] h-[400px] rounded-full blur-[120px] opacity-25 animate-float"
+          className="absolute w-[400px] h-[400px] rounded-full blur-[120px] opacity-20 animate-float"
           style={{
             background: "radial-gradient(circle, var(--amber-600) 0%, transparent 70%)",
             bottom: "20%",
@@ -31,6 +49,31 @@ export function Hero() {
           }}
         />
       </div>
+
+      {/* Video Modal */}
+      {showVideo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={() => setShowVideo(false)}
+        >
+          <div className="relative w-full max-w-4xl mx-4" onClick={(e) => e.stopPropagation()}>
+            <video
+              autoPlay
+              loop
+              controls
+              className="w-full rounded-xl shadow-2xl"
+            >
+              <source src="/videos/hero-animation.mp4" type="video/mp4" />
+            </video>
+            <button
+              onClick={() => setShowVideo(false)}
+              className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors"
+            >
+              Close ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Badge */}
@@ -58,9 +101,13 @@ export function Hero() {
             Start Free
             <ChevronRight size={18} />
           </ButtonLink>
-          <ButtonLink href="#demo" variant="secondary" size="lg">
+          <button
+            onClick={() => setShowVideo(true)}
+            className="inline-flex items-center justify-center gap-2 font-medium transition-all bg-transparent border border-[var(--border-subtle)] hover:border-[var(--border-warm)] text-[var(--text-primary)] rounded-lg px-8 py-4 text-base"
+          >
+            <Play size={18} />
             Watch Demo
-          </ButtonLink>
+          </button>
         </div>
 
         {/* Stats */}

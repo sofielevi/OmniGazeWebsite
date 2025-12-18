@@ -117,19 +117,19 @@ from infrastructure discovery to strategic planning
 
 ---
 
-## Tech Stack (Recommended)
+## Tech Stack (Implemented)
 
-| Layer | Technology | Version |
-|-------|------------|---------|
-| **Framework** | Next.js (App Router) | 14.x |
-| **Language** | TypeScript | 5.x |
-| **Styling** | Tailwind CSS | 3.x |
-| **UI Components** | shadcn/ui | latest |
-| **Auth** | NextAuth.js (Auth.js) | 5.x |
-| **Payments** | Stripe Checkout | latest |
-| **Forms** | React Hook Form + Zod | latest |
-| **State** | TanStack Query | 5.x |
-| **Hosting** | Vercel / Azure Static Web Apps | - |
+| Layer | Technology | Version | Status |
+|-------|------------|---------|--------|
+| **Framework** | Next.js (App Router) | 16.x | Installed |
+| **Language** | TypeScript | 5.x | Installed |
+| **Styling** | Tailwind CSS | 4.x | Installed |
+| **UI Components** | Custom + Lucide icons | latest | Installed |
+| **Auth** | HttpOnly cookies via API | - | API Ready |
+| **Payments** | Stripe Checkout | latest | Not Started |
+| **Hosting** | Static Export (Web Hotel) | - | Configured |
+| **AI Image Gen** | MCP Integration | - | Pending MCP |
+| **AI Video Gen** | MCP Integration (8sec 720p/1080p) | - | Pending MCP |
 
 ---
 
@@ -214,6 +214,8 @@ omnigaze-website/
 ## API Integration
 
 ### OmniGaze API Endpoints (api.omnigaze.com)
+
+**Desktop Client Endpoints (require OmniToken + OmniLicense headers):**
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
 | `/api/Registration/Register` | POST | Email + machine registration |
@@ -223,6 +225,21 @@ omnigaze-website/
 | `/api/Tier/Current` | GET | Get customer's tier + usage |
 | `/api/Customer/Upgrade` | POST | Process tier upgrade |
 | `/api/License/Heartbeat` | POST | Sync tier, features, limits |
+
+**Website Endpoints (CORS protected, no OmniToken required):**
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/api/website/health` | GET | Health check |
+| `/api/website/tiers` | GET | Get all active tiers (public) |
+| `/api/website/check-email` | GET | Check if email registered |
+| `/api/website/register` | POST | Register new user |
+| `/api/website/verify` | POST | Verify code, set HttpOnly cookie |
+| `/api/website/resend` | POST | Resend verification code |
+| `/api/website/login` | POST | Login with license key |
+| `/api/website/logout` | POST | Clear session cookie |
+| `/api/website/me` | GET | Get current user info (auth required) |
+| `/api/website/tier` | GET | Get current tier + upgrades (auth required) |
+| `/api/website/license-key` | GET | Get license key for desktop client |
 
 ### Stripe Integration
 | Flow | Implementation |
@@ -304,12 +321,12 @@ See `F:\RootContext\OmniGazeSelfService\landing-page.html` for design reference.
 
 | # | Work Chunk | Status |
 |---|------------|--------|
-| WEB-01 | Infrastructure | Not Started |
-| WEB-02 | Marketing Pages | Not Started |
-| WEB-03 | Registration Flow | Not Started |
+| WEB-01 | Infrastructure | **Complete** - Next.js 16, Tailwind 4, TypeScript |
+| WEB-02 | Marketing Pages | **Complete** - Pages + AI visual assets (7 images, 1 video) |
+| WEB-03 | Registration Flow | **UI Complete** - Register, Verify, Login, Success pages |
 | WEB-04 | Purchase Flow | Not Started |
 | WEB-05 | Account Portal | Not Started |
-| WEB-06 | Download & Docs | Not Started |
+| WEB-06 | Download & Docs | **MVP Complete** - Docs page with quick start |
 | WEB-07 | Testing & Launch | Not Started |
 
 ---

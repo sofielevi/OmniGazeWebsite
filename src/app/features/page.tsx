@@ -5,6 +5,7 @@ import { ValuePyramid } from "@/components/marketing/value-pyramid";
 import { ButtonLink } from "@/components/ui/button";
 import { pyramidLayers } from "@/config/site";
 import { ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
   title: "Features",
@@ -85,22 +86,40 @@ export default function FeaturesPage() {
               {/* Visual */}
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                 <div
-                  className="aspect-video rounded-2xl border border-[var(--border-subtle)] flex items-center justify-center relative overflow-hidden"
+                  className="aspect-video rounded-2xl border border-[var(--border-subtle)] relative overflow-hidden group"
                   style={{
                     background: `linear-gradient(135deg, ${layer.color}15 0%, var(--bg-elevated) 100%)`,
                   }}
                 >
-                  {/* Placeholder for AI-generated image/video */}
-                  <div className="text-center p-8">
-                    <div className="text-5xl mb-4">{getLayerIcon(layer.id)}</div>
-                    <div className="text-sm text-[var(--text-muted)]">
-                      {layer.name} visualization
+                  {/* AI-generated layer image */}
+                  <Image
+                    src={getLayerImage(layer.id)}
+                    alt={`${layer.name} visualization`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  {/* Gradient overlay */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-[var(--bg-deep)] via-transparent to-transparent opacity-60"
+                  />
+
+                  {/* Label overlay */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div
+                      className="inline-block px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+                      style={{
+                        backgroundColor: `${layer.color}40`,
+                        color: layer.color,
+                      }}
+                    >
+                      {layer.name}
                     </div>
                   </div>
 
                   {/* Decorative elements */}
                   <div
-                    className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full blur-3xl opacity-30"
+                    className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full blur-3xl opacity-20"
                     style={{ backgroundColor: layer.color }}
                   />
                 </div>
@@ -187,13 +206,13 @@ function getLayerDetailedFeatures(id: string): Array<{ title: string; descriptio
   return features[id] || [];
 }
 
-function getLayerIcon(id: string): string {
-  const icons: Record<string, string> = {
-    infrastructure: "🖥️",
-    applications: "📊",
-    capabilities: "🔧",
-    "value-streams": "📈",
-    strategy: "🎯",
+function getLayerImage(id: string): string {
+  const images: Record<string, string> = {
+    infrastructure: "/images/layer-infrastructure.png",
+    applications: "/images/layer-applications.png",
+    capabilities: "/images/layer-capabilities.png",
+    "value-streams": "/images/layer-value-streams.png",
+    strategy: "/images/layer-strategy.png",
   };
-  return icons[id] || "📦";
+  return images[id] || "/images/layer-infrastructure.png";
 }
