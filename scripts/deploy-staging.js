@@ -4,10 +4,15 @@
  * OmniGaze Website - Staging Deployment Script
  * Deploys to fingerscrossed.omnigaze.com via FTP
  *
+ * Features:
+ * - Incremental deployment: only uploads changed files
+ * - Uses .ftp-deploy-sync-state.json to track file hashes
+ * - Much faster deployments after initial sync
+ *
  * Usage: npm run deploy:staging
  */
 
-const FtpDeploy = require('ftp-deploy');
+const { deploy } = require('@samkirkland/ftp-deploy');
 const ftp = require('basic-ftp');
 const path = require('path');
 const fs = require('fs');
@@ -16,25 +21,16 @@ const { execSync } = require('child_process');
 // .htaccess for no-cache headers on installer
 const HTACCESS_PATH = path.join(__dirname, 'install-folder', '.htaccess');
 
+// State file location (tracks what's been deployed for incremental sync)
+// Must be relative to cwd when running the script
+const STATE_FILE = '.ftp-deploy-sync-state.json';
+
 // FTP Configuration for staging
 const FTP_CONFIG = {
   host: 'linux349.unoeuro.com',
   port: 21,
   user: 'fingerscrossed.com',
-  password: 'xyfnwt9r3DeRHgF5AB2d',
-  localRoot: path.join(__dirname, '..', 'out'),
-  remoteRoot: '/public_html/',
-  include: ['*', '**/*'],
-  exclude: [
-    '.git/**',
-    '.git*',
-    'node_modules/**',
-    '.env*',
-    '*.map'
-  ],
-  deleteRemote: true, // Clean deploy - removes old files
-  forcePasv: true,    // Required for most shared hosts
-  sftp: false
+  password: 'xyfnwt9r3DeRHgF5AB2d'
 };
 
 // Colors for console output
@@ -45,7 +41,8 @@ const colors = {
   yellow: '\x1b[33m',
   blue: '\x1b[34m',
   red: '\x1b[31m',
-  cyan: '\x1b[36m'
+  cyan: '\x1b[36m',
+  dim: '\x1b[2m'
 };
 
 function log(message, color = 'reset') {
@@ -56,12 +53,13 @@ function logStep(step, message) {
   console.log(`\n${colors.cyan}[${step}]${colors.reset} ${colors.bright}${message}${colors.reset}`);
 }
 
-async function deploy() {
+async function deployStaging() {
   const startTime = Date.now();
 
   console.log('\n' + '='.repeat(60));
   log('  OmniGaze Website - Staging Deployment', 'bright');
   log('  Target: fingerscrossed.omnigaze.com', 'yellow');
+  log('  Mode: INCREMENTAL (only changed files uploaded)', 'green');
   console.log('='.repeat(60));
 
   try {
@@ -89,40 +87,78 @@ async function deploy() {
       throw new Error('Build output directory "out" not found. Build may have failed.');
     }
 
-    const files = fs.readdirSync(outDir);
-    log(`Found ${files.length} items in build output`, 'green');
+    // Count total files in output
+    const countFiles = (dir) => {
+      let count = 0;
+      const items = fs.readdirSync(dir, { withFileTypes: true });
+      for (const item of items) {
+        if (item.isDirectory()) {
+          count += countFiles(path.join(dir, item.name));
+        } else {
+          count++;
+        }
+      }
+      return count;
+    };
+    const totalFiles = countFiles(outDir);
+    log(`Found ${totalFiles} files in build output`, 'green');
 
-    // Step 3: Deploy via FTP
-    logStep('3/4', 'Deploying to FTP server...');
+    // Step 3: Deploy via FTP with incremental sync
+    logStep('3/4', 'Deploying to FTP server (incremental sync)...');
     log(`Host: ${FTP_CONFIG.host}`, 'blue');
-    log(`Remote path: ${FTP_CONFIG.remoteRoot}`, 'blue');
+    log(`Remote path: /public_html/`, 'blue');
+    log('Comparing local files with server state...', 'dim');
 
-    const ftpDeploy = new FtpDeploy();
+    // Track stats
+    let uploadCount = 0;
+    let deleteCount = 0;
+    let skipCount = 0;
 
-    // Progress tracking
-    let uploadedCount = 0;
-    let totalCount = 0;
-
-    ftpDeploy.on('uploading', (data) => {
-      totalCount = data.totalFilesCount;
-      uploadedCount = data.transferredFileCount;
-      const percent = Math.round((uploadedCount / totalCount) * 100);
-      process.stdout.write(`\r  Uploading: ${uploadedCount}/${totalCount} files (${percent}%) - ${data.filename}`.padEnd(80));
+    await deploy({
+      server: FTP_CONFIG.host,
+      port: FTP_CONFIG.port,
+      username: FTP_CONFIG.user,
+      password: FTP_CONFIG.password,
+      protocol: 'ftp',
+      'local-dir': './out/',
+      'server-dir': '/public_html/',
+      'state-name': STATE_FILE,
+      'dry-run': false,
+      'dangerous-clean-slate': false, // Don't delete everything on first run
+      timeout: 600000, // 10 minute timeout for large files (like video)
+      exclude: [
+        '.git/**',
+        '.gitignore',
+        'node_modules/**',
+        '.env*',
+        '*.map',
+        '.DS_Store',
+        'Thumbs.db'
+      ],
+      log: (message) => {
+        // Parse log messages for stats
+        if (message.includes('uploading:') || message.includes('Upload:')) {
+          uploadCount++;
+          const file = message.split(/uploading:|Upload:/)[1]?.trim() || '';
+          process.stdout.write(`\r  Uploading: ${file}`.padEnd(80));
+        } else if (message.includes('deleting:') || message.includes('Delete:')) {
+          deleteCount++;
+        } else if (message.includes('no changes')) {
+          // No changes detected
+        }
+      }
     });
-
-    ftpDeploy.on('uploaded', (data) => {
-      // File uploaded
-    });
-
-    ftpDeploy.on('log', (data) => {
-      // Verbose logging (disabled for cleaner output)
-      // console.log(data);
-    });
-
-    await ftpDeploy.deploy(FTP_CONFIG);
 
     console.log('\n');
-    log('Website deployment completed!', 'green');
+
+    if (uploadCount === 0 && deleteCount === 0) {
+      log('No changes detected - nothing to deploy!', 'green');
+    } else {
+      log(`Deployment completed! Uploaded ${uploadCount} files.`, 'green');
+      if (deleteCount > 0) {
+        log(`Removed ${deleteCount} obsolete files from server.`, 'yellow');
+      }
+    }
 
     // Step 4: Upload .htaccess for installer no-cache headers
     logStep('4/4', 'Uploading .htaccess for installer...');
@@ -154,7 +190,11 @@ async function deploy() {
     log('  Deployment Summary', 'bright');
     console.log('='.repeat(60));
     log(`  Status: SUCCESS`, 'green');
-    log(`  Files uploaded: ${totalCount}`, 'blue');
+    log(`  Mode: Incremental`, 'blue');
+    log(`  Files uploaded: ${uploadCount}`, 'blue');
+    if (deleteCount > 0) {
+      log(`  Files removed: ${deleteCount}`, 'yellow');
+    }
     log(`  Duration: ${duration}s`, 'blue');
     log(`  URL: https://fingerscrossed.omnigaze.com`, 'yellow');
     console.log('='.repeat(60) + '\n');
@@ -164,7 +204,7 @@ async function deploy() {
     log('Deployment FAILED!', 'red');
     log(`Error: ${error.message}`, 'red');
 
-    if (error.message.includes('Login')) {
+    if (error.message.includes('Login') || error.message.includes('auth')) {
       log('Check FTP credentials in scripts/deploy-staging.js', 'yellow');
     }
 
@@ -173,4 +213,4 @@ async function deploy() {
 }
 
 // Run deployment
-deploy();
+deployStaging();

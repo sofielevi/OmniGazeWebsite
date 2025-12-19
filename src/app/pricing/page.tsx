@@ -25,35 +25,96 @@ interface UITier {
   ctaVariant: "primary" | "secondary";
 }
 
-// Map API feature keys to display names
-const featureDisplayNames: Record<string, string> = {
-  NetworkDiscovery: "Network discovery",
-  AssetInventory: "Asset inventory",
-  ServerDiagram2D: "Server diagram (2D)",
-  TagManagement: "Tag management",
-  ProcessDiscovery: "Process discovery",
-  ProcessDiagram: "Process diagram",
-  Visualization3D: "3D visualization",
-  ScheduledScans: "Scheduled scans",
-  CsvExport: "CSV export",
-  ODataApi: "OData API access",
-  VulnerabilityScanning: "Vulnerability scanning",
-  SslCertTracking: "SSL certificate tracking",
-  SoftwareInventory: "Software inventory",
-  AdLdapSync: "AD/LDAP sync",
-  AzureDiscovery: "Azure cloud discovery",
-  IntuneIntegration: "Intune integration",
-  CisCompliance: "CIS compliance benchmarks",
-  SqlServerAnalysis: "SQL Server analysis",
-  SsoAzureAd: "SSO (Azure AD)",
-  SsoEntraId: "SSO (Entra ID)",
-  FactSheets: "FactSheets (EA)",
-  BusinessCapabilities: "Business capabilities",
-  LogicalDiagram: "Logical architecture diagram",
-  LeanIxIntegration: "LeanIX integration",
-  ServiceNowIntegration: "ServiceNow sync",
-  AiInsights: "AI-powered insights",
+// Feature metadata: display name and category
+interface FeatureMetadata {
+  name: string;
+  category: string;
+}
+
+const featureMetadata: Record<string, FeatureMetadata> = {
+  // Discovery
+  NetworkDiscovery: { name: "Network scanning", category: "Discovery" },
+  AssetInventory: { name: "Windows/Linux assets", category: "Discovery" },
+  ProcessDiscovery: { name: "Process discovery", category: "Discovery" },
+  AzureDiscovery: { name: "Azure cloud resources", category: "Discovery" },
+  // Visualization
+  ServerDiagram2D: { name: "Server diagram (2D)", category: "Visualization" },
+  Visualization3D: { name: "3D visualization", category: "Visualization" },
+  ProcessDiagram: { name: "Process diagram", category: "Visualization" },
+  LogicalDiagram: { name: "Logical architecture", category: "Visualization" },
+  // Security & Compliance
+  VulnerabilityScanning: { name: "Vulnerability detection", category: "Security & Compliance" },
+  SslCertTracking: { name: "SSL certificate tracking", category: "Security & Compliance" },
+  CisCompliance: { name: "CIS benchmarks", category: "Security & Compliance" },
+  // Enterprise Architecture
+  FactSheets: { name: "FactSheets", category: "Enterprise Architecture" },
+  BusinessCapabilities: { name: "Business capabilities", category: "Enterprise Architecture" },
+  LeanIxIntegration: { name: "LeanIX integration", category: "Enterprise Architecture" },
+  ServiceNowIntegration: { name: "ServiceNow sync", category: "Enterprise Architecture" },
+  // Integration & API
+  CsvExport: { name: "CSV export", category: "Integration & API" },
+  ODataApi: { name: "OData API", category: "Integration & API" },
+  SsoAzureAd: { name: "SSO (Active Directory)", category: "Integration & API" },
+  SsoEntraId: { name: "SSO (Entra ID)", category: "Integration & API" },
+  AdLdapSync: { name: "AD/LDAP sync", category: "Integration & API" },
+  // Other features (for display names mapping)
+  TagManagement: { name: "Tag management", category: "Discovery" },
+  ScheduledScans: { name: "Scheduled scans", category: "Discovery" },
+  SoftwareInventory: { name: "Software inventory", category: "Discovery" },
+  IntuneIntegration: { name: "Intune integration", category: "Integration & API" },
+  SqlServerAnalysis: { name: "SQL Server analysis", category: "Discovery" },
+  AiInsights: { name: "AI-powered insights", category: "Enterprise Architecture" },
 };
+
+// Map API feature keys to display names (for backward compatibility)
+const featureDisplayNames: Record<string, string> = Object.fromEntries(
+  Object.entries(featureMetadata).map(([key, meta]) => [key, meta.name])
+);
+
+// Category display order
+const categoryOrder = [
+  "Discovery",
+  "Visualization",
+  "Security & Compliance",
+  "Enterprise Architecture",
+  "Integration & API",
+];
+
+// Build feature matrix from tier data
+interface FeatureMatrixCategory {
+  category: string;
+  features: { name: string; tiers: boolean[] }[];
+}
+
+function buildFeatureMatrix(tiers: TierInfo[]): FeatureMatrixCategory[] {
+  // Collect all unique features across tiers
+  const allFeatures = new Set<string>();
+  tiers.forEach(tier => tier.features.forEach(f => allFeatures.add(f)));
+
+  // Group features by category
+  const categorizedFeatures: Record<string, { name: string; key: string }[]> = {};
+
+  allFeatures.forEach(featureKey => {
+    const meta = featureMetadata[featureKey];
+    if (meta) {
+      if (!categorizedFeatures[meta.category]) {
+        categorizedFeatures[meta.category] = [];
+      }
+      categorizedFeatures[meta.category].push({ name: meta.name, key: featureKey });
+    }
+  });
+
+  // Build the matrix in category order
+  return categoryOrder
+    .filter(category => categorizedFeatures[category]?.length > 0)
+    .map(category => ({
+      category,
+      features: categorizedFeatures[category].map(feature => ({
+        name: feature.name,
+        tiers: tiers.map(tier => tier.features.includes(feature.key)),
+      })),
+    }));
+}
 
 // UI metadata for each tier (CTA, featured status, etc.)
 const tierUIMetadata: Record<string, {
@@ -132,6 +193,7 @@ function enrichTierWithUI(tier: TierInfo, index: number, allTiers: TierInfo[]): 
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
   const [pricingTiers, setPricingTiers] = useState<UITier[]>([]);
+  const [featureMatrix, setFeatureMatrix] = useState<FeatureMatrixCategory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -145,6 +207,8 @@ export default function PricingPage() {
           const sortedTiers = [...apiTiers].sort((a, b) => a.id - b.id);
           const enrichedTiers = sortedTiers.map((tier, index, arr) => enrichTierWithUI(tier, index, arr));
           setPricingTiers(enrichedTiers);
+          // Build feature matrix from API data
+          setFeatureMatrix(buildFeatureMatrix(sortedTiers));
         } else {
           setError("No pricing tiers available");
         }
@@ -256,7 +320,7 @@ export default function PricingPage() {
         </Section>
 
         {/* Feature Matrix */}
-        {!isLoading && !error && pricingTiers.length > 0 && (
+        {!isLoading && !error && pricingTiers.length > 0 && featureMatrix.length > 0 && (
           <Section className="bg-[var(--bg-card)]">
             <div className="bg-[var(--bg-elevated)] rounded-3xl p-8 md:p-12">
               <h3 className="font-display text-2xl mb-8">Compare All Features</h3>
@@ -335,53 +399,6 @@ export default function PricingPage() {
     </>
   );
 }
-
-// Feature comparison matrix
-const featureMatrix = [
-  {
-    category: "Discovery",
-    features: [
-      { name: "Network scanning", tiers: [true, true, true, true, true] },
-      { name: "Windows/Linux assets", tiers: [true, true, true, true, true] },
-      { name: "Process discovery", tiers: [false, true, true, true, true] },
-      { name: "Azure cloud resources", tiers: [false, false, false, true, true] },
-    ],
-  },
-  {
-    category: "Visualization",
-    features: [
-      { name: "Server diagram (2D)", tiers: [true, true, true, true, true] },
-      { name: "3D visualization", tiers: [false, true, true, true, true] },
-      { name: "Process diagram", tiers: [false, true, true, true, true] },
-      { name: "Logical architecture", tiers: [false, false, false, false, true] },
-    ],
-  },
-  {
-    category: "Security & Compliance",
-    features: [
-      { name: "Vulnerability detection", tiers: [false, false, true, true, true] },
-      { name: "SSL certificate tracking", tiers: [false, false, true, true, true] },
-      { name: "CIS benchmarks", tiers: [false, false, false, true, true] },
-    ],
-  },
-  {
-    category: "Enterprise Architecture",
-    features: [
-      { name: "FactSheets", tiers: [false, false, false, false, true] },
-      { name: "Business capabilities", tiers: [false, false, false, false, true] },
-      { name: "LeanIX integration", tiers: [false, false, false, false, true] },
-      { name: "ServiceNow sync", tiers: [false, false, false, false, true] },
-    ],
-  },
-  {
-    category: "Integration & API",
-    features: [
-      { name: "CSV export", tiers: [false, true, true, true, true] },
-      { name: "OData API", tiers: [false, false, true, true, true] },
-      { name: "SSO (Azure AD)", tiers: [false, false, false, true, true] },
-    ],
-  },
-];
 
 // FAQs
 const faqs = [

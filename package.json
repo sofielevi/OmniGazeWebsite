@@ -21,6 +21,7 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@samkirkland/ftp-deploy": "^1.2.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -28,7 +29,6 @@
     "basic-ftp": "^5.0.5",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
-    "ftp-deploy": "^2.4.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

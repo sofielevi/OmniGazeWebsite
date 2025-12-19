@@ -4,6 +4,7 @@ import { Hero } from "@/components/marketing/hero";
 import { Section, SectionHeader } from "@/components/marketing/section";
 import { ValuePyramid } from "@/components/marketing/value-pyramid";
 import { BridgeVisual } from "@/components/marketing/bridge-visual";
+import { DataSovereignty } from "@/components/marketing/data-sovereignty";
 import { ButtonLink } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 
@@ -53,6 +54,9 @@ export default function HomePage() {
           />
 
           <BridgeVisual />
+
+          {/* Data Sovereignty */}
+          <DataSovereignty className="mt-16" />
         </Section>
 
         {/* Features Preview */}
