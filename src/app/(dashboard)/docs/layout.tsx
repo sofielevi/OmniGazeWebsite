@@ -21,6 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import { getCurrentUser, UserInfo } from "@/lib/api-client";
 import { canAccessTier, getTierBadgeText, Tier } from "@/lib/docs-access";
+import { DocsSearch } from "@/components/docs";
 
 interface NavSection {
   title: string;
@@ -140,11 +141,16 @@ export default function DocsLayout({
       {/* Back to Dashboard */}
       <Link
         href="/dashboard"
-        className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors"
+        className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-4 transition-colors"
       >
         <ChevronLeft className="w-4 h-4" />
         Back to Dashboard
       </Link>
+
+      {/* Search */}
+      <div className="mb-6">
+        <DocsSearch userTier={userTier} />
+      </div>
 
       {/* Navigation */}
       <nav className="space-y-6">

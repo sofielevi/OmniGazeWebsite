@@ -231,7 +231,7 @@ export default function ThreeDViewPage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/docs/security/credentials"
+            href="/docs/security/credential-journey"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Credential Management

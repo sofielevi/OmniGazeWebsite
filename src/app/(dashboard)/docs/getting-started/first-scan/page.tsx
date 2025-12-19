@@ -74,7 +74,7 @@ export default function FirstScanPage() {
         <p className="mt-4 text-sm text-[var(--text-secondary)]">
           Need help setting up WinRM? See our{" "}
           <Link
-            href="/docs/infrastructure/winrm-setup"
+            href="/docs/security/winrm-setup"
             className="text-[var(--amber-400)] hover:underline"
           >
             WinRM Setup Guide
@@ -192,7 +192,7 @@ OmniGaze.exe /scan /target:server01 /user:DOMAIN\\admin`}
           Set up recurring scans using Windows Task Scheduler or your preferred
           automation tool. See our{" "}
           <Link
-            href="/docs/advanced/automation"
+            href="/docs/infrastructure/scanning"
             className="text-[var(--amber-400)] hover:underline"
           >
             Automation Guide
@@ -209,14 +209,14 @@ OmniGaze.exe /scan /target:server01 /user:DOMAIN\\admin`}
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/docs/infrastructure/winrm-setup"
+            href="/docs/security/winrm-setup"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             WinRM Setup Guide
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/docs/infrastructure/credentials"
+            href="/docs/security/credential-journey"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Credential Management

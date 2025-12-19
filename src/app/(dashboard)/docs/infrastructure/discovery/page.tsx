@@ -109,7 +109,7 @@ export default function DiscoveryPage() {
         <Callout type="tip" title="Best Practice">
           Use WinRM whenever possible. It&apos;s more efficient than WMI and provides better
           performance for large-scale scans. See the{" "}
-          <Link href="/docs/infrastructure/winrm-setup" className="text-[var(--amber-400)] hover:underline">
+          <Link href="/docs/security/winrm-setup" className="text-[var(--amber-400)] hover:underline">
             WinRM Setup Guide
           </Link>.
         </Callout>
