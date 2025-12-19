@@ -48,6 +48,8 @@ export function ValuePyramid({ className, showLabels = true, interactive = true 
           return (
             <div
               key={layer.id}
+              data-testid="pyramid-layer"
+              data-layer={layer.id}
               className="relative w-full flex justify-center"
               style={{
                 animationDelay: `${(pyramidLayers.length - 1 - index) * 0.1}s`,
@@ -127,7 +129,7 @@ export function PyramidMini({ highlightTier }: { highlightTier?: string }) {
   const tierIndex = highlightTier ? tierOrder.indexOf(highlightTier) : -1;
 
   return (
-    <div className="flex flex-col items-center gap-0.5 w-24">
+    <div className="flex flex-col items-center gap-0.5 w-24" data-testid="pyramid-mini">
       {pyramidLayers.map((layer, index) => {
         const isUnlocked = tierIndex >= 0 && tierOrder.indexOf(layer.tier) <= tierIndex;
         const widthPercent = 40 + (index * 15);

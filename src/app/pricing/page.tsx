@@ -1,15 +1,120 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Section, SectionHeader } from "@/components/marketing/section";
 import { PricingCard } from "@/components/marketing/pricing-card";
-import { pricingTiers } from "@/config/site";
+import { getTiers, type TierInfo } from "@/lib/api-client";
 import { cn } from "@/lib/utils";
+
+// UI tier type that matches PricingCard expectations
+interface UITier {
+  id: string;
+  name: string;
+  displayName: string;
+  description: string;
+  monthlyPrice: number | null;
+  annualPrice: number | null;
+  serverLimit: number;
+  userLimit: number;
+  features: string[];
+  disabledFeatures?: string[];
+  featured?: boolean;
+  cta: string;
+  ctaVariant: "primary" | "secondary";
+}
+
+// UI metadata for each tier (CTA, featured status, etc.)
+const tierUIMetadata: Record<string, {
+  description: string;
+  cta: string;
+  ctaVariant: "primary" | "secondary";
+  featured?: boolean;
+  disabledFeatures?: string[];
+}> = {
+  Community: {
+    description: "Free Forever",
+    cta: "Download Free",
+    ctaVariant: "secondary",
+    disabledFeatures: ["Process mapping", "API access"],
+  },
+  Starter: {
+    description: "Small Teams",
+    cta: "Start 14-Day Trial",
+    ctaVariant: "secondary",
+  },
+  Professional: {
+    description: "Growing Teams",
+    cta: "Start 14-Day Trial",
+    ctaVariant: "primary",
+    featured: true,
+  },
+  Business: {
+    description: "Operations",
+    cta: "Start 14-Day Trial",
+    ctaVariant: "secondary",
+  },
+  Enterprise: {
+    description: "Full Platform",
+    cta: "Contact Sales",
+    ctaVariant: "secondary",
+  },
+};
+
+// Transform API tiers to UI format
+function enrichTierWithUI(tier: TierInfo): UITier {
+  const metadata = tierUIMetadata[tier.name] || {
+    description: tier.description || tier.name,
+    cta: "Get Started",
+    ctaVariant: "secondary" as const,
+  };
+
+  return {
+    id: tier.name.toLowerCase(),
+    name: tier.name,
+    displayName: tier.displayName,
+    description: metadata.description,
+    monthlyPrice: tier.monthlyPrice,
+    annualPrice: tier.annualPrice,
+    serverLimit: tier.serverLimit,
+    userLimit: tier.userLimit,
+    features: tier.features,
+    disabledFeatures: metadata.disabledFeatures,
+    featured: metadata.featured,
+    cta: metadata.cta,
+    ctaVariant: metadata.ctaVariant,
+  };
+}
 
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
+  const [pricingTiers, setPricingTiers] = useState<UITier[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch tiers from API on mount
+  useEffect(() => {
+    async function fetchTiers() {
+      try {
+        const apiTiers = await getTiers();
+        if (apiTiers && apiTiers.length > 0) {
+          // Sort by id to ensure correct order
+          const sortedTiers = [...apiTiers].sort((a, b) => a.id - b.id);
+          const enrichedTiers = sortedTiers.map(enrichTierWithUI);
+          setPricingTiers(enrichedTiers);
+        } else {
+          setError("No pricing tiers available");
+        }
+      } catch (err) {
+        console.error("Failed to fetch tiers from API:", err);
+        setError("Unable to load pricing. Please try again later.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchTiers();
+  }, []);
 
   return (
     <>
@@ -56,72 +161,115 @@ export default function PricingPage() {
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {pricingTiers.map((tier) => (
-              <PricingCard
-                key={tier.id}
-                tier={tier}
-                billingCycle={billingCycle}
-              />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl p-7 animate-pulse"
+                >
+                  <div className="h-4 w-20 bg-[var(--bg-elevated)] rounded mb-2" />
+                  <div className="h-8 w-32 bg-[var(--bg-elevated)] rounded mb-4" />
+                  <div className="h-12 w-24 bg-[var(--bg-elevated)] rounded mb-6" />
+                  <div className="flex gap-4 py-4 border-y border-[var(--border-subtle)] mb-6">
+                    <div className="flex-1">
+                      <div className="h-6 w-12 bg-[var(--bg-elevated)] rounded mb-1" />
+                      <div className="h-3 w-16 bg-[var(--bg-elevated)] rounded" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="h-6 w-8 bg-[var(--bg-elevated)] rounded mb-1" />
+                      <div className="h-3 w-12 bg-[var(--bg-elevated)] rounded" />
+                    </div>
+                  </div>
+                  <div className="space-y-2 mb-6">
+                    {[...Array(4)].map((_, j) => (
+                      <div key={j} className="h-4 bg-[var(--bg-elevated)] rounded w-full" />
+                    ))}
+                  </div>
+                  <div className="h-10 bg-[var(--bg-elevated)] rounded" />
+                </div>
+              ))}
+            </div>
+          ) : error ? (
+            <div className="text-center py-16">
+              <div className="text-[var(--text-muted)] mb-4">{error}</div>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-4 py-2 bg-[var(--amber-500)] text-[var(--bg-deep)] rounded-lg hover:bg-[var(--amber-400)] transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+              {pricingTiers.map((tier) => (
+                <PricingCard
+                  key={tier.id}
+                  tier={tier}
+                  billingCycle={billingCycle}
+                />
+              ))}
+            </div>
+          )}
         </Section>
 
         {/* Feature Matrix */}
-        <Section className="bg-[var(--bg-card)]">
-          <div className="bg-[var(--bg-elevated)] rounded-3xl p-8 md:p-12">
-            <h3 className="font-display text-2xl mb-8">Compare All Features</h3>
+        {!isLoading && !error && pricingTiers.length > 0 && (
+          <Section className="bg-[var(--bg-card)]">
+            <div className="bg-[var(--bg-elevated)] rounded-3xl p-8 md:p-12">
+              <h3 className="font-display text-2xl mb-8">Compare All Features</h3>
 
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[800px]">
-                <thead>
-                  <tr className="border-b border-[var(--border-subtle)]">
-                    <th className="text-left py-4 text-sm font-medium text-[var(--text-muted)]"></th>
-                    {pricingTiers.map((tier) => (
-                      <th
-                        key={tier.id}
-                        className={cn(
-                          "text-center py-4 text-xs uppercase tracking-wider",
-                          tier.featured ? "text-[var(--amber-400)]" : "text-[var(--text-muted)]"
-                        )}
-                      >
-                        {tier.name}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {featureMatrix.map((category) => (
-                    <>
-                      <tr key={category.category}>
-                        <td
-                          colSpan={6}
-                          className="pt-6 pb-2 text-xs uppercase tracking-wider text-[var(--amber-400)]"
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[800px]">
+                  <thead>
+                    <tr className="border-b border-[var(--border-subtle)]">
+                      <th className="text-left py-4 text-sm font-medium text-[var(--text-muted)]"></th>
+                      {pricingTiers.map((tier) => (
+                        <th
+                          key={tier.id}
+                          className={cn(
+                            "text-center py-4 text-xs uppercase tracking-wider",
+                            tier.featured ? "text-[var(--amber-400)]" : "text-[var(--text-muted)]"
+                          )}
                         >
-                          {category.category}
-                        </td>
-                      </tr>
-                      {category.features.map((feature) => (
-                        <tr key={feature.name} className="border-b border-[var(--border-subtle)]">
-                          <td className="py-3 text-sm">{feature.name}</td>
-                          {feature.tiers.map((available, i) => (
-                            <td key={i} className="text-center py-3">
-                              {available ? (
-                                <span className="text-[var(--success)]">✓</span>
-                              ) : (
-                                <span className="text-[var(--text-muted)] opacity-30">—</span>
-                              )}
-                            </td>
-                          ))}
-                        </tr>
+                          {tier.name}
+                        </th>
                       ))}
-                    </>
-                  ))}
-                </tbody>
-              </table>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {featureMatrix.map((category) => (
+                      <>
+                        <tr key={category.category}>
+                          <td
+                            colSpan={pricingTiers.length + 1}
+                            className="pt-6 pb-2 text-xs uppercase tracking-wider text-[var(--amber-400)]"
+                          >
+                            {category.category}
+                          </td>
+                        </tr>
+                        {category.features.map((feature) => (
+                          <tr key={feature.name} className="border-b border-[var(--border-subtle)]">
+                            <td className="py-3 text-sm">{feature.name}</td>
+                            {feature.tiers.slice(0, pricingTiers.length).map((available, i) => (
+                              <td key={i} className="text-center py-3">
+                                {available ? (
+                                  <span className="text-[var(--success)]">✓</span>
+                                ) : (
+                                  <span className="text-[var(--text-muted)] opacity-30">—</span>
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-        </Section>
+          </Section>
+        )}
 
         {/* FAQ */}
         <Section>

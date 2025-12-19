@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ui/button";
+import { CodeBlock } from "@/components/ui/code-block";
 import { Download, Check, AlertTriangle } from "lucide-react";
 
 export const metadata = {
@@ -175,9 +176,10 @@ export default function InstallationPage() {
 
           <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
             <h3 className="font-medium mb-2">Silent Installation</h3>
-            <p className="text-[var(--text-secondary)] text-sm">
-              For enterprise deployments, run: <code className="px-2 py-0.5 bg-[var(--bg-elevated)] rounded">OmniGazeSetup.exe /S</code>
+            <p className="text-[var(--text-secondary)] text-sm mb-3">
+              For enterprise deployments, use the silent install flag:
             </p>
+            <CodeBlock code="OmniGazeSetup.exe /S" language="bash" />
           </div>
         </div>
       </section>

@@ -26,6 +26,23 @@ export default function FeaturesPage() {
             description="Everything you need to understand, visualize, and optimize your IT landscape—in one unified platform."
           />
 
+          {/* Anchor Navigation */}
+          <nav className="flex flex-wrap justify-center gap-3 mb-12" aria-label="Feature sections">
+            {pyramidLayers.slice().reverse().map((layer) => (
+              <a
+                key={layer.id}
+                href={`#${layer.id}`}
+                className="px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105"
+                style={{
+                  backgroundColor: `${layer.color}20`,
+                  color: layer.color,
+                }}
+              >
+                {layer.name}
+              </a>
+            ))}
+          </nav>
+
           <div className="flex justify-center">
             <ValuePyramid />
           </div>

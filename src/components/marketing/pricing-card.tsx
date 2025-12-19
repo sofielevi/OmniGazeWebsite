@@ -34,6 +34,8 @@ export function PricingCard({ tier, billingCycle }: PricingCardProps) {
 
   return (
     <div
+      data-testid="pricing-card"
+      data-tier={tier.id}
       className={cn(
         "relative bg-[var(--bg-card)] border rounded-2xl p-7 transition-all duration-500",
         tier.featured

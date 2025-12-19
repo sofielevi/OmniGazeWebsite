@@ -136,7 +136,7 @@ export default function RegisterPage() {
           variant="primary"
           size="lg"
           className="w-full"
-          disabled={isLoading}
+          disabled={isLoading || !email || !acceptedTerms}
         >
           {isLoading ? (
             <>

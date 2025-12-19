@@ -4,10 +4,21 @@ import { ChevronRight, Play } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Hero() {
   const [showVideo, setShowVideo] = useState(false);
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowVideo(false);
+    };
+    if (showVideo) {
+      window.addEventListener('keydown', handleEscape);
+      return () => window.removeEventListener('keydown', handleEscape);
+    }
+  }, [showVideo]);
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20">
@@ -53,6 +64,9 @@ export function Hero() {
       {/* Video Modal */}
       {showVideo && (
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Demo video"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
           onClick={() => setShowVideo(false)}
         >

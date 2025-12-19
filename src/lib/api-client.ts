@@ -53,11 +53,17 @@ export interface TierInfo {
   id: number;
   name: string;
   displayName: string;
-  monthlyPrice: number;
-  annualPrice: number;
+  description?: string;
+  monthlyPrice: number | null;
+  annualPrice: number | null;
   serverLimit: number;
   userLimit: number;
   features: string[];
+  // UI-enriched fields (added client-side)
+  featured?: boolean;
+  cta?: string;
+  ctaVariant?: 'primary' | 'secondary';
+  disabledFeatures?: string[];
 }
 
 export interface CurrentTierInfo extends TierInfo {
