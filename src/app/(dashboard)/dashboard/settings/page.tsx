@@ -34,8 +34,7 @@ export default function SettingsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   // Form state
-  const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [productUpdates, setProductUpdates] = useState(true);
   const [securityAlerts, setSecurityAlerts] = useState(true);
   const [billingAlerts, setBillingAlerts] = useState(true);
@@ -45,8 +44,7 @@ export default function SettingsPage() {
       try {
         const data = await getUserSettings();
         setSettings(data);
-        setName(data.name || "");
-        setCompany(data.company || "");
+        setCompanyName(data.companyName || "");
         setProductUpdates(data.notifications.productUpdates);
         setSecurityAlerts(data.notifications.securityAlerts);
         setBillingAlerts(data.notifications.billingAlerts);
@@ -71,8 +69,7 @@ export default function SettingsPage() {
 
     try {
       await updateUserSettings({
-        name: name.trim() || undefined,
-        company: company.trim() || undefined,
+        companyName: companyName.trim() || undefined,
       });
       setSuccess("Profile updated successfully");
       setTimeout(() => setSuccess(""), 3000);
@@ -209,24 +206,12 @@ export default function SettingsPage() {
 
           <div>
             <label className="block text-sm font-medium text-[var(--text-primary)] mb-2">
-              Display Name
+              Company Name
             </label>
             <Input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-primary)] mb-2">
-              Company
-            </label>
-            <Input
-              type="text"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
               placeholder="Your company name"
             />
           </div>

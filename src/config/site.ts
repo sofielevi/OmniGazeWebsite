@@ -52,7 +52,7 @@ export const siteConfig = {
   },
 
   stats: [
-    { value: "60min", label: "Setup Time" },
+    { value: "10min", label: "Setup Time" },
     { value: "50+", label: "Free Servers" },
     { value: "Zero", label: "Agents Required" },
   ],

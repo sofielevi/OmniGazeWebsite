@@ -12,6 +12,7 @@ import { Loader2, Mail, ArrowLeft, RefreshCw } from "lucide-react";
 export default function VerifyPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
@@ -24,12 +25,14 @@ export default function VerifyPage() {
     // Skip redirect check if already verified (prevents race condition)
     if (isVerified) return;
 
-    // Get email from session storage
+    // Get email and company name from session storage
     const storedEmail = sessionStorage.getItem("registerEmail");
-    if (storedEmail) {
+    const storedCompanyName = sessionStorage.getItem("registerCompanyName");
+    if (storedEmail && storedCompanyName) {
       setEmail(storedEmail);
+      setCompanyName(storedCompanyName);
     } else {
-      // No email stored, redirect to register
+      // Missing data, redirect to register
       router.push("/register");
     }
   }, [router, isVerified]);
@@ -62,8 +65,8 @@ export default function VerifyPage() {
       let result;
 
       if (apiUrl) {
-        // Use real API
-        result = await verify(email, code);
+        // Use real API - pass email, code, and company name
+        result = await verify(email, code, companyName);
       } else {
         // Demo mode - accept any 6-char code
         result = {
@@ -78,9 +81,10 @@ export default function VerifyPage() {
       // Mark as verified FIRST to prevent redirect race condition
       setIsVerified(true);
 
-      // Store result for success page
+      // Store result for success page and clean up session storage
       sessionStorage.setItem("verifyResult", JSON.stringify(result));
       sessionStorage.removeItem("registerEmail");
+      sessionStorage.removeItem("registerCompanyName");
 
       // Redirect to success page
       router.push("/register/success");
@@ -132,7 +136,7 @@ export default function VerifyPage() {
     }
   };
 
-  if (!email && !isVerified) {
+  if ((!email || !companyName) && !isVerified) {
     return null; // Will redirect in useEffect
   }
 

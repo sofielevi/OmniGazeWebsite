@@ -142,25 +142,25 @@ export async function checkEmail(email: string): Promise<{ exists: boolean }> {
 }
 
 /**
- * Register a new user with email
+ * Register a new user with email and company name
  */
-export async function register(email: string): Promise<RegisterResponse> {
+export async function register(email: string, companyName?: string): Promise<RegisterResponse> {
   const endpoint = useLocalApi ? '/api/auth/register' : '/api/website/register';
   return apiFetch(endpoint, {
     method: 'POST',
-    body: JSON.stringify({ email, source: 'Website' }),
+    body: JSON.stringify({ email, companyName, source: 'Website' }),
   });
 }
 
 /**
- * Verify email with 6-character code
+ * Verify email with 6-character code and company name
  * Sets HttpOnly session cookie on success
  */
-export async function verify(email: string, code: string): Promise<VerifyResponse> {
+export async function verify(email: string, code: string, companyName: string): Promise<VerifyResponse> {
   const endpoint = useLocalApi ? '/api/auth/verify' : '/api/website/verify';
   return apiFetch(endpoint, {
     method: 'POST',
-    body: JSON.stringify({ email, code: code.toUpperCase() }),
+    body: JSON.stringify({ email, code: code.toUpperCase(), companyName }),
   });
 }
 
@@ -327,8 +327,7 @@ export async function cancelInvite(email: string): Promise<{ success: boolean }>
 
 export interface UserSettings {
   email: string;
-  name?: string;
-  company?: string;
+  companyName?: string;
   notifications: {
     productUpdates: boolean;
     securityAlerts: boolean;

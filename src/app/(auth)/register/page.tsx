@@ -46,10 +46,12 @@ const BLOCKED_EMAIL_DOMAINS = new Set([
 export default function RegisterPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [companyError, setCompanyError] = useState("");
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -80,8 +82,19 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
     setEmailError("");
+    setCompanyError("");
 
     // Client-side validation
+    if (!companyName.trim()) {
+      setCompanyError("Company name is required");
+      return;
+    }
+
+    if (companyName.trim().length < 2) {
+      setCompanyError("Company name must be at least 2 characters");
+      return;
+    }
+
     if (!email) {
       setEmailError("Email is required");
       return;
@@ -118,11 +131,12 @@ export default function RegisterPage() {
           setIsLoading(false);
           return;
         }
-        await register(email);
+        await register(email, companyName.trim());
       }
 
-      // Store email for verify page and redirect
+      // Store email and company name for verify page and redirect
       sessionStorage.setItem("registerEmail", email);
+      sessionStorage.setItem("registerCompanyName", companyName.trim());
       router.push("/verify");
     } catch (err) {
       if (err instanceof ApiError) {
@@ -136,6 +150,7 @@ export default function RegisterPage() {
       } else {
         // If API not configured, just proceed
         sessionStorage.setItem("registerEmail", email);
+        sessionStorage.setItem("registerCompanyName", companyName.trim());
         router.push("/verify");
       }
     } finally {
@@ -153,6 +168,22 @@ export default function RegisterPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <Input
+          type="text"
+          name="companyName"
+          label="Company name"
+          placeholder="Acme Corporation"
+          value={companyName}
+          onChange={(e) => {
+            setCompanyName(e.target.value);
+            setCompanyError("");
+          }}
+          error={companyError}
+          disabled={isLoading}
+          autoFocus
+          autoComplete="organization"
+        />
+
+        <Input
           type="email"
           name="email"
           label="Work email"
@@ -164,7 +195,6 @@ export default function RegisterPage() {
           }}
           error={emailError}
           disabled={isLoading}
-          autoFocus
           autoComplete="email"
         />
 
@@ -197,7 +227,7 @@ export default function RegisterPage() {
           variant="primary"
           size="lg"
           className="w-full"
-          disabled={isLoading || !email || !acceptedTerms}
+          disabled={isLoading || !email || !companyName.trim() || !acceptedTerms}
         >
           {isLoading ? (
             <>
