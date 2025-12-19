@@ -35,22 +35,22 @@ export default function DocsOverviewPage() {
         </h2>
         <div className="grid gap-3">
           <QuickLink
-            href="/dashboard/docs/getting-started/installation"
+            href="/docs/getting-started/installation"
             title="1. Install OmniGaze"
             description="Download and install on Windows"
           />
           <QuickLink
-            href="/dashboard/docs/getting-started/activation"
+            href="/docs/getting-started/activation"
             title="2. Activate License"
             description="Enter your license key"
           />
           <QuickLink
-            href="/dashboard/docs/security/winrm-setup"
+            href="/docs/security/winrm-setup"
             title="3. Configure Credentials"
             description="Set up secure scanning access"
           />
           <QuickLink
-            href="/dashboard/docs/getting-started/first-scan"
+            href="/docs/getting-started/first-scan"
             title="4. Run Your First Scan"
             description="Discover your infrastructure"
           />
@@ -62,34 +62,34 @@ export default function DocsOverviewPage() {
         <h2 className="font-display text-xl mb-4">Browse Documentation</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <SectionCard
-            href="/dashboard/docs/infrastructure/discovery"
+            href="/docs/infrastructure/discovery"
             icon={Server}
             title="Infrastructure"
             description="Asset discovery, network scanning, and 3D visualization."
           />
           <SectionCard
-            href="/dashboard/docs/security"
+            href="/docs/security"
             icon={Shield}
             title="Security & Credentials"
             description="Configure scanning credentials securely."
             highlight
           />
           <SectionCard
-            href="/dashboard/docs/applications/discovery"
+            href="/docs/applications/discovery"
             icon={AppWindow}
             title="Applications"
             description="Discover and map applications to infrastructure."
             badge="Starter+"
           />
           <SectionCard
-            href="/dashboard/docs/capabilities/overview"
+            href="/docs/capabilities/overview"
             icon={Layers}
             title="Business Capabilities"
             description="Link applications to business capabilities."
             badge="Pro+"
           />
           <SectionCard
-            href="/dashboard/docs/api/rest"
+            href="/docs/api/rest"
             icon={FileCode}
             title="API Reference"
             description="REST API and OData endpoints documentation."

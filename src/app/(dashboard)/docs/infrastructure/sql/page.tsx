@@ -174,7 +174,7 @@ export default function SQLPage() {
         <Callout type="info" title="Application Mapping">
           Connection data is used to build the application dependency map. View relationships
           in the{" "}
-          <Link href="/dashboard/docs/infrastructure/3d-view" className="text-[var(--amber-400)] hover:underline">
+          <Link href="/docs/infrastructure/3d-view" className="text-[var(--amber-400)] hover:underline">
             3D Visualization
           </Link>.
         </Callout>
@@ -208,7 +208,7 @@ export default function SQLPage() {
         </div>
         <p className="mt-4 text-sm text-[var(--text-secondary)]">
           See the{" "}
-          <Link href="/dashboard/docs/infrastructure/clusters" className="text-[var(--amber-400)] hover:underline">
+          <Link href="/docs/infrastructure/clusters" className="text-[var(--amber-400)] hover:underline">
             Clusters documentation
           </Link>{" "}
           for detailed cluster information.
@@ -240,7 +240,7 @@ OmniGaze.exe /sql /instance:"SERVER01\\SQLPROD" /database:ProductionDB /connecti
           Visualize your SQL infrastructure and dependencies.
         </p>
         <Link
-          href="/dashboard/docs/infrastructure/3d-view"
+          href="/docs/infrastructure/3d-view"
           className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
         >
           3D Visualization

@@ -439,21 +439,21 @@ wevtutil set-log Microsoft-Windows-WinRM/Operational /enabled:true /rt:true /ms:
         <h3 className="font-display text-lg font-medium mb-4">Related Documentation</h3>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/security/winrm-setup"
+            href="/docs/security/winrm-setup"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             WinRM Setup Guide
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/security/credential-journey"
+            href="/docs/security/credential-journey"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Route to Least Privilege
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/infrastructure/scanning"
+            href="/docs/infrastructure/scanning"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Network Scanning

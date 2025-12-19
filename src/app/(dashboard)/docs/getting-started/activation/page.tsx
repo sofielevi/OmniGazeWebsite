@@ -129,7 +129,7 @@ export default function ActivationPage() {
           Now that OmniGaze is activated, let&apos;s run your first infrastructure scan.
         </p>
         <Link
-          href="/dashboard/docs/getting-started/first-scan"
+          href="/docs/getting-started/first-scan"
           className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
         >
           Continue to Your First Scan

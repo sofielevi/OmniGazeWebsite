@@ -188,7 +188,7 @@ export default function ServersPage() {
         <Callout type="tip" title="Dependency Discovery">
           Network connections are used to automatically map dependencies between servers.
           View these in the{" "}
-          <Link href="/dashboard/docs/infrastructure/3d-view" className="text-[var(--amber-400)] hover:underline">
+          <Link href="/docs/infrastructure/3d-view" className="text-[var(--amber-400)] hover:underline">
             3D Visualization
           </Link>.
         </Callout>
@@ -220,14 +220,14 @@ OmniGaze.exe /export /all /format:xlsx /output:inventory.xlsx`}
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/infrastructure/clusters"
+            href="/docs/infrastructure/clusters"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Clusters
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/infrastructure/sql"
+            href="/docs/infrastructure/sql"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             SQL Instances

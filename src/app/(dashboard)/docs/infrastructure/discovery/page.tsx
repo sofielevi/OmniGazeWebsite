@@ -109,7 +109,7 @@ export default function DiscoveryPage() {
         <Callout type="tip" title="Best Practice">
           Use WinRM whenever possible. It&apos;s more efficient than WMI and provides better
           performance for large-scale scans. See the{" "}
-          <Link href="/dashboard/docs/infrastructure/winrm-setup" className="text-[var(--amber-400)] hover:underline">
+          <Link href="/docs/infrastructure/winrm-setup" className="text-[var(--amber-400)] hover:underline">
             WinRM Setup Guide
           </Link>.
         </Callout>
@@ -173,14 +173,14 @@ OmniGaze.exe /scan /profile:FullDiscovery /schedule:"0 2 * * *"`}
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/infrastructure/scanning"
+            href="/docs/infrastructure/scanning"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Network Scanning
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/infrastructure/servers"
+            href="/docs/infrastructure/servers"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Server Details

@@ -258,7 +258,7 @@ export default function CredentialJourneyPage() {
 
         <div className="mt-4">
           <Link
-            href="/dashboard/docs/security/winrm-setup"
+            href="/docs/security/winrm-setup"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--amber-400)] text-[var(--bg-deep)] font-medium text-sm hover:bg-[var(--amber-500)] transition-colors"
           >
             View WinRM Setup Guide
@@ -442,14 +442,14 @@ export default function CredentialJourneyPage() {
         <h3 className="font-display text-lg font-medium mb-4">Ready to Get Started?</h3>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/security/winrm-setup"
+            href="/docs/security/winrm-setup"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--amber-400)] text-[var(--bg-deep)] font-medium text-sm hover:bg-[var(--amber-500)] transition-colors"
           >
             Setup WinRM Read-Only
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/security/troubleshooting"
+            href="/docs/security/troubleshooting"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Troubleshooting Guide

@@ -120,7 +120,7 @@ export default function InstallationPage() {
           After installation, you&apos;ll need to activate your license.
         </p>
         <Link
-          href="/dashboard/docs/getting-started/activation"
+          href="/docs/getting-started/activation"
           className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
         >
           Continue to Activation

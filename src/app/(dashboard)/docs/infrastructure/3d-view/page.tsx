@@ -224,14 +224,14 @@ export default function ThreeDViewPage() {
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/security/winrm-setup"
+            href="/docs/security/winrm-setup"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             WinRM Setup
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/security/credentials"
+            href="/docs/security/credentials"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Credential Management

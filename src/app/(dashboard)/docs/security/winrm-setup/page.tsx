@@ -385,14 +385,14 @@ Remove-CimSession -CimSession $session`}
         <h3 className="font-display text-lg font-medium mb-4">Next Steps</h3>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/security/troubleshooting"
+            href="/docs/security/troubleshooting"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Troubleshooting Guide
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/infrastructure/scanning"
+            href="/docs/infrastructure/scanning"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Start Network Scanning

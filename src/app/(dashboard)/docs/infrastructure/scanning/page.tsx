@@ -193,14 +193,14 @@ OmniGaze.exe /scan /target:10.0.0.0/24 /ports:80,443,8080,8443`}
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/infrastructure/servers"
+            href="/docs/infrastructure/servers"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             Server Details
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/infrastructure/3d-view"
+            href="/docs/infrastructure/3d-view"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             3D Visualization

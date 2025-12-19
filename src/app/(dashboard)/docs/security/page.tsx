@@ -41,24 +41,24 @@ export default function SecurityOverviewPage() {
             <RecommendationRow
               condition="New deployment or production environment"
               recommendation="WinRM Read-Only"
-              href="/dashboard/docs/security/winrm-setup"
+              href="/docs/security/winrm-setup"
               recommended
             />
             <RecommendationRow
               condition="Already have Azure/M365 with Log Analytics"
               recommendation="Log Analytics"
-              href="/dashboard/docs/security/credential-journey"
+              href="/docs/security/credential-journey"
             />
             <RecommendationRow
               condition="Quick POC or lab environment"
               recommendation="WMI + Admin (temporary)"
-              href="/dashboard/docs/security/credential-journey"
+              href="/docs/security/credential-journey"
               warning
             />
             <RecommendationRow
               condition="Transitioning from legacy setup"
               recommendation="WMI Limited → WinRM"
-              href="/dashboard/docs/security/credential-journey"
+              href="/docs/security/credential-journey"
             />
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function SecurityOverviewPage() {
               security exposure and a single-command setup.
             </p>
             <Link
-              href="/dashboard/docs/security/winrm-setup"
+              href="/docs/security/winrm-setup"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--amber-400)] text-[var(--bg-deep)] font-medium text-sm hover:bg-[var(--amber-500)] transition-colors"
             >
               Get Started with WinRM
@@ -197,17 +197,17 @@ export default function SecurityOverviewPage() {
         <h3 className="font-display text-lg font-medium mb-4">Documentation</h3>
         <div className="grid md:grid-cols-3 gap-4">
           <NextStepCard
-            href="/dashboard/docs/security/credential-journey"
+            href="/docs/security/credential-journey"
             title="Route to Least Privilege"
             description="Understand the full security journey and comparison"
           />
           <NextStepCard
-            href="/dashboard/docs/security/winrm-setup"
+            href="/docs/security/winrm-setup"
             title="WinRM Setup Guide"
             description="Step-by-step configuration with our automated script"
           />
           <NextStepCard
-            href="/dashboard/docs/security/troubleshooting"
+            href="/docs/security/troubleshooting"
             title="Troubleshooting"
             description="Common issues and diagnostic commands"
           />

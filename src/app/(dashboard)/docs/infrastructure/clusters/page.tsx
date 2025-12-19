@@ -197,14 +197,14 @@ OmniGaze.exe /clusters /refresh /name:SQLCLUSTER01`}
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/dashboard/docs/infrastructure/sql"
+            href="/docs/infrastructure/sql"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             SQL Instances
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/dashboard/docs/infrastructure/3d-view"
+            href="/docs/infrastructure/3d-view"
             className="inline-flex items-center gap-2 text-[var(--amber-400)] hover:underline"
           >
             3D Visualization
