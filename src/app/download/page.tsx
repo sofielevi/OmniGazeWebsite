@@ -20,8 +20,9 @@ export const metadata = {
   description: "Download OmniGaze for Windows. Auto-discover your infrastructure and visualize your IT landscape.",
 };
 
-// Use centralized download config
-const { version, releaseDate, fileSize, url: DOWNLOAD_URL } = siteConfig.download;
+// Use centralized download config with cache-busting version parameter
+const { version, buildNumber, releaseDate, fileSize, url } = siteConfig.download;
+const DOWNLOAD_URL = `${url}?v=${buildNumber}`;
 
 export default function DownloadPage() {
   return (
