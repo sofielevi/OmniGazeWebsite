@@ -8,8 +8,13 @@
  */
 
 const FtpDeploy = require('ftp-deploy');
+const ftp = require('basic-ftp');
 const path = require('path');
+const fs = require('fs');
 const { execSync } = require('child_process');
+
+// .htaccess for no-cache headers on installer
+const HTACCESS_PATH = path.join(__dirname, 'install-folder', '.htaccess');
 
 // FTP Configuration for staging
 const FTP_CONFIG = {
@@ -61,7 +66,7 @@ async function deploy() {
 
   try {
     // Step 1: Build the static site
-    logStep('1/3', 'Building static site...');
+    logStep('1/4', 'Building static site...');
     log('Running: STATIC_EXPORT=true npm run build', 'blue');
 
     execSync('npm run build', {
@@ -77,8 +82,7 @@ async function deploy() {
     log('Build completed successfully!', 'green');
 
     // Step 2: Verify build output
-    logStep('2/3', 'Verifying build output...');
-    const fs = require('fs');
+    logStep('2/4', 'Verifying build output...');
     const outDir = path.join(__dirname, '..', 'out');
 
     if (!fs.existsSync(outDir)) {
@@ -89,7 +93,7 @@ async function deploy() {
     log(`Found ${files.length} items in build output`, 'green');
 
     // Step 3: Deploy via FTP
-    logStep('3/3', 'Deploying to FTP server...');
+    logStep('3/4', 'Deploying to FTP server...');
     log(`Host: ${FTP_CONFIG.host}`, 'blue');
     log(`Remote path: ${FTP_CONFIG.remoteRoot}`, 'blue');
 
@@ -118,7 +122,31 @@ async function deploy() {
     await ftpDeploy.deploy(FTP_CONFIG);
 
     console.log('\n');
-    log('Deployment completed successfully!', 'green');
+    log('Website deployment completed!', 'green');
+
+    // Step 4: Upload .htaccess for installer no-cache headers
+    logStep('4/4', 'Uploading .htaccess for installer...');
+
+    if (fs.existsSync(HTACCESS_PATH)) {
+      const client = new ftp.Client();
+      try {
+        await client.access({
+          host: FTP_CONFIG.host,
+          port: FTP_CONFIG.port,
+          user: FTP_CONFIG.user,
+          password: FTP_CONFIG.password,
+          secure: false
+        });
+
+        await client.ensureDir('/install');
+        await client.uploadFrom(HTACCESS_PATH, '/install/.htaccess');
+        log('.htaccess uploaded to /install/', 'green');
+      } finally {
+        client.close();
+      }
+    } else {
+      log('.htaccess not found, skipping', 'yellow');
+    }
 
     // Summary
     const duration = ((Date.now() - startTime) / 1000).toFixed(1);

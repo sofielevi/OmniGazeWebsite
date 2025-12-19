@@ -11,16 +11,16 @@ interface DownloadButtonProps {
 }
 
 /**
- * Download button that adds a fresh timestamp to bust browser cache.
- * This ensures users always download the latest installer, even if
- * they have a cached version from a previous download.
+ * Download button with cache-busting timestamp.
+ * Combined with .htaccess no-cache headers on the server,
+ * this ensures users always download the latest installer.
  */
 export function DownloadButton({ className, size = "lg", children }: DownloadButtonProps) {
   const handleDownload = () => {
-    // Add timestamp to URL to bypass any browser/proxy caching
+    // Add timestamp to force browser to request fresh file
+    // Server-side .htaccess should also set no-cache headers
     const timestamp = Date.now();
-    const downloadUrl = `${siteConfig.download.url}?v=${siteConfig.download.buildNumber}&t=${timestamp}`;
-    window.location.href = downloadUrl;
+    window.location.href = `${siteConfig.download.url}?t=${timestamp}`;
   };
 
   const sizes = {

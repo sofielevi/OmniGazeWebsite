@@ -15,12 +15,12 @@ const ftp = require('basic-ftp');
 const path = require('path');
 const fs = require('fs');
 
-// FTP Configuration for main omnigaze.com site
+// FTP Configuration for staging site (fingerscrossed.omnigaze.com)
 const FTP_CONFIG = {
   host: 'linux349.unoeuro.com',
   port: 21,
-  user: 'omnigaze.com',
-  password: 'xyfnwt9r3DeRHgF5AB2d', // Same password as staging
+  user: 'fingerscrossed.com',
+  password: 'xyfnwt9r3DeRHgF5AB2d',
   secure: false
 };
 

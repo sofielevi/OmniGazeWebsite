@@ -1,0 +1,18 @@
+# Force no caching for installer files
+# This ensures users always download the latest version
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(exe|msi|zip)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "Thu, 01 Jan 1970 00:00:00 GMT"
+    </FilesMatch>
+</IfModule>
+
+# Fallback for servers without mod_headers
+<IfModule mod_expires.c>
+    <FilesMatch "\.(exe|msi|zip)$">
+        ExpiresActive On
+        ExpiresDefault "access plus 0 seconds"
+    </FilesMatch>
+</IfModule>
