@@ -7,7 +7,41 @@ import { AuthCard, AuthError } from "@/components/auth/auth-card";
 import { Input, Checkbox } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { register, checkEmail, ApiError } from "@/lib/api-client";
-import { Mail, ArrowRight, Loader2 } from "lucide-react";
+import { Mail, ArrowRight, Loader2, Building2 } from "lucide-react";
+
+// Personal/free email domains that are not allowed
+const BLOCKED_EMAIL_DOMAINS = new Set([
+  // Major free email providers
+  "gmail.com", "googlemail.com",
+  "yahoo.com", "yahoo.co.uk", "yahoo.fr", "yahoo.de", "yahoo.es", "yahoo.it", "yahoo.ca", "yahoo.com.au",
+  "outlook.com", "hotmail.com", "hotmail.co.uk", "hotmail.fr", "hotmail.de", "hotmail.es", "hotmail.it",
+  "live.com", "live.co.uk", "live.fr", "live.de", "live.nl",
+  "msn.com",
+  "aol.com", "aol.co.uk",
+  "icloud.com", "me.com", "mac.com",
+  "protonmail.com", "protonmail.ch", "proton.me", "pm.me",
+  "zoho.com", "zohomail.com",
+  "mail.com", "email.com",
+  "gmx.com", "gmx.net", "gmx.de", "gmx.at", "gmx.ch",
+  "yandex.com", "yandex.ru",
+  "mail.ru", "inbox.ru", "list.ru", "bk.ru",
+  "fastmail.com", "fastmail.fm",
+  "tutanota.com", "tutanota.de", "tutamail.com", "tuta.io",
+  "hushmail.com",
+  "mailfence.com",
+  "qq.com", "163.com", "126.com", "sina.com",
+  "naver.com", "daum.net", "hanmail.net",
+  "web.de", "t-online.de", "freenet.de",
+  "orange.fr", "free.fr", "sfr.fr", "laposte.net",
+  "libero.it", "virgilio.it", "tin.it",
+  "wp.pl", "onet.pl", "interia.pl",
+  "rediffmail.com", "inbox.com",
+  "att.net", "sbcglobal.net", "bellsouth.net",
+  "comcast.net", "verizon.net", "cox.net", "charter.net",
+  // Temporary/disposable email domains
+  "tempmail.com", "temp-mail.org", "guerrillamail.com", "mailinator.com",
+  "10minutemail.com", "throwaway.email", "fakeinbox.com", "sharklasers.com",
+]);
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -20,6 +54,26 @@ export default function RegisterPage() {
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const isBusinessEmail = (email: string): { valid: boolean; message?: string } => {
+    if (!email) return { valid: false, message: "Email is required" };
+
+    const atIndex = email.lastIndexOf("@");
+    if (atIndex <= 0 || atIndex >= email.length - 1) {
+      return { valid: false, message: "Invalid email address" };
+    }
+
+    const domain = email.substring(atIndex + 1).toLowerCase();
+
+    if (BLOCKED_EMAIL_DOMAINS.has(domain)) {
+      return {
+        valid: false,
+        message: "Please use your company email address. Personal email providers are not accepted for business accounts.",
+      };
+    }
+
+    return { valid: true };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,6 +89,13 @@ export default function RegisterPage() {
 
     if (!validateEmail(email)) {
       setEmailError("Please enter a valid email address");
+      return;
+    }
+
+    // Check if business email
+    const businessCheck = isBusinessEmail(email);
+    if (!businessCheck.valid) {
+      setEmailError(businessCheck.message || "Invalid email domain");
       return;
     }
 
@@ -165,8 +226,24 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      {/* Features reminder */}
+      {/* Company email notice */}
       <div className="mt-6 p-4 bg-[var(--bg-elevated)] rounded-lg">
+        <div className="flex items-start gap-3">
+          <Building2 className="w-5 h-5 text-[var(--amber-400)] shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-medium text-[var(--text-primary)] mb-1">
+              Company Email Required
+            </p>
+            <p className="text-xs text-[var(--text-muted)]">
+              OmniGaze is designed for businesses. Please register with your company email address.
+              Personal email providers (Gmail, Yahoo, Outlook, etc.) are not accepted.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Features reminder */}
+      <div className="mt-4 p-3 border border-[var(--border-subtle)] rounded-lg">
         <p className="text-xs text-[var(--text-muted)] text-center">
           Free Community tier includes: Auto-discovery, 50 servers, 2D visualization, and more
         </p>

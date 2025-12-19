@@ -2,6 +2,7 @@ import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Section, SectionHeader } from "@/components/marketing/section";
 import { ButtonLink } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 import {
   Download,
   Monitor,
@@ -19,9 +20,8 @@ export const metadata = {
   description: "Download OmniGaze for Windows. Auto-discover your infrastructure and visualize your IT landscape.",
 };
 
-const CURRENT_VERSION = "2.5.0";
-const RELEASE_DATE = "December 2024";
-const DOWNLOAD_URL = "https://downloads.omnigaze.com/OmniGazeSetup.exe";
+// Use centralized download config
+const { version, releaseDate, fileSize, url: DOWNLOAD_URL } = siteConfig.download;
 
 export default function DownloadPage() {
   return (
@@ -34,7 +34,7 @@ export default function DownloadPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--amber-glow)] text-[var(--amber-400)] text-sm font-medium mb-6">
               <Download className="w-4 h-4" />
-              Version {CURRENT_VERSION}
+              Version {version}
             </div>
 
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
@@ -70,7 +70,7 @@ export default function DownloadPage() {
               </ButtonLink>
 
               <p className="text-xs text-[var(--text-muted)]">
-                v{CURRENT_VERSION} &bull; {RELEASE_DATE} &bull; 85 MB
+                v{version} &bull; {releaseDate} &bull; {fileSize}
               </p>
             </div>
           </div>
@@ -239,9 +239,9 @@ export default function DownloadPage() {
             <FileText className="w-12 h-12 text-[var(--amber-400)] mx-auto mb-4" />
             <h2 className="font-display text-2xl mb-3">Release Notes</h2>
             <p className="text-[var(--text-secondary)] mb-6">
-              See what&apos;s new in version {CURRENT_VERSION} and view the full changelog.
+              See what&apos;s new in version {version} and view the full changelog.
             </p>
-            <ButtonLink href="/docs/changelog" variant="secondary">
+            <ButtonLink href="/docs" variant="secondary">
               View Release Notes
               <ArrowRight className="w-4 h-4" />
             </ButtonLink>

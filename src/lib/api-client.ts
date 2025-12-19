@@ -26,27 +26,28 @@ export interface RegisterResponse {
 
 export interface VerifyResponse {
   success: boolean;
-  customerId: number;
-  licenseKey: string;
-  tier: string;
+  message: string;
   email: string;
+  tier: TierInfo | null;
+  features: string[];
+  // Note: licenseKey is stored in HttpOnly cookie, not returned in response
 }
 
 export interface LoginResponse {
   success: boolean;
-  customerId: number;
-  tier: string;
+  message?: string;
   email: string;
+  tier: TierInfo | null;
 }
 
 export interface UserInfo {
-  customerId: number;
+  isAuthenticated: boolean;
   email: string;
-  tier: string;
-  tierDisplayName: string;
+  tier: TierInfo | null;
+  serverCount: number;
+  userCount: number;
   serverLimit: number;
   userLimit: number;
-  isActive: boolean;
 }
 
 export interface TierInfo {
@@ -135,7 +136,9 @@ export async function checkEmail(email: string): Promise<{ exists: boolean }> {
   const endpoint = useLocalApi
     ? `/api/auth/check-email?email=${encodeURIComponent(email)}`
     : `/api/website/check-email?email=${encodeURIComponent(email)}`;
-  return apiFetch(endpoint);
+  const response = await apiFetch<{ isRegistered: boolean }>(endpoint);
+  // API returns { isRegistered }, client expects { exists }
+  return { exists: response.isRegistered };
 }
 
 /**
@@ -214,7 +217,7 @@ export async function getCurrentTier(): Promise<CurrentTierInfo> {
  * Get all available tiers (public)
  */
 export async function getTiers(): Promise<TierInfo[]> {
-  const endpoint = useLocalApi ? '/api/auth/tiers' : '/api/website/tiers';
+  const endpoint = useLocalApi ? '/api/auth/tiers' : '/api/Tier/All';
   return apiFetch(endpoint);
 }
 

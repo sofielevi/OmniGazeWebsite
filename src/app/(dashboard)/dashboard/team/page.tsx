@@ -48,7 +48,8 @@ export default function TeamPage() {
         const userData = await getCurrentUser();
         setUser(userData);
 
-        if (TEAM_TIERS.includes(userData.tierDisplayName)) {
+        const userTierName = userData.tier?.displayName || userData.tier?.name || "Community";
+        if (TEAM_TIERS.includes(userTierName)) {
           const team = await getTeamInfo();
           setTeamInfo(team);
         }
@@ -126,7 +127,8 @@ export default function TeamPage() {
   }
 
   // Check if user has team access
-  const hasTeamAccess = user && TEAM_TIERS.includes(user.tierDisplayName);
+  const tierDisplayName = user?.tier?.displayName || user?.tier?.name || "Community";
+  const hasTeamAccess = user && TEAM_TIERS.includes(tierDisplayName);
 
   if (!hasTeamAccess) {
     return (

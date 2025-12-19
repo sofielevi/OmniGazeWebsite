@@ -46,14 +46,28 @@ function CheckoutContent() {
     setError("");
 
     try {
-      const response = await fetch("/api/checkout", {
+      // Map tier name to tier ID
+      const tierIdMap: Record<string, number> = {
+        starter: 2,
+        professional: 3,
+        business: 4,
+      };
+      const tierId = tierIdMap[tier.name.toLowerCase()];
+
+      if (!tierId) {
+        throw new Error("Invalid tier selected");
+      }
+
+      // Call the OmniGaze API checkout endpoint
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const response = await fetch(`${apiUrl}/api/website/checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
         body: JSON.stringify({
-          tier: tier.name.toLowerCase() as TierName,
+          tierId,
           billingCycle,
         }),
       });

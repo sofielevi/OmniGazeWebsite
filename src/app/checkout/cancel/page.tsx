@@ -76,7 +76,7 @@ export default function CheckoutCancelPage() {
 
               {/* FAQ */}
               <Link
-                href="/docs/faq"
+                href="/docs"
                 className="flex items-center gap-4 p-4 bg-[var(--bg-elevated)] rounded-xl hover:bg-[var(--bg-deep)] transition-colors group"
               >
                 <div className="w-10 h-10 bg-[var(--amber-400)]/20 rounded-lg flex items-center justify-center flex-shrink-0">

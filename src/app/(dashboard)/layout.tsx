@@ -46,9 +46,12 @@ export default function DashboardLayout({
     return null; // Will redirect
   }
 
+  // Extract tier name as string for display
+  const tierName = user.tier?.displayName || user.tier?.name || "Community";
+
   return (
     <div className="min-h-screen bg-[var(--bg-deep)]">
-      <Sidebar userTier={user.tier} userEmail={user.email} />
+      <Sidebar userTier={tierName} userEmail={user.email} />
       <main className="lg:pl-72">
         <div className="p-6 lg:p-8 pt-20 lg:pt-8">{children}</div>
       </main>

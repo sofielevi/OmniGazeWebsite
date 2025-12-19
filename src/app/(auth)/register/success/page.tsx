@@ -2,16 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { AuthCard } from "@/components/auth/auth-card";
-import { Button, ButtonLink } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { VerifyResponse } from "@/lib/api-client";
-import { CheckCircle2, Copy, Check, Download, BookOpen, LayoutDashboard } from "lucide-react";
+import { CheckCircle2, Download, BookOpen, LayoutDashboard } from "lucide-react";
 
 export default function SuccessPage() {
   const router = useRouter();
   const [result, setResult] = useState<VerifyResponse | null>(null);
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     // Get verification result from session storage
@@ -25,29 +23,11 @@ export default function SuccessPage() {
     }
   }, [router]);
 
-  const handleCopyLicenseKey = async () => {
-    if (!result?.licenseKey) return;
-
-    try {
-      await navigator.clipboard.writeText(result.licenseKey);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Fallback for older browsers
-      const textArea = document.createElement("textarea");
-      textArea.value = result.licenseKey;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textArea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
   if (!result) {
     return null; // Will redirect in useEffect
   }
+
+  const tierName = result.tier?.displayName || result.tier?.name || "Community";
 
   return (
     <AuthCard title="Welcome to OmniGaze!">
@@ -73,36 +53,18 @@ export default function SuccessPage() {
         <div className="flex justify-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--pyramid-infrastructure)]/20 border border-[var(--pyramid-infrastructure)]/30 rounded-full">
             <span className="text-sm font-medium text-[var(--pyramid-infrastructure)]">
-              {result.tier} Tier
+              {tierName} Tier
             </span>
           </div>
         </div>
 
-        {/* License key */}
+        {/* Info about license key */}
         <div className="bg-[var(--bg-elevated)] rounded-lg p-4">
-          <label className="block text-xs text-[var(--text-muted)] uppercase tracking-wider mb-2">
-            Your License Key
-          </label>
-          <div className="flex items-center gap-2">
-            <code className="flex-1 font-mono text-lg text-[var(--amber-400)] bg-[var(--bg-deep)] px-3 py-2 rounded border border-[var(--border-subtle)]">
-              {result.licenseKey}
-            </code>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={handleCopyLicenseKey}
-              className="shrink-0"
-            >
-              {copied ? (
-                <Check className="w-4 h-4 text-[var(--success)]" />
-              ) : (
-                <Copy className="w-4 h-4" />
-              )}
-            </Button>
-          </div>
-          <p className="text-xs text-[var(--text-muted)] mt-2">
-            Use this key to activate OmniGaze on your computer
+          <p className="text-sm text-[var(--text-secondary)]">
+            Your license key has been sent to your email. You can also find it in your{" "}
+            <a href="/dashboard/licenses" className="text-[var(--amber-400)] hover:underline">
+              dashboard
+            </a>.
           </p>
         </div>
 

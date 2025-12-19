@@ -25,6 +25,36 @@ interface UITier {
   ctaVariant: "primary" | "secondary";
 }
 
+// Map API feature keys to display names
+const featureDisplayNames: Record<string, string> = {
+  NetworkDiscovery: "Network discovery",
+  AssetInventory: "Asset inventory",
+  ServerDiagram2D: "Server diagram (2D)",
+  TagManagement: "Tag management",
+  ProcessDiscovery: "Process discovery",
+  ProcessDiagram: "Process diagram",
+  Visualization3D: "3D visualization",
+  ScheduledScans: "Scheduled scans",
+  CsvExport: "CSV export",
+  ODataApi: "OData API access",
+  VulnerabilityScanning: "Vulnerability scanning",
+  SslCertTracking: "SSL certificate tracking",
+  SoftwareInventory: "Software inventory",
+  AdLdapSync: "AD/LDAP sync",
+  AzureDiscovery: "Azure cloud discovery",
+  IntuneIntegration: "Intune integration",
+  CisCompliance: "CIS compliance benchmarks",
+  SqlServerAnalysis: "SQL Server analysis",
+  SsoAzureAd: "SSO (Azure AD)",
+  SsoEntraId: "SSO (Entra ID)",
+  FactSheets: "FactSheets (EA)",
+  BusinessCapabilities: "Business capabilities",
+  LogicalDiagram: "Logical architecture diagram",
+  LeanIxIntegration: "LeanIX integration",
+  ServiceNowIntegration: "ServiceNow sync",
+  AiInsights: "AI-powered insights",
+};
+
 // UI metadata for each tier (CTA, featured status, etc.)
 const tierUIMetadata: Record<string, {
   description: string;
@@ -63,12 +93,24 @@ const tierUIMetadata: Record<string, {
 };
 
 // Transform API tiers to UI format
-function enrichTierWithUI(tier: TierInfo): UITier {
+function enrichTierWithUI(tier: TierInfo, index: number, allTiers: TierInfo[]): UITier {
   const metadata = tierUIMetadata[tier.name] || {
     description: tier.description || tier.name,
     cta: "Get Started",
     ctaVariant: "secondary" as const,
   };
+
+  // Get previous tier's features to show only new features
+  const prevTierFeatures = index > 0 ? new Set(allTiers[index - 1].features) : new Set<string>();
+
+  // Map feature keys to display names, showing only new features for this tier
+  const newFeatures = tier.features.filter(f => !prevTierFeatures.has(f));
+  const displayFeatures = newFeatures.map(key => featureDisplayNames[key] || key);
+
+  // Add "Everything in [PrevTier]" for non-Community tiers
+  const finalFeatures = index > 0
+    ? [`Everything in ${allTiers[index - 1].displayName}`, ...displayFeatures]
+    : displayFeatures;
 
   return {
     id: tier.name.toLowerCase(),
@@ -79,7 +121,7 @@ function enrichTierWithUI(tier: TierInfo): UITier {
     annualPrice: tier.annualPrice,
     serverLimit: tier.serverLimit,
     userLimit: tier.userLimit,
-    features: tier.features,
+    features: finalFeatures,
     disabledFeatures: metadata.disabledFeatures,
     featured: metadata.featured,
     cta: metadata.cta,
@@ -101,7 +143,7 @@ export default function PricingPage() {
         if (apiTiers && apiTiers.length > 0) {
           // Sort by id to ensure correct order
           const sortedTiers = [...apiTiers].sort((a, b) => a.id - b.id);
-          const enrichedTiers = sortedTiers.map(enrichTierWithUI);
+          const enrichedTiers = sortedTiers.map((tier, index, arr) => enrichTierWithUI(tier, index, arr));
           setPricingTiers(enrichedTiers);
         } else {
           setError("No pricing tiers available");

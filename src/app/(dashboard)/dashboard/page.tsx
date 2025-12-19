@@ -69,7 +69,7 @@ export default function DashboardPage() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <TierBadge tier={user?.tier || "Community"} size="lg" />
+              <TierBadge tier={user?.tier?.displayName || user?.tier?.name || "Community"} size="lg" />
               <span className="text-sm text-[var(--text-muted)]">Current Plan</span>
             </div>
             <p className="text-[var(--text-secondary)]">
@@ -103,13 +103,13 @@ export default function DashboardPage() {
         />
         <StatCard
           title="Plan"
-          value={user?.tier || "Community"}
+          value={user?.tier?.displayName || user?.tier?.name || "Community"}
           subtitle={tier?.monthlyPrice ? `$${tier.monthlyPrice}/mo` : "Free"}
           icon={Key}
         />
         <StatCard
           title="Status"
-          value={user?.isActive ? "Active" : "Inactive"}
+          value={user?.isAuthenticated ? "Active" : "Inactive"}
           subtitle="License status"
           icon={Server}
         />

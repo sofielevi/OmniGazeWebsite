@@ -5,6 +5,25 @@ export const siteConfig = {
   url: "https://omnigaze.com",
   apiUrl: process.env.NEXT_PUBLIC_API_URL || "https://api.omnigaze.com",
 
+  // Download configuration - update when releasing new versions
+  download: {
+    version: "3.1.2",
+    buildNumber: "1436",
+    releaseDate: "December 2024",
+    fileSize: "97 MB",
+    // Primary download URL - uses main site FTP
+    url: "https://omnigaze.com/install/OmniGazeSetup.exe",
+    // Fallback to Portal API if available
+    fallbackUrl: "https://portal.omnigaze.com/api/download/installer",
+    // System requirements
+    requirements: {
+      os: ["Windows 10 (64-bit)", "Windows 11", "Windows Server 2016+"],
+      processor: "2 GHz dual-core or better (x64)",
+      memory: "4 GB RAM minimum, 8 GB recommended",
+      disk: "500 MB available space",
+    },
+  },
+
   links: {
     docs: "/docs",
     pricing: "/pricing",
@@ -24,7 +43,7 @@ export const siteConfig = {
   footer: {
     links: [
       { label: "Documentation", href: "/docs" },
-      { label: "API Reference", href: "/docs/api" },
+      { label: "API Reference", href: "/docs/api/rest" },
       { label: "Support", href: "/support" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
