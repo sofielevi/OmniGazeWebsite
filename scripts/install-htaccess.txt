@@ -1,0 +1,8 @@
+# Prevent caching of installer files
+# Upload this file as .htaccess to the /install folder
+
+<FilesMatch "\.(exe|msi|zip)$">
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires "0"
+</FilesMatch>

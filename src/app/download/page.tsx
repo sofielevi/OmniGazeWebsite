@@ -2,6 +2,7 @@ import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Section, SectionHeader } from "@/components/marketing/section";
 import { ButtonLink } from "@/components/ui/button";
+import { DownloadButton } from "@/components/marketing/download-button";
 import { siteConfig } from "@/config/site";
 import {
   Download,
@@ -20,9 +21,8 @@ export const metadata = {
   description: "Download OmniGaze for Windows. Auto-discover your infrastructure and visualize your IT landscape.",
 };
 
-// Use centralized download config with cache-busting version parameter
-const { version, buildNumber, releaseDate, fileSize, url } = siteConfig.download;
-const DOWNLOAD_URL = `${url}?v=${buildNumber}`;
+// Use centralized download config
+const { version, releaseDate, fileSize } = siteConfig.download;
 
 export default function DownloadPage() {
   return (
@@ -60,15 +60,7 @@ export default function DownloadPage() {
                 Windows 10/11, Windows Server 2016+
               </p>
 
-              <ButtonLink
-                href={DOWNLOAD_URL}
-                variant="primary"
-                size="lg"
-                className="w-full justify-center mb-4"
-              >
-                <Download className="w-5 h-5" />
-                Download Installer
-              </ButtonLink>
+              <DownloadButton className="w-full mb-4" />
 
               <p className="text-xs text-[var(--text-muted)]">
                 v{version} &bull; {releaseDate} &bull; {fileSize}
@@ -259,10 +251,10 @@ export default function DownloadPage() {
               Start with the free Community tier. No credit card required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <ButtonLink href={DOWNLOAD_URL} variant="primary" size="lg">
+              <DownloadButton>
                 <Download className="w-5 h-5" />
                 Download Now
-              </ButtonLink>
+              </DownloadButton>
               <ButtonLink href="/register" variant="secondary" size="lg">
                 Create Free Account
               </ButtonLink>
