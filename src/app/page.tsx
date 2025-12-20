@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Hero } from "@/components/marketing/hero";
@@ -6,7 +7,58 @@ import { ValuePyramid } from "@/components/marketing/value-pyramid";
 import { BridgeVisual } from "@/components/marketing/bridge-visual";
 import { DataSovereignty } from "@/components/marketing/data-sovereignty";
 import { ButtonLink } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import {
+  ChevronRight,
+  Search,
+  Globe,
+  GitBranch,
+  ShieldCheck,
+  Zap,
+  Building2,
+} from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "OmniGaze - From Servers to Strategy | Infrastructure Discovery & EA",
+  description:
+    "Auto-discover your IT infrastructure, map application dependencies, and bridge operations to enterprise architecture. The only platform spanning from 10,000+ assets to strategic initiatives. Free tier available.",
+  keywords: [
+    "infrastructure discovery",
+    "CMDB",
+    "enterprise architecture",
+    "IT asset management",
+    "network discovery",
+    "server inventory",
+    "application mapping",
+    "business capabilities",
+    "value stream mapping",
+    "3D visualization",
+    "agentless discovery",
+  ],
+  openGraph: {
+    title: "OmniGaze - From Servers to Strategy",
+    description:
+      "The only platform that connects infrastructure discovery to strategic business value. Auto-discover servers, map dependencies, and align IT with business goals.",
+    url: "https://omnigaze.com",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "OmniGaze - Applied Observability Platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "OmniGaze - From Servers to Strategy",
+    description:
+      "Auto-discover infrastructure, map dependencies, bridge IT to business strategy. Free tier with 50 servers.",
+    images: ["/og-image.png"],
+  },
+  alternates: {
+    canonical: "https://omnigaze.com",
+  },
+};
 
 export default function HomePage() {
   return (
@@ -91,7 +143,7 @@ export default function HomePage() {
               Ready to See Everything?
             </h2>
             <p className="font-display font-light text-lg text-[var(--text-secondary)] mb-8 relative z-10">
-              Join hundreds of IT teams who&apos;ve discovered a better way to understand their infrastructure.
+              Discover a better way to understand your infrastructure, from servers to strategy.
             </p>
             <div className="flex flex-wrap justify-center gap-4 relative z-10">
               <ButtonLink href="/register" variant="primary" size="lg">
@@ -115,50 +167,52 @@ const features = [
   {
     title: "Auto-Discovery",
     description: "Automatically scan your network and discover servers, services, and connections without agents.",
-    icon: "🔍",
+    icon: Search,
     tier: "Community",
   },
   {
     title: "3D Visualization",
     description: "Explore your infrastructure in an immersive 3D environment. See connections like never before.",
-    icon: "🌐",
+    icon: Globe,
     tier: "Starter",
   },
   {
     title: "Process Mapping",
     description: "Discover running processes and map application dependencies automatically.",
-    icon: "📊",
+    icon: GitBranch,
     tier: "Starter",
   },
   {
     title: "Vulnerability Scanning",
     description: "Identify CVEs and security risks across your infrastructure with continuous monitoring.",
-    icon: "🛡️",
+    icon: ShieldCheck,
     tier: "Professional",
   },
   {
     title: "OData API",
     description: "Full API access for integration with your existing tools and workflows.",
-    icon: "⚡",
+    icon: Zap,
     tier: "Professional",
   },
   {
     title: "Enterprise Architecture",
     description: "FactSheets, business capabilities, and strategic planning integration.",
-    icon: "🏛️",
+    icon: Building2,
     tier: "Enterprise",
   },
 ];
 
-function FeatureCard({ title, description, icon, tier }: {
+function FeatureCard({ title, description, icon: Icon, tier }: {
   title: string;
   description: string;
-  icon: string;
+  icon: React.ElementType;
   tier: string;
 }) {
   return (
     <div className="p-6 bg-[var(--bg-elevated)] rounded-xl border border-[var(--border-subtle)] hover:border-[var(--border-warm)] transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl">
-      <div className="text-3xl mb-4">{icon}</div>
+      <div className="w-12 h-12 rounded-lg bg-[var(--amber-400)]/10 flex items-center justify-center mb-4">
+        <Icon className="w-6 h-6 text-[var(--amber-400)]" />
+      </div>
       <h3 className="font-display text-lg mb-2">{title}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4">{description}</p>
       <span className="inline-block px-2 py-1 bg-[var(--bg-card)] rounded text-xs text-[var(--amber-400)]">

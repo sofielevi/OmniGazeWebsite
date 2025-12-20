@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import {
   BookOpen,
@@ -9,6 +10,29 @@ import {
   FileCode,
   ArrowRight,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Documentation - Getting Started with OmniGaze",
+  description:
+    "OmniGaze documentation: installation guides, network scanning setup, credential configuration, API reference, and best practices for infrastructure discovery.",
+  keywords: [
+    "OmniGaze documentation",
+    "infrastructure discovery guide",
+    "network scanning tutorial",
+    "WinRM setup",
+    "OData API documentation",
+    "CMDB setup guide",
+  ],
+  openGraph: {
+    title: "OmniGaze Documentation",
+    description:
+      "Everything you need to discover, map, and understand your IT infrastructure with OmniGaze.",
+    url: "https://omnigaze.com/docs",
+  },
+  alternates: {
+    canonical: "https://omnigaze.com/docs",
+  },
+};
 
 export default function DocsOverviewPage() {
   return (

@@ -160,28 +160,34 @@ async function deployStaging() {
       }
     }
 
-    // Step 4: Upload .htaccess for installer no-cache headers
-    logStep('4/4', 'Uploading .htaccess for installer...');
+    // Step 4: Upload .htaccess files
+    logStep('4/4', 'Uploading .htaccess files...');
 
-    if (fs.existsSync(HTACCESS_PATH)) {
-      const client = new ftp.Client();
-      try {
-        await client.access({
-          host: FTP_CONFIG.host,
-          port: FTP_CONFIG.port,
-          user: FTP_CONFIG.user,
-          password: FTP_CONFIG.password,
-          secure: false
-        });
+    const client = new ftp.Client();
+    try {
+      await client.access({
+        host: FTP_CONFIG.host,
+        port: FTP_CONFIG.port,
+        user: FTP_CONFIG.user,
+        password: FTP_CONFIG.password,
+        secure: false
+      });
 
+      // Upload root .htaccess for 404 and caching
+      const rootHtaccess = path.join(outDir, '.htaccess');
+      if (fs.existsSync(rootHtaccess)) {
+        await client.uploadFrom(rootHtaccess, '/public_html/.htaccess');
+        log('.htaccess uploaded to /public_html/', 'green');
+      }
+
+      // Upload installer .htaccess for no-cache headers
+      if (fs.existsSync(HTACCESS_PATH)) {
         await client.ensureDir('/install');
         await client.uploadFrom(HTACCESS_PATH, '/install/.htaccess');
         log('.htaccess uploaded to /install/', 'green');
-      } finally {
-        client.close();
       }
-    } else {
-      log('.htaccess not found, skipping', 'yellow');
+    } finally {
+      client.close();
     }
 
     // Summary

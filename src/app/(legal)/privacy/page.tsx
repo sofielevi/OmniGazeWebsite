@@ -3,8 +3,17 @@ import { Footer } from "@/components/marketing/footer";
 import { Section } from "@/components/marketing/section";
 
 export const metadata = {
-  title: "Privacy Policy | OmniGaze",
-  description: "OmniGaze privacy policy - how we collect, use, and protect your data.",
+  title: "Privacy Policy - How We Protect Your Data",
+  description:
+    "OmniGaze privacy policy: learn how we collect, use, and protect your data. GDPR compliant. No tracking cookies. Your infrastructure data stays yours.",
+  openGraph: {
+    title: "Privacy Policy - OmniGaze",
+    description: "Learn how OmniGaze protects your privacy and data.",
+    url: "https://omnigaze.com/privacy",
+  },
+  alternates: {
+    canonical: "https://omnigaze.com/privacy",
+  },
 };
 
 export default function PrivacyPage() {
@@ -50,7 +59,23 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="font-display text-2xl mb-4">3. Data Security</h2>
+                <h2 className="font-display text-2xl mb-4">3. Third-Party Services</h2>
+                <p className="text-[var(--text-secondary)] mb-4">
+                  We use the following third-party services to provide our platform:
+                </p>
+                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
+                  <li><strong>Stripe</strong> - Payment processing (PCI DSS compliant)</li>
+                  <li><strong>Microsoft Azure</strong> - Cloud infrastructure hosting</li>
+                  <li><strong>SendGrid</strong> - Transactional email delivery</li>
+                </ul>
+                <p className="text-[var(--text-secondary)] mt-4">
+                  These providers process data only as necessary to provide their services and are bound
+                  by data processing agreements.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="font-display text-2xl mb-4">4. Data Security</h2>
                 <p className="text-[var(--text-secondary)]">
                   We implement appropriate technical and organizational measures to protect your personal
                   data against unauthorized access, alteration, disclosure, or destruction. All data
@@ -59,7 +84,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="font-display text-2xl mb-4">4. Data Retention</h2>
+                <h2 className="font-display text-2xl mb-4">5. Data Retention</h2>
                 <p className="text-[var(--text-secondary)]">
                   We retain your personal data only for as long as necessary to fulfill the purposes
                   for which it was collected, including to satisfy legal, accounting, or reporting requirements.
@@ -67,7 +92,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="font-display text-2xl mb-4">5. Your Rights</h2>
+                <h2 className="font-display text-2xl mb-4">6. Your Rights</h2>
                 <p className="text-[var(--text-secondary)] mb-4">
                   You have the right to:
                 </p>
@@ -81,7 +106,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="font-display text-2xl mb-4">6. Cookies and Storage</h2>
+                <h2 className="font-display text-2xl mb-4">7. Cookies and Storage</h2>
                 <h3 className="font-display text-lg mb-2 mt-4">Essential Cookies</h3>
                 <p className="text-[var(--text-secondary)] mb-4">
                   We use a single session cookie to maintain your login state when you access your account
@@ -113,7 +138,16 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="font-display text-2xl mb-4">7. Contact Us</h2>
+                <h2 className="font-display text-2xl mb-4">8. Governing Law</h2>
+                <p className="text-[var(--text-secondary)]">
+                  This Privacy Policy is governed by the laws of Denmark and the European Union. For users
+                  in the European Economic Area, we comply with GDPR requirements. The supervisory authority
+                  for data protection matters is the Danish Data Protection Agency (Datatilsynet).
+                </p>
+              </section>
+
+              <section>
+                <h2 className="font-display text-2xl mb-4">9. Contact Us</h2>
                 <p className="text-[var(--text-secondary)]">
                   If you have any questions about this Privacy Policy, please contact us at{" "}
                   <a href="mailto:privacy@omnigaze.com" className="text-[var(--amber-400)] hover:underline">

@@ -3,8 +3,17 @@ import { Footer } from "@/components/marketing/footer";
 import { Section } from "@/components/marketing/section";
 
 export const metadata = {
-  title: "Terms of Service | OmniGaze",
-  description: "OmniGaze terms of service - the agreement between you and OmniGaze.",
+  title: "Terms of Service - OmniGaze License Agreement",
+  description:
+    "OmniGaze terms of service and license agreement. Understand your rights and obligations when using OmniGaze infrastructure discovery software.",
+  openGraph: {
+    title: "Terms of Service - OmniGaze",
+    description: "OmniGaze terms of service and license agreement.",
+    url: "https://omnigaze.com/terms",
+  },
+  alternates: {
+    canonical: "https://omnigaze.com/terms",
+  },
 };
 
 export default function TermsPage() {
@@ -49,7 +58,6 @@ export default function TermsPage() {
                 </p>
                 <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
                   <li>Prices are subject to change with 30 days notice</li>
-                  <li>Refunds are provided within 14 days of initial purchase</li>
                   <li>Upgrades are prorated; downgrades require contacting support</li>
                 </ul>
               </section>
@@ -100,7 +108,30 @@ export default function TermsPage() {
               </section>
 
               <section>
-                <h2 className="font-display text-2xl mb-4">9. Contact</h2>
+                <h2 className="font-display text-2xl mb-4">9. Governing Law and Jurisdiction</h2>
+                <p className="text-[var(--text-secondary)] mb-4">
+                  These Terms shall be governed by and construed in accordance with the laws of Denmark,
+                  without regard to its conflict of law provisions. Any disputes arising under these Terms
+                  shall be subject to the exclusive jurisdiction of the courts of Denmark.
+                </p>
+                <p className="text-[var(--text-secondary)]">
+                  For users in the European Union, nothing in these Terms affects your statutory rights
+                  as a consumer under applicable EU law.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="font-display text-2xl mb-4">10. Changes to Terms</h2>
+                <p className="text-[var(--text-secondary)]">
+                  We reserve the right to modify these Terms at any time. We will notify you of material
+                  changes by email or by posting a notice on our website at least 30 days before the changes
+                  take effect. Your continued use of the services after the changes take effect constitutes
+                  acceptance of the revised Terms.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="font-display text-2xl mb-4">11. Contact</h2>
                 <p className="text-[var(--text-secondary)]">
                   For questions about these Terms, contact us at{" "}
                   <a href="mailto:legal@omnigaze.com" className="text-[var(--amber-400)] hover:underline">

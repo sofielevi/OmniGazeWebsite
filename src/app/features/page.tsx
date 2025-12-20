@@ -8,8 +8,37 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 export const metadata = {
-  title: "Features",
-  description: "Explore OmniGaze features: from auto-discovery and 3D visualization to enterprise architecture integration.",
+  title: "Features - Infrastructure Discovery to Enterprise Architecture",
+  description:
+    "Explore OmniGaze features: agentless network discovery, 3D visualization, application mapping, vulnerability detection, business capabilities, and LeanIX integration. From infrastructure to strategy.",
+  keywords: [
+    "infrastructure discovery features",
+    "network scanning",
+    "3D IT visualization",
+    "application dependency mapping",
+    "vulnerability scanning",
+    "business capability mapping",
+    "CMDB features",
+    "agentless discovery",
+    "enterprise architecture tools",
+  ],
+  openGraph: {
+    title: "OmniGaze Features - From Infrastructure to Strategy",
+    description:
+      "Discover all OmniGaze capabilities: auto-discovery, 3D visualization, application mapping, vulnerability detection, and enterprise architecture integration.",
+    url: "https://omnigaze.com/features",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "OmniGaze Features Overview",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://omnigaze.com/features",
+  },
 };
 
 export default function FeaturesPage() {

@@ -5,8 +5,25 @@ import { Mail, FileText, HelpCircle, Building2 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Contact & Support",
-  description: "Get in touch with the OmniGaze team. We're here to help with sales inquiries, technical support, and partnership opportunities.",
+  title: "Contact & Support - Get Help with OmniGaze",
+  description:
+    "Contact the OmniGaze team for sales inquiries, technical support, and partnership opportunities. Response within 24 hours on business days.",
+  keywords: [
+    "OmniGaze support",
+    "OmniGaze contact",
+    "infrastructure discovery help",
+    "technical support",
+    "sales inquiry",
+  ],
+  openGraph: {
+    title: "Contact & Support - OmniGaze",
+    description:
+      "Get in touch with the OmniGaze team. Sales inquiries, technical support, and partnership opportunities.",
+    url: "https://omnigaze.com/support",
+  },
+  alternates: {
+    canonical: "https://omnigaze.com/support",
+  },
 };
 
 const helpfulLinks = [

@@ -17,8 +17,35 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Download OmniGaze",
-  description: "Download OmniGaze for Windows. Auto-discover your infrastructure and visualize your IT landscape.",
+  title: "Download OmniGaze for Windows - Free Infrastructure Discovery",
+  description:
+    "Download OmniGaze free for Windows 10, 11, and Server 2016+. Agentless infrastructure discovery, network scanning, and 3D visualization. Start with 50 free servers.",
+  keywords: [
+    "download OmniGaze",
+    "infrastructure discovery software",
+    "free CMDB tool",
+    "network discovery Windows",
+    "IT asset management download",
+    "server discovery tool",
+    "agentless scanning software",
+  ],
+  openGraph: {
+    title: "Download OmniGaze - Free Infrastructure Discovery for Windows",
+    description:
+      "Get OmniGaze free. Auto-discover servers, map dependencies, visualize in 3D. No agents required. Windows 10, 11, Server 2016+.",
+    url: "https://omnigaze.com/download",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Download OmniGaze for Windows",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://omnigaze.com/download",
+  },
 };
 
 // Use centralized download config

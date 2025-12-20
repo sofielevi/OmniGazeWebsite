@@ -411,6 +411,14 @@ const faqs = [
     answer: "Yes, changes take effect on your next billing cycle. When upgrading, you get immediate access with prorated billing. Note that downgrading is not available for self-service - please contact support.",
   },
   {
+    question: "Can I switch between monthly and annual billing?",
+    answer: "Yes, you can switch from monthly to annual billing at any time to save 17%. Switching from annual to monthly takes effect at the end of your current billing period.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit cards (Visa, Mastercard, American Express) and can arrange invoicing for Enterprise customers. Payments are processed securely through Stripe.",
+  },
+  {
     question: "What happens if I exceed my server limit?",
     answer: "You'll receive a notification and have 14 days to upgrade or remove servers. Discovery continues but new servers won't be added until you're within limits.",
   },
