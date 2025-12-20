@@ -229,11 +229,23 @@ export default function PricingPage() {
       <main className="pt-32">
         {/* Pricing Section */}
         <Section>
-          <SectionHeader
-            label="Pricing"
-            title="Plans That Grow With You"
-            description="Start free, scale when you need to. No credit card required."
-          />
+          <div className="text-center mb-16">
+            <span className="inline-block px-3 py-1 text-xs uppercase tracking-wider bg-[var(--amber-400)]/10 text-[var(--amber-400)] rounded-full mb-6">
+              Pricing
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium mb-4">
+              <span className="inline-block">Plans That</span>{" "}
+              <span className="inline-block relative">
+                <span className="relative z-10 bg-gradient-to-r from-[var(--amber-400)] via-[var(--amber-300)] to-[var(--amber-500)] bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">
+                  Grow With You
+                </span>
+                <span className="absolute -inset-1 bg-gradient-to-r from-[var(--amber-400)]/20 via-[var(--amber-300)]/10 to-[var(--amber-500)]/20 blur-xl animate-gradient-x bg-[length:200%_auto] -z-10" />
+              </span>
+            </h2>
+            <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
+              Start free, scale when you need to. No credit card required.
+            </p>
+          </div>
 
           {/* Billing Toggle */}
           <div className="flex justify-center mb-12">

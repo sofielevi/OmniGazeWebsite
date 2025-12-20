@@ -146,6 +146,13 @@
     <priority>0.5</priority>
   </url>
 
+  <!-- Team -->
+  <url>
+    <loc>https://omnigaze.com/team/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Legal Pages -->
   <url>
     <loc>https://omnigaze.com/privacy/</loc>

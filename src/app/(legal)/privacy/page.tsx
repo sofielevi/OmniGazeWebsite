@@ -1,6 +1,18 @@
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Section } from "@/components/marketing/section";
+import {
+  Shield,
+  Database,
+  Lock,
+  Clock,
+  UserCheck,
+  Cookie,
+  Scale,
+  Mail,
+  Server,
+  CreditCard,
+} from "lucide-react";
 
 export const metadata = {
   title: "Privacy Policy - How We Protect Your Data",
@@ -23,138 +35,202 @@ export default function PrivacyPage() {
 
       <main className="pt-32">
         <Section>
-          <div className="max-w-3xl mx-auto">
-            <h1 className="font-display text-4xl mb-4">Privacy Policy</h1>
-            <p className="text-[var(--text-secondary)] mb-8">
-              Last updated: December 2025
-            </p>
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--amber-400)]/10 mb-6">
+                <Shield className="w-8 h-8 text-[var(--amber-400)]" />
+              </div>
+              <h1 className="font-display text-4xl md:text-5xl mb-4">Privacy Policy</h1>
+              <p className="text-[var(--text-secondary)] text-lg">
+                Your data, your control. Last updated December 2025.
+              </p>
+            </div>
 
-            <div className="prose prose-invert max-w-none space-y-8">
-              <section>
-                <h2 className="font-display text-2xl mb-4">1. Information We Collect</h2>
+            {/* Quick Summary */}
+            <div className="grid sm:grid-cols-3 gap-4 mb-12">
+              <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-5 text-center">
+                <div className="text-2xl font-display text-[var(--amber-400)] mb-1">GDPR</div>
+                <div className="text-sm text-[var(--text-secondary)]">Compliant</div>
+              </div>
+              <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-5 text-center">
+                <div className="text-2xl font-display text-[var(--success)] mb-1">Zero</div>
+                <div className="text-sm text-[var(--text-secondary)]">Tracking Cookies</div>
+              </div>
+              <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-5 text-center">
+                <div className="text-2xl font-display text-[var(--text-primary)] mb-1">TLS</div>
+                <div className="text-sm text-[var(--text-secondary)]">Encrypted</div>
+              </div>
+            </div>
+
+            {/* Sections */}
+            <div className="space-y-6">
+              {/* Information We Collect */}
+              <PolicyCard
+                icon={Database}
+                number="1"
+                title="Information We Collect"
+              >
                 <p className="text-[var(--text-secondary)] mb-4">
                   We collect information you provide directly to us, such as when you create an account,
                   download our software, or contact us for support.
                 </p>
-                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
-                  <li>Email address (for account registration and communications)</li>
-                  <li>License key (for software activation)</li>
-                  <li>Usage data (feature usage, error reports)</li>
-                  <li>Payment information (processed securely by Stripe)</li>
-                </ul>
-              </section>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <InfoItem>Email address (registration)</InfoItem>
+                  <InfoItem>License key (activation)</InfoItem>
+                  <InfoItem>Usage data (features, errors)</InfoItem>
+                  <InfoItem>Payment info (via Stripe)</InfoItem>
+                </div>
+              </PolicyCard>
 
-              <section>
-                <h2 className="font-display text-2xl mb-4">2. How We Use Your Information</h2>
+              {/* How We Use Your Information */}
+              <PolicyCard
+                icon={UserCheck}
+                number="2"
+                title="How We Use Your Information"
+              >
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <InfoItem>Provide and improve services</InfoItem>
+                  <InfoItem>Send technical notices</InfoItem>
+                  <InfoItem>Respond to your questions</InfoItem>
+                  <InfoItem>Process payments</InfoItem>
+                  <InfoItem>Detect and prevent fraud</InfoItem>
+                </div>
+              </PolicyCard>
+
+              {/* Third-Party Services */}
+              <PolicyCard
+                icon={Server}
+                number="3"
+                title="Third-Party Services"
+              >
                 <p className="text-[var(--text-secondary)] mb-4">
-                  We use the information we collect to:
+                  We use trusted partners to provide our platform:
                 </p>
-                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
-                  <li>Provide, maintain, and improve our services</li>
-                  <li>Send you technical notices and support messages</li>
-                  <li>Respond to your comments and questions</li>
-                  <li>Process payments and send billing information</li>
-                  <li>Detect and prevent fraud and abuse</li>
-                </ul>
-              </section>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  <ServiceCard
+                    icon={CreditCard}
+                    name="Stripe"
+                    description="Payment processing"
+                    badge="PCI DSS"
+                  />
+                  <ServiceCard
+                    icon={Server}
+                    name="Microsoft Azure"
+                    description="Cloud hosting"
+                    badge="ISO 27001"
+                  />
+                  <ServiceCard
+                    icon={Mail}
+                    name="SendGrid"
+                    description="Email delivery"
+                    badge="SOC 2"
+                  />
+                </div>
+              </PolicyCard>
 
-              <section>
-                <h2 className="font-display text-2xl mb-4">3. Third-Party Services</h2>
-                <p className="text-[var(--text-secondary)] mb-4">
-                  We use the following third-party services to provide our platform:
-                </p>
-                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
-                  <li><strong>Stripe</strong> - Payment processing (PCI DSS compliant)</li>
-                  <li><strong>Microsoft Azure</strong> - Cloud infrastructure hosting</li>
-                  <li><strong>SendGrid</strong> - Transactional email delivery</li>
-                </ul>
-                <p className="text-[var(--text-secondary)] mt-4">
-                  These providers process data only as necessary to provide their services and are bound
-                  by data processing agreements.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="font-display text-2xl mb-4">4. Data Security</h2>
+              {/* Data Security */}
+              <PolicyCard
+                icon={Lock}
+                number="4"
+                title="Data Security"
+              >
                 <p className="text-[var(--text-secondary)]">
                   We implement appropriate technical and organizational measures to protect your personal
                   data against unauthorized access, alteration, disclosure, or destruction. All data
                   transmission is encrypted using TLS, and we regularly review our security practices.
                 </p>
-              </section>
+              </PolicyCard>
 
-              <section>
-                <h2 className="font-display text-2xl mb-4">5. Data Retention</h2>
+              {/* Data Retention */}
+              <PolicyCard
+                icon={Clock}
+                number="5"
+                title="Data Retention"
+              >
                 <p className="text-[var(--text-secondary)]">
                   We retain your personal data only for as long as necessary to fulfill the purposes
                   for which it was collected, including to satisfy legal, accounting, or reporting requirements.
                 </p>
-              </section>
+              </PolicyCard>
 
-              <section>
-                <h2 className="font-display text-2xl mb-4">6. Your Rights</h2>
+              {/* Your Rights */}
+              <PolicyCard
+                icon={UserCheck}
+                number="6"
+                title="Your Rights"
+              >
                 <p className="text-[var(--text-secondary)] mb-4">
-                  You have the right to:
+                  Under GDPR and applicable laws, you have the right to:
                 </p>
-                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
-                  <li>Access your personal data</li>
-                  <li>Correct inaccurate data</li>
-                  <li>Request deletion of your data</li>
-                  <li>Object to processing of your data</li>
-                  <li>Data portability</li>
-                </ul>
-              </section>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <RightBadge>Access your data</RightBadge>
+                  <RightBadge>Correct inaccuracies</RightBadge>
+                  <RightBadge>Request deletion</RightBadge>
+                  <RightBadge>Object to processing</RightBadge>
+                  <RightBadge>Data portability</RightBadge>
+                  <RightBadge>Withdraw consent</RightBadge>
+                </div>
+              </PolicyCard>
 
-              <section>
-                <h2 className="font-display text-2xl mb-4">7. Cookies and Storage</h2>
-                <h3 className="font-display text-lg mb-2 mt-4">Essential Cookies</h3>
-                <p className="text-[var(--text-secondary)] mb-4">
-                  We use a single session cookie to maintain your login state when you access your account
-                  dashboard. This cookie:
-                </p>
-                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2 mb-4">
-                  <li>Is set when you log in or verify your email</li>
-                  <li>Is HttpOnly (cannot be read by JavaScript for security)</li>
-                  <li>Is cleared when you log out</li>
-                  <li>Contains only a session identifier, not personal data</li>
-                </ul>
-                <p className="text-[var(--text-secondary)] mb-4">
-                  This cookie is strictly necessary for authentication and does not require consent under
-                  GDPR/ePrivacy regulations.
-                </p>
-                <h3 className="font-display text-lg mb-2 mt-4">Session Storage</h3>
-                <p className="text-[var(--text-secondary)] mb-4">
-                  During registration, we temporarily store your email in your browser&apos;s session storage
-                  to facilitate the verification process. This data is automatically cleared after
-                  verification completes.
-                </p>
-                <h3 className="font-display text-lg mb-2 mt-4">What We Do Not Use</h3>
-                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
-                  <li>Analytics or tracking cookies</li>
-                  <li>Advertising cookies</li>
-                  <li>Third-party tracking pixels</li>
-                  <li>Social media cookies</li>
-                </ul>
-              </section>
+              {/* Cookies and Storage */}
+              <PolicyCard
+                icon={Cookie}
+                number="7"
+                title="Cookies and Storage"
+              >
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-medium text-[var(--text-primary)] mb-2">Essential Cookies</h4>
+                    <p className="text-[var(--text-secondary)] text-sm mb-3">
+                      We use a single session cookie to maintain your login state. This cookie:
+                    </p>
+                    <div className="grid sm:grid-cols-2 gap-2">
+                      <InfoItem small>Set on login/verification</InfoItem>
+                      <InfoItem small>HttpOnly (secure)</InfoItem>
+                      <InfoItem small>Cleared on logout</InfoItem>
+                      <InfoItem small>Session ID only</InfoItem>
+                    </div>
+                  </div>
 
-              <section>
-                <h2 className="font-display text-2xl mb-4">8. Governing Law</h2>
+                  <div className="border-t border-[var(--border-subtle)] pt-4">
+                    <h4 className="font-medium text-[var(--text-primary)] mb-2">What We Don&apos;t Use</h4>
+                    <div className="flex flex-wrap gap-2">
+                      <NoBadge>Analytics cookies</NoBadge>
+                      <NoBadge>Advertising cookies</NoBadge>
+                      <NoBadge>Tracking pixels</NoBadge>
+                      <NoBadge>Social media cookies</NoBadge>
+                    </div>
+                  </div>
+                </div>
+              </PolicyCard>
+
+              {/* Governing Law */}
+              <PolicyCard
+                icon={Scale}
+                number="8"
+                title="Governing Law"
+              >
                 <p className="text-[var(--text-secondary)]">
                   This Privacy Policy is governed by the laws of Denmark and the European Union. For users
                   in the European Economic Area, we comply with GDPR requirements. The supervisory authority
                   for data protection matters is the Danish Data Protection Agency (Datatilsynet).
                 </p>
-              </section>
+              </PolicyCard>
 
-              <section>
-                <h2 className="font-display text-2xl mb-4">9. Contact Us</h2>
+              {/* Contact */}
+              <PolicyCard
+                icon={Mail}
+                number="9"
+                title="Contact Us"
+              >
                 <p className="text-[var(--text-secondary)]">
-                  If you have any questions about this Privacy Policy, please contact us at{" "}
-                  <a href="mailto:privacy@omnigaze.com" className="text-[var(--amber-400)] hover:underline">
+                  Questions about this Privacy Policy? Contact us at{" "}
+                  <a href="mailto:privacy@omnigaze.com" className="text-[var(--amber-400)] hover:underline font-medium">
                     privacy@omnigaze.com
                   </a>
                 </p>
-              </section>
+              </PolicyCard>
             </div>
           </div>
         </Section>
@@ -162,5 +238,88 @@ export default function PrivacyPage() {
 
       <Footer />
     </>
+  );
+}
+
+function PolicyCard({
+  icon: Icon,
+  number,
+  title,
+  children,
+}: {
+  icon: React.ElementType;
+  number: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl p-6 md:p-8">
+      <div className="flex items-start gap-4 mb-4">
+        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--amber-400)]/10 flex items-center justify-center">
+          <Icon className="w-5 h-5 text-[var(--amber-400)]" />
+        </div>
+        <div>
+          <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Section {number}</span>
+          <h2 className="font-display text-xl md:text-2xl">{title}</h2>
+        </div>
+      </div>
+      <div className="pl-0 md:pl-14">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function InfoItem({ children, small }: { children: React.ReactNode; small?: boolean }) {
+  return (
+    <div className={`flex items-center gap-2 ${small ? 'text-xs' : 'text-sm'} text-[var(--text-secondary)]`}>
+      <div className="w-1.5 h-1.5 rounded-full bg-[var(--amber-400)]" />
+      {children}
+    </div>
+  );
+}
+
+function RightBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-2 bg-[var(--bg-elevated)] rounded-lg text-sm text-[var(--text-secondary)]">
+      <svg className="w-4 h-4 text-[var(--success)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      </svg>
+      {children}
+    </div>
+  );
+}
+
+function NoBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-elevated)] rounded-full text-xs text-[var(--text-muted)]">
+      <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)]" />
+      {children}
+    </span>
+  );
+}
+
+function ServiceCard({
+  icon: Icon,
+  name,
+  description,
+  badge,
+}: {
+  icon: React.ElementType;
+  name: string;
+  description: string;
+  badge: string;
+}) {
+  return (
+    <div className="bg-[var(--bg-elevated)] rounded-xl p-4">
+      <div className="flex items-center gap-3 mb-2">
+        <Icon className="w-5 h-5 text-[var(--text-muted)]" />
+        <span className="font-medium text-[var(--text-primary)]">{name}</span>
+      </div>
+      <p className="text-xs text-[var(--text-secondary)] mb-2">{description}</p>
+      <span className="inline-block px-2 py-0.5 bg-[var(--success-muted)] text-[var(--success)] text-xs rounded">
+        {badge}
+      </span>
+    </div>
   );
 }

@@ -44,6 +44,7 @@ export const siteConfig = {
     links: [
       { label: "Documentation", href: "/docs" },
       { label: "API Reference", href: "/docs/api/rest" },
+      { label: "Team", href: "/team" },
       { label: "Support", href: "/support" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
