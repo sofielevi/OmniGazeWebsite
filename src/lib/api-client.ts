@@ -243,11 +243,19 @@ export interface Invoice {
   invoiceUrl?: string;
 }
 
+export interface SubscriptionInfo {
+  status: 'active' | 'trialing' | 'past_due' | 'canceled' | 'unpaid' | 'none';
+  billingCycle: 'monthly' | 'annual';
+  currentPeriodStart?: string;
+  currentPeriodEnd?: string;
+  trialEnd?: string;
+  cancelAtPeriodEnd?: boolean;
+}
+
 export interface BillingInfo {
-  hasPaymentMethod: boolean;
-  cardLast4?: string;
-  cardBrand?: string;
+  subscription: SubscriptionInfo | null;
   nextBillingDate?: string;
+  nextBillingAmount?: number;
   invoices: Invoice[];
   stripePortalUrl: string;
 }

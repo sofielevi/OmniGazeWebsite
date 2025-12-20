@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import { UsageMeter, TierBadge } from "@/components/dashboard/stat-card";
 import { Button, ButtonLink } from "@/components/ui/button";
-import { getCurrentTier, getTiers, CurrentTierInfo, TierInfo } from "@/lib/api-client";
-import { Check, X, ArrowRight, ExternalLink } from "lucide-react";
+import { getCurrentTier, getTiers, getStripePortalUrl, CurrentTierInfo, TierInfo } from "@/lib/api-client";
+import { Check, X, ArrowRight, ExternalLink, Loader2 } from "lucide-react";
 
 export default function SubscriptionPage() {
   const [currentTier, setCurrentTier] = useState<CurrentTierInfo | null>(null);
   const [allTiers, setAllTiers] = useState<TierInfo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingPortal, setIsLoadingPortal] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -28,6 +29,22 @@ export default function SubscriptionPage() {
     }
     loadData();
   }, []);
+
+  const handleManageBilling = async () => {
+    setIsLoadingPortal(true);
+    try {
+      const result = await getStripePortalUrl();
+      if (result.url) {
+        window.open(result.url, "_blank");
+      }
+    } catch (error) {
+      console.error("Failed to get billing portal:", error);
+      // Fallback to billing page
+      window.location.href = "/dashboard/billing";
+    } finally {
+      setIsLoadingPortal(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -68,13 +85,20 @@ export default function SubscriptionPage() {
           </div>
           <Button
             variant="secondary"
-            onClick={() => {
-              // TODO: Open Stripe Customer Portal
-              window.open("https://billing.stripe.com/p/login/test", "_blank");
-            }}
+            onClick={handleManageBilling}
+            disabled={isLoadingPortal}
           >
-            Manage Billing
-            <ExternalLink className="w-4 h-4" />
+            {isLoadingPortal ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              <>
+                Manage Billing
+                <ExternalLink className="w-4 h-4" />
+              </>
+            )}
           </Button>
         </div>
 

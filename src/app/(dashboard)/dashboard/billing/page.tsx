@@ -3,9 +3,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { TierBadge } from "@/components/dashboard/stat-card";
-import { getBillingInfo, getCurrentTier, BillingInfo, CurrentTierInfo, ApiError } from "@/lib/api-client";
+import { getBillingInfo, getCurrentTier, getStripePortalUrl, BillingInfo, CurrentTierInfo, ApiError } from "@/lib/api-client";
 import {
-  CreditCard,
   Receipt,
   ExternalLink,
   AlertTriangle,
@@ -13,29 +12,31 @@ import {
   XCircle,
   Clock,
   Download,
+  Calendar,
+  CreditCard,
+  Zap,
+  Loader2,
 } from "lucide-react";
 
 export default function BillingPage() {
   const [billingInfo, setBillingInfo] = useState<BillingInfo | null>(null);
   const [tier, setTier] = useState<CurrentTierInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingPortal, setIsLoadingPortal] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     async function loadData() {
       try {
         const [billing, tierData] = await Promise.all([
-          getBillingInfo(),
+          getBillingInfo().catch(() => null), // Don't fail if billing info not available yet
           getCurrentTier(),
         ]);
         setBillingInfo(billing);
         setTier(tierData);
       } catch (err) {
         if (err instanceof ApiError) {
-          // If no billing info (free tier), that's okay
-          if (err.statusCode === 404) {
-            setBillingInfo(null);
-          } else {
+          if (err.statusCode !== 404) {
             setError(err.message);
           }
         } else {
@@ -55,9 +56,18 @@ export default function BillingPage() {
     loadData();
   }, []);
 
-  const handleManageBilling = () => {
-    if (billingInfo?.stripePortalUrl) {
-      window.open(billingInfo.stripePortalUrl, "_blank");
+  const handleManageBilling = async () => {
+    setIsLoadingPortal(true);
+    try {
+      const result = await getStripePortalUrl();
+      if (result.url) {
+        window.open(result.url, "_blank");
+      }
+    } catch (err) {
+      console.error("Failed to open billing portal:", err);
+      setError("Unable to open billing portal. Please try again.");
+    } finally {
+      setIsLoadingPortal(false);
     }
   };
 
@@ -71,6 +81,7 @@ export default function BillingPage() {
   }
 
   const isFreeUser = tier?.monthlyPrice === 0 || tier?.monthlyPrice === null;
+  const subscription = billingInfo?.subscription;
 
   return (
     <div className="space-y-8">
@@ -80,7 +91,7 @@ export default function BillingPage() {
           Billing
         </h1>
         <p className="text-[var(--text-secondary)] mt-1">
-          Manage your payment method and view invoices.
+          View your subscription and invoices.
         </p>
       </div>
 
@@ -119,112 +130,173 @@ export default function BillingPage() {
         </div>
       )}
 
-      {/* Payment Method */}
-      {!isFreeUser && (
+      {/* Current Subscription */}
+      {!isFreeUser && tier && (
         <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-lg bg-[var(--amber-400)]/10 flex items-center justify-center">
-              <CreditCard className="w-5 h-5 text-[var(--amber-400)]" />
+              <Zap className="w-5 h-5 text-[var(--amber-400)]" />
             </div>
             <div>
               <h2 className="font-display text-lg font-semibold text-[var(--text-primary)]">
-                Payment Method
+                Current Subscription
               </h2>
               <p className="text-sm text-[var(--text-muted)]">
-                Your payment details are securely stored with Stripe
+                Your active plan and billing details
               </p>
             </div>
           </div>
 
-          {billingInfo?.hasPaymentMethod ? (
-            <div className="flex items-center justify-between p-4 bg-[var(--bg-elevated)] rounded-lg">
+          <div className="space-y-4">
+            {/* Plan Info */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-[var(--bg-elevated)] rounded-lg">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-8 bg-[var(--bg-deep)] rounded flex items-center justify-center text-sm font-medium text-[var(--text-secondary)]">
-                  {billingInfo.cardBrand?.toUpperCase() || "CARD"}
-                </div>
+                <TierBadge tier={tier.displayName} size="lg" />
                 <div>
-                  <p className="font-medium text-[var(--text-primary)]">
-                    •••• •••• •••• {billingInfo.cardLast4}
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium text-[var(--text-primary)]">
+                      ${subscription?.billingCycle === 'annual' ? tier.annualPrice : tier.monthlyPrice}
+                      <span className="text-[var(--text-muted)] font-normal">
+                        /{subscription?.billingCycle === 'annual' ? 'year' : 'month'}
+                      </span>
+                    </p>
+                    {subscription?.status === 'trialing' && (
+                      <span className="px-2 py-0.5 bg-[var(--amber-400)]/20 text-[var(--amber-400)] text-xs rounded-full font-medium">
+                        Trial
+                      </span>
+                    )}
+                    {subscription?.status === 'active' && (
+                      <span className="px-2 py-0.5 bg-[var(--success)]/20 text-[var(--success)] text-xs rounded-full font-medium">
+                        Active
+                      </span>
+                    )}
+                    {subscription?.status === 'past_due' && (
+                      <span className="px-2 py-0.5 bg-red-500/20 text-red-400 text-xs rounded-full font-medium">
+                        Past Due
+                      </span>
+                    )}
+                    {subscription?.cancelAtPeriodEnd && (
+                      <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-500 text-xs rounded-full font-medium">
+                        Cancels Soon
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-[var(--text-muted)]">
+                    {tier.serverLimit === -1 ? "Unlimited" : tier.serverLimit} servers,{" "}
+                    {tier.userLimit === -1 ? "unlimited" : tier.userLimit} users
                   </p>
-                  {billingInfo.nextBillingDate && (
+                </div>
+              </div>
+              <Button
+                variant="secondary"
+                onClick={() => window.location.href = "/dashboard/subscription"}
+              >
+                Change Plan
+              </Button>
+            </div>
+
+            {/* Billing Details */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              {/* Next Billing */}
+              {billingInfo?.nextBillingDate && (
+                <div className="p-4 bg-[var(--bg-elevated)] rounded-lg">
+                  <div className="flex items-center gap-2 text-[var(--text-muted)] mb-1">
+                    <Calendar className="w-4 h-4" />
+                    <span className="text-sm">Next Billing Date</span>
+                  </div>
+                  <p className="font-medium text-[var(--text-primary)]">
+                    {new Date(billingInfo.nextBillingDate).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </p>
+                  {billingInfo.nextBillingAmount !== undefined && (
                     <p className="text-sm text-[var(--text-muted)]">
-                      Next billing: {new Date(billingInfo.nextBillingDate).toLocaleDateString()}
+                      ${(billingInfo.nextBillingAmount / 100).toFixed(2)} will be charged
                     </p>
                   )}
                 </div>
-              </div>
+              )}
+
+              {/* Trial Info */}
+              {subscription?.status === 'trialing' && subscription.trialEnd && (
+                <div className="p-4 bg-[var(--amber-400)]/10 border border-[var(--amber-400)]/30 rounded-lg">
+                  <div className="flex items-center gap-2 text-[var(--amber-400)] mb-1">
+                    <Clock className="w-4 h-4" />
+                    <span className="text-sm font-medium">Trial Period</span>
+                  </div>
+                  <p className="font-medium text-[var(--text-primary)]">
+                    Ends {new Date(subscription.trialEnd).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </p>
+                  <p className="text-sm text-[var(--text-muted)]">
+                    You won&apos;t be charged until trial ends
+                  </p>
+                </div>
+              )}
+
+              {/* Billing Cycle */}
+              {subscription?.billingCycle && (
+                <div className="p-4 bg-[var(--bg-elevated)] rounded-lg">
+                  <div className="flex items-center gap-2 text-[var(--text-muted)] mb-1">
+                    <CreditCard className="w-4 h-4" />
+                    <span className="text-sm">Billing Cycle</span>
+                  </div>
+                  <p className="font-medium text-[var(--text-primary)] capitalize">
+                    {subscription.billingCycle}
+                  </p>
+                  {subscription.billingCycle === 'annual' && (
+                    <p className="text-sm text-[var(--success)]">
+                      Saving 17% vs monthly
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Manage in Stripe */}
+            <div className="pt-4 border-t border-[var(--border-subtle)]">
               <Button variant="secondary" onClick={handleManageBilling}>
-                Update
+                Manage Subscription in Stripe
                 <ExternalLink className="w-4 h-4" />
               </Button>
             </div>
-          ) : (
-            <div className="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-              <p className="text-yellow-500 text-sm">
-                No payment method on file. Add one to continue your subscription.
-              </p>
-              <Button
-                variant="primary"
-                className="mt-3"
-                onClick={handleManageBilling}
-              >
-                Add Payment Method
-              </Button>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Current Subscription */}
-      {!isFreeUser && tier && (
-        <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
-          <h2 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-4">
-            Current Subscription
-          </h2>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-[var(--bg-elevated)] rounded-lg">
-            <div className="flex items-center gap-3">
-              <TierBadge tier={tier.displayName} size="lg" />
-              <div>
-                <p className="font-medium text-[var(--text-primary)]">
-                  ${tier.monthlyPrice}/month
-                </p>
-                <p className="text-sm text-[var(--text-muted)]">
-                  {tier.serverLimit === -1 ? "Unlimited" : tier.serverLimit} servers,{" "}
-                  {tier.userLimit === -1 ? "unlimited" : tier.userLimit} users
-                </p>
-              </div>
-            </div>
-            <Button
-              variant="secondary"
-              onClick={() => window.location.href = "/dashboard/subscription"}
-            >
-              Change Plan
-            </Button>
           </div>
         </div>
       )}
 
       {/* Invoice History */}
-      {!isFreeUser && billingInfo && (
+      {!isFreeUser && (
         <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl overflow-hidden">
           <div className="p-6 border-b border-[var(--border-subtle)]">
             <div className="flex items-center justify-between">
-              <div>
-                <h2 className="font-display text-lg font-semibold text-[var(--text-primary)]">
-                  Invoice History
-                </h2>
-                <p className="text-sm text-[var(--text-muted)]">
-                  Your billing history and invoices
-                </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[var(--amber-400)]/10 flex items-center justify-center">
+                  <Receipt className="w-5 h-5 text-[var(--amber-400)]" />
+                </div>
+                <div>
+                  <h2 className="font-display text-lg font-semibold text-[var(--text-primary)]">
+                    Invoices
+                  </h2>
+                  <p className="text-sm text-[var(--text-muted)]">
+                    Download your billing history
+                  </p>
+                </div>
               </div>
-              <Button variant="secondary" onClick={handleManageBilling}>
-                View All in Stripe
-                <ExternalLink className="w-4 h-4" />
-              </Button>
+              {billingInfo?.stripePortalUrl && (
+                <Button variant="secondary" onClick={handleManageBilling}>
+                  View All
+                  <ExternalLink className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           </div>
 
-          {billingInfo.invoices.length === 0 ? (
+          {!billingInfo?.invoices || billingInfo.invoices.length === 0 ? (
             <div className="p-8 text-center">
               <Receipt className="w-12 h-12 text-[var(--text-muted)] mx-auto mb-3" />
               <h3 className="font-medium text-[var(--text-primary)] mb-1">
