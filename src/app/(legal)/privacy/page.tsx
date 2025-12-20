@@ -81,7 +81,39 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="font-display text-2xl mb-4">6. Contact Us</h2>
+                <h2 className="font-display text-2xl mb-4">6. Cookies and Storage</h2>
+                <h3 className="font-display text-lg mb-2 mt-4">Essential Cookies</h3>
+                <p className="text-[var(--text-secondary)] mb-4">
+                  We use a single session cookie to maintain your login state when you access your account
+                  dashboard. This cookie:
+                </p>
+                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2 mb-4">
+                  <li>Is set when you log in or verify your email</li>
+                  <li>Is HttpOnly (cannot be read by JavaScript for security)</li>
+                  <li>Is cleared when you log out</li>
+                  <li>Contains only a session identifier, not personal data</li>
+                </ul>
+                <p className="text-[var(--text-secondary)] mb-4">
+                  This cookie is strictly necessary for authentication and does not require consent under
+                  GDPR/ePrivacy regulations.
+                </p>
+                <h3 className="font-display text-lg mb-2 mt-4">Session Storage</h3>
+                <p className="text-[var(--text-secondary)] mb-4">
+                  During registration, we temporarily store your email in your browser&apos;s session storage
+                  to facilitate the verification process. This data is automatically cleared after
+                  verification completes.
+                </p>
+                <h3 className="font-display text-lg mb-2 mt-4">What We Do Not Use</h3>
+                <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
+                  <li>Analytics or tracking cookies</li>
+                  <li>Advertising cookies</li>
+                  <li>Third-party tracking pixels</li>
+                  <li>Social media cookies</li>
+                </ul>
+              </section>
+
+              <section>
+                <h2 className="font-display text-2xl mb-4">7. Contact Us</h2>
                 <p className="text-[var(--text-secondary)]">
                   If you have any questions about this Privacy Policy, please contact us at{" "}
                   <a href="mailto:privacy@omnigaze.com" className="text-[var(--amber-400)] hover:underline">
