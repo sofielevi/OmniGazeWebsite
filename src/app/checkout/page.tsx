@@ -5,8 +5,8 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Button } from "@/components/ui/button";
-import { pricingTiers } from "@/config/site";
-import { isPurchasableTier, formatPrice, TierName, BillingCycle } from "@/lib/stripe";
+import { getTiers, TierInfo } from "@/lib/api-client";
+import { isPurchasableTier, formatPrice, BillingCycle } from "@/lib/stripe";
 import {
   Check,
   CreditCard,
@@ -25,10 +25,30 @@ function CheckoutContent() {
 
   const [billingCycle, setBillingCycle] = useState<BillingCycle>(cycleParam || "monthly");
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingTiers, setIsFetchingTiers] = useState(true);
   const [error, setError] = useState("");
+  const [tiers, setTiers] = useState<TierInfo[]>([]);
 
-  // Find the tier
-  const tier = pricingTiers.find((t) => t.name.toLowerCase() === tierParam?.toLowerCase());
+  // Fetch tiers from API
+  useEffect(() => {
+    async function fetchTiers() {
+      try {
+        const apiTiers = await getTiers();
+        if (apiTiers && apiTiers.length > 0) {
+          setTiers(apiTiers);
+        }
+      } catch (err) {
+        console.error("Failed to fetch tiers:", err);
+        setError("Unable to load pricing information.");
+      } finally {
+        setIsFetchingTiers(false);
+      }
+    }
+    fetchTiers();
+  }, []);
+
+  // Find the tier from API data
+  const tier = tiers.find((t) => t.name.toLowerCase() === tierParam?.toLowerCase());
 
   // Validate tier is purchasable
   const isValidTier = tierParam && isPurchasableTier(tierParam.toLowerCase());
@@ -46,13 +66,8 @@ function CheckoutContent() {
     setError("");
 
     try {
-      // Map tier name to tier ID
-      const tierIdMap: Record<string, number> = {
-        starter: 2,
-        professional: 3,
-        business: 4,
-      };
-      const tierId = tierIdMap[tier.name.toLowerCase()];
+      // Use tier ID from API
+      const tierId = tier.id;
 
       if (!tierId) {
         throw new Error("Invalid tier selected");
@@ -90,7 +105,23 @@ function CheckoutContent() {
     }
   };
 
-  // Invalid tier
+  // Loading state while fetching tiers
+  if (isFetchingTiers) {
+    return (
+      <>
+        <Header />
+        <main className="pt-32 pb-20">
+          <div className="max-w-lg mx-auto px-6 text-center">
+            <Loader2 className="w-12 h-12 animate-spin text-[var(--amber-400)] mx-auto mb-6" />
+            <p className="text-[var(--text-secondary)]">Loading pricing...</p>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
+  // Invalid tier (after loading completes)
   if (!tier || !isValidTier) {
     return (
       <>

@@ -47,6 +47,10 @@ export async function POST(request: NextRequest) {
     // In production, this would validate the session and get customer info
     const customerEmail = request.cookies.get("customer_email")?.value;
 
+    // Format tier name for display
+    const tierDisplayName = tier.charAt(0).toUpperCase() + tier.slice(1);
+    const cycleDisplayName = billingCycle === "annual" ? "Annual" : "Monthly";
+
     // Create Stripe Checkout Session
     // Using fetch to avoid adding stripe package to client bundle
     const stripeResponse = await fetch("https://api.stripe.com/v1/checkout/sessions", {
@@ -63,11 +67,19 @@ export async function POST(request: NextRequest) {
         "success_url": `${APP_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
         "cancel_url": `${APP_URL}/checkout/cancel`,
         "subscription_data[trial_period_days]": "14",
+        "subscription_data[description]": `OmniGaze ${tierDisplayName} Plan (${cycleDisplayName})`,
         "allow_promotion_codes": "true",
         "billing_address_collection": "required",
+        "tax_id_collection[enabled]": "true",
         "customer_email": customerEmail || "",
         "metadata[tier]": tier,
         "metadata[billing_cycle]": billingCycle,
+        // Invoice settings - ensure invoices are sent automatically
+        "invoice_creation[enabled]": "true",
+        "invoice_creation[invoice_data][description]": `OmniGaze ${tierDisplayName} Subscription`,
+        "invoice_creation[invoice_data][footer]": "Thank you for choosing OmniGaze! Your license key will be sent separately.",
+        "invoice_creation[invoice_data][metadata][tier]": tier,
+        "invoice_creation[invoice_data][metadata][billing_cycle]": billingCycle,
       }),
     });
 

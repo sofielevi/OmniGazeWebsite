@@ -154,17 +154,42 @@ export async function POST(request: NextRequest) {
         break;
       }
 
+      case "invoice.finalized": {
+        // Invoice finalized and ready to be sent
+        const { id, customer_email, hosted_invoice_url, invoice_pdf, number } = eventData;
+        console.log(`Invoice finalized: ${number} (${id})`);
+
+        await notifyOmniGazeAPI("invoice.finalized", {
+          invoiceId: id,
+          invoiceNumber: number,
+          email: customer_email,
+          hostedInvoiceUrl: hosted_invoice_url,
+          invoicePdfUrl: invoice_pdf,
+        });
+        break;
+      }
+
       case "invoice.paid": {
         // Invoice paid successfully
-        const { id, customer_email, subscription, amount_paid } = eventData;
-        console.log(`Invoice paid: ${id}, amount: ${amount_paid}`);
+        const { id, customer_email, subscription, amount_paid, hosted_invoice_url, invoice_pdf, number } = eventData;
+        console.log(`Invoice paid: ${number} (${id}), amount: ${amount_paid}`);
 
         await notifyOmniGazeAPI("invoice.paid", {
           invoiceId: id,
+          invoiceNumber: number,
           email: customer_email,
           subscriptionId: subscription,
           amountPaid: amount_paid,
+          hostedInvoiceUrl: hosted_invoice_url,
+          invoicePdfUrl: invoice_pdf,
         });
+        break;
+      }
+
+      case "invoice.sent": {
+        // Invoice email sent to customer
+        const { id, customer_email, number } = eventData;
+        console.log(`Invoice sent: ${number} to ${customer_email}`);
         break;
       }
 
