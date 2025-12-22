@@ -18,7 +18,7 @@ export function ValuePyramid({ className, showLabels = true, interactive = true 
       {/* Axis Labels */}
       {showLabels && (
         <>
-          {/* Left axis - Business Value */}
+          {/* Left axis - Business Value / Complexity */}
           <div className="absolute left-0 top-0 bottom-0 w-24 hidden lg:flex flex-col justify-between items-end pr-4 py-8 text-xs text-[var(--text-muted)]">
             <div className="text-right">
               <div className="font-semibold text-[var(--text-secondary)]">Business Value</div>
@@ -30,10 +30,13 @@ export function ValuePyramid({ className, showLabels = true, interactive = true 
             </div>
           </div>
 
-          {/* Right axis - Strategic Focus */}
-          <div className="absolute right-0 top-0 w-24 hidden lg:flex flex-col items-start pl-4 py-8 text-xs text-[var(--text-muted)]">
+          {/* Right axis - Strategic Focus (top) / Technical Focus (bottom) */}
+          <div className="absolute right-0 top-0 bottom-0 w-28 hidden lg:flex flex-col justify-between items-start pl-4 py-8 text-xs text-[var(--text-muted)]">
             <div>
               <div className="font-semibold text-[var(--text-secondary)]">Strategic Focus</div>
+            </div>
+            <div>
+              <div className="font-semibold text-[var(--text-secondary)]">Technical Focus</div>
             </div>
           </div>
         </>
@@ -104,7 +107,10 @@ export function ValuePyramid({ className, showLabels = true, interactive = true 
 
               {/* Ratio connector */}
               {layer.ratio && (
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-xs text-[var(--text-muted)] bg-[var(--bg-deep)] px-2 z-10">
+                <div
+                  className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-xs text-[var(--text-muted)] bg-[var(--bg-deep)] px-2 z-10 cursor-help"
+                  title={`Example ratio: Typically ${layer.ratio.split(':')[0]} items at this level support ${layer.ratio.split(':')[1]} item above`}
+                >
                   {layer.ratio}
                 </div>
               )}

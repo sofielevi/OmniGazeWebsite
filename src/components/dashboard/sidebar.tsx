@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -15,6 +15,7 @@ import {
   LogOut,
   Menu,
   X,
+  Home,
 } from "lucide-react";
 import { useState } from "react";
 import { logout } from "@/lib/api-client";
@@ -116,6 +117,15 @@ export function Sidebar({ userTier = "Community", userEmail = "" }: SidebarProps
           <Download className="w-5 h-5" />
           <span className="font-medium">Download</span>
           <ExternalLink className="w-4 h-4 ml-auto" />
+        </Link>
+
+        {/* Homepage link */}
+        <Link
+          href="/"
+          className="flex items-center gap-3 px-4 py-3 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)] transition-colors"
+        >
+          <Home className="w-5 h-5" />
+          <span className="font-medium">Back to Homepage</span>
         </Link>
       </nav>
 

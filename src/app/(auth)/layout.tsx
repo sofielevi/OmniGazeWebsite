@@ -1,5 +1,4 @@
-import Link from "next/link";
-import "../globals.css";
+import Link from "@/components/ui/link";
 
 export default function AuthLayout({
   children,

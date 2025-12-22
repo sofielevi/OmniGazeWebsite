@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { getCurrentUser, UserInfo } from "@/lib/api-client";
 import { Loader2 } from "lucide-react";
-import "../globals.css";
 
 export default function DashboardLayout({
   children,
@@ -15,6 +14,7 @@ export default function DashboardLayout({
   const router = useRouter();
   const [user, setUser] = useState<UserInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     async function checkAuth() {
@@ -23,6 +23,7 @@ export default function DashboardLayout({
         setUser(userData);
       } catch {
         // Not authenticated, redirect to login
+        setIsRedirecting(true);
         router.push("/login");
       } finally {
         setIsLoading(false);
@@ -31,19 +32,29 @@ export default function DashboardLayout({
     checkAuth();
   }, [router]);
 
-  if (isLoading) {
+  if (isLoading || isRedirecting) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-[var(--bg-deep)] flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin text-[var(--amber-400)] mx-auto mb-4" />
-          <p className="text-[var(--text-secondary)]">Loading...</p>
+          <p className="text-[var(--text-secondary)]">
+            {isRedirecting ? "Redirecting to login..." : "Loading..."}
+          </p>
         </div>
       </div>
     );
   }
 
   if (!user) {
-    return null; // Will redirect
+    // Show loading state while redirect happens
+    return (
+      <div className="min-h-screen bg-[var(--bg-deep)] flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-[var(--amber-400)] mx-auto mb-4" />
+          <p className="text-[var(--text-secondary)]">Redirecting...</p>
+        </div>
+      </div>
+    );
   }
 
   // Extract tier name as string for display

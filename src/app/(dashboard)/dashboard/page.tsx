@@ -88,7 +88,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard
           title="Servers"
           value={tier?.usage?.servers || 0}
@@ -102,16 +102,10 @@ export default function DashboardPage() {
           icon={Users}
         />
         <StatCard
-          title="Plan"
-          value={user?.tier?.displayName || user?.tier?.name || "Community"}
-          subtitle={tier?.monthlyPrice ? `$${tier.monthlyPrice}/mo` : "Free"}
-          icon={Key}
-        />
-        <StatCard
           title="Status"
           value={user?.isAuthenticated ? "Active" : "Inactive"}
           subtitle="License status"
-          icon={Server}
+          icon={Key}
         />
       </div>
 

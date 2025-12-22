@@ -206,11 +206,66 @@ export async function getCurrentUser(): Promise<UserInfo> {
 }
 
 /**
+ * API response format from /api/website/tier
+ * (different property names than our frontend types)
+ */
+interface ApiCustomerTierResponse {
+  tierId: number;
+  tierName: string;
+  tierDisplayName: string;
+  monthlyPrice: number | null;
+  annualPrice: number | null;
+  serverLimit: number;
+  userLimit: number;
+  serverCount: number;
+  userCount: number;
+  features: string[];
+  availableUpgrades: Array<{
+    id: number;
+    name: string;
+    displayName: string;
+    monthlyPrice: number | null;
+    annualPrice: number | null;
+    serverLimit: number;
+    userLimit: number;
+    features: string[];
+  }>;
+  canUpgrade: boolean;
+}
+
+/**
  * Get current tier info with usage and upgrade options (requires auth)
  */
 export async function getCurrentTier(): Promise<CurrentTierInfo> {
   const endpoint = useLocalApi ? '/api/auth/tier' : '/api/website/tier';
-  return apiFetch(endpoint);
+  const response = await apiFetch<ApiCustomerTierResponse>(endpoint);
+
+  // Map API response to frontend types
+  // API uses TierName/TierDisplayName, frontend expects name/displayName
+  return {
+    id: response.tierId,
+    name: response.tierName,
+    displayName: response.tierDisplayName,
+    monthlyPrice: response.monthlyPrice,
+    annualPrice: response.annualPrice,
+    serverLimit: response.serverLimit,
+    userLimit: response.userLimit,
+    features: response.features || [],
+    usage: {
+      servers: response.serverCount,
+      users: response.userCount,
+    },
+    availableUpgrades: (response.availableUpgrades || []).map(tier => ({
+      id: tier.id,
+      name: tier.name,
+      displayName: tier.displayName,
+      monthlyPrice: tier.monthlyPrice,
+      annualPrice: tier.annualPrice,
+      serverLimit: tier.serverLimit,
+      userLimit: tier.userLimit,
+      features: tier.features || [],
+    })),
+  };
 }
 
 /**
