@@ -6,6 +6,7 @@ import { Section, SectionHeader } from "@/components/marketing/section";
 import { ValuePyramid } from "@/components/marketing/value-pyramid";
 import { BridgeVisual } from "@/components/marketing/bridge-visual";
 import { DataSovereignty } from "@/components/marketing/data-sovereignty";
+import { GravityWell } from "@/components/marketing/gravity-well";
 import { ButtonLink } from "@/components/ui/button";
 import {
   ChevronRight,
@@ -109,6 +110,9 @@ export default function HomePage() {
 
           {/* Data Sovereignty */}
           <DataSovereignty className="mt-16" />
+
+          {/* EA Evolution - Gravity Well */}
+          <GravityWell className="mt-20" />
         </Section>
 
         {/* Features Preview */}

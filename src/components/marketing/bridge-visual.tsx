@@ -7,7 +7,7 @@ interface BridgeVisualProps {
 }
 
 const infrastructureTools = ["Faddom", "Device42", "Lansweeper", "SolarWinds"];
-const eaTools = ["LeanIX", "Ardoq", "ServiceNow", "Mega"];
+const eaTools = ["LeanIX", "Ardoq", "Bizzdesign", "Mega"];
 
 export function BridgeVisual({ className }: BridgeVisualProps) {
   return (

@@ -158,6 +158,26 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes field-flow {
+  0% {
+    stroke-dashoffset: 36;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
 .animate-fade-up {
   animation: fade-up 0.8s var(--ease-out-expo) backwards;
 }
@@ -176,6 +196,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-blink {
   animation: blink 2s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+.animate-field-line-left,
+.animate-field-line-right {
+  stroke-dasharray: 12 6;
+  animation: field-flow 2s linear infinite;
 }
 
 /* Grid Pattern Background */
