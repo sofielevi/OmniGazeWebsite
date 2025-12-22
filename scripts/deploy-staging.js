@@ -133,7 +133,8 @@ async function deployStaging() {
         '.env*',
         '*.map',
         '.DS_Store',
-        'Thumbs.db'
+        'Thumbs.db',
+        'install/**'  // Don't delete manually-uploaded installer files
       ],
       log: (message) => {
         // Parse log messages for stats

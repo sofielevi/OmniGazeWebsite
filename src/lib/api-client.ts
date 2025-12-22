@@ -285,6 +285,27 @@ export async function getLicenseKey(): Promise<{ licenseKey: string }> {
 }
 
 // ============================================
+// License Activations API Endpoints
+// ============================================
+
+export interface LicenseActivation {
+  machineName: string;
+  firstSeen: string;
+  lastSeen: string;
+  isActive: boolean;
+  ipAddress: string | null;
+  applicationVersion: string | null;
+}
+
+/**
+ * Get license activations - machines where OmniGaze is running (requires auth)
+ */
+export async function getActivations(): Promise<{ activations: LicenseActivation[] }> {
+  const endpoint = useLocalApi ? '/api/auth/activations' : '/api/website/activations';
+  return apiFetch(endpoint);
+}
+
+// ============================================
 // Billing API Endpoints
 // ============================================
 

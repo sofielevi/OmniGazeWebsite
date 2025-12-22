@@ -2,20 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { getLicenseKey, ApiError } from "@/lib/api-client";
-import { Key, Copy, Check, Monitor, RefreshCw, AlertTriangle } from "lucide-react";
-
-interface Activation {
-  id: string;
-  machineName: string;
-  activatedAt: string;
-  lastSeen: string;
-  isActive: boolean;
-}
+import { getLicenseKey, getActivations, LicenseActivation, ApiError } from "@/lib/api-client";
+import { Key, Copy, Check, Monitor, AlertTriangle } from "lucide-react";
 
 export default function LicensesPage() {
   const [licenseKey, setLicenseKey] = useState<string>("");
-  const [activations, setActivations] = useState<Activation[]>([]);
+  const [activations, setActivations] = useState<LicenseActivation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
@@ -23,19 +15,14 @@ export default function LicensesPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const { licenseKey: key } = await getLicenseKey();
-        setLicenseKey(key);
-
-        // Mock activations for now - would come from API
-        setActivations([
-          {
-            id: "1",
-            machineName: "WORKSTATION-01",
-            activatedAt: "2024-12-01T10:00:00Z",
-            lastSeen: "2024-12-18T09:30:00Z",
-            isActive: true,
-          },
+        // Load license key and activations in parallel
+        const [licenseResponse, activationsResponse] = await Promise.all([
+          getLicenseKey(),
+          getActivations().catch(() => ({ activations: [] })), // Don't fail if activations endpoint isn't ready
         ]);
+
+        setLicenseKey(licenseResponse.licenseKey);
+        setActivations(activationsResponse.activations);
       } catch (err) {
         if (err instanceof ApiError) {
           setError(err.message);
@@ -67,6 +54,16 @@ export default function LicensesPage() {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
+  const formatDateTime = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
+
   if (isLoading) {
     return (
       <div className="animate-pulse space-y-6">
@@ -84,7 +81,7 @@ export default function LicensesPage() {
           Licenses
         </h1>
         <p className="text-[var(--text-secondary)] mt-1">
-          Manage your license key and activations.
+          Manage your license key and view activations.
         </p>
       </div>
 
@@ -148,7 +145,7 @@ export default function LicensesPage() {
               </p>
             </div>
             <div className="text-sm text-[var(--text-secondary)]">
-              {activations.length} / 3 activations used
+              {activations.filter(a => a.isActive).length} active / {activations.length} total
             </div>
           </div>
         </div>
@@ -171,7 +168,7 @@ export default function LicensesPage() {
                   Machine
                 </th>
                 <th className="text-left p-4 text-sm font-medium text-[var(--text-secondary)]">
-                  Activated
+                  First Seen
                 </th>
                 <th className="text-left p-4 text-sm font-medium text-[var(--text-secondary)]">
                   Last Seen
@@ -179,30 +176,34 @@ export default function LicensesPage() {
                 <th className="text-left p-4 text-sm font-medium text-[var(--text-secondary)]">
                   Status
                 </th>
-                <th className="text-right p-4 text-sm font-medium text-[var(--text-secondary)]">
-                  Actions
-                </th>
               </tr>
             </thead>
             <tbody>
-              {activations.map((activation) => (
+              {activations.map((activation, index) => (
                 <tr
-                  key={activation.id}
+                  key={`${activation.machineName}-${index}`}
                   className="border-t border-[var(--border-subtle)]"
                 >
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <Monitor className="w-5 h-5 text-[var(--text-muted)]" />
-                      <span className="font-medium text-[var(--text-primary)]">
-                        {activation.machineName}
-                      </span>
+                      <div>
+                        <span className="font-medium text-[var(--text-primary)] block">
+                          {activation.machineName}
+                        </span>
+                        {activation.applicationVersion && (
+                          <span className="text-xs text-[var(--text-muted)]">
+                            v{activation.applicationVersion}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </td>
                   <td className="p-4 text-sm text-[var(--text-secondary)]">
-                    {new Date(activation.activatedAt).toLocaleDateString()}
+                    {formatDate(activation.firstSeen)}
                   </td>
                   <td className="p-4 text-sm text-[var(--text-secondary)]">
-                    {new Date(activation.lastSeen).toLocaleString()}
+                    {formatDateTime(activation.lastSeen)}
                   </td>
                   <td className="p-4">
                     <span
@@ -222,38 +223,19 @@ export default function LicensesPage() {
                       {activation.isActive ? "Active" : "Inactive"}
                     </span>
                   </td>
-                  <td className="p-4 text-right">
-                    <Button variant="ghost" size="sm">
-                      Deactivate
-                    </Button>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
-      </div>
 
-      {/* Regenerate key section */}
-      <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
-        <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center">
-            <RefreshCw className="w-5 h-5 text-yellow-500" />
-          </div>
-          <div className="flex-1">
-            <h3 className="font-medium text-[var(--text-primary)] mb-1">
-              Regenerate License Key
-            </h3>
-            <p className="text-sm text-[var(--text-secondary)] mb-4">
-              Generate a new license key. This will deactivate all existing installations
-              and you&apos;ll need to re-enter the new key in OmniGaze.
+        {activations.length > 0 && (
+          <div className="p-4 bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)]">
+            <p className="text-xs text-[var(--text-muted)]">
+              Machines are considered active if they have connected within the last 24 hours.
             </p>
-            <Button variant="secondary">
-              <RefreshCw className="w-4 h-4" />
-              Regenerate Key
-            </Button>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
