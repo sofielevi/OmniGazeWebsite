@@ -87,42 +87,90 @@ export class ApiError extends Error {
   }
 }
 
-// Generic fetch wrapper with error handling
+// Fetch with timeout wrapper
+async function fetchWithTimeout(
+  url: string,
+  options: RequestInit = {},
+  timeoutMs: number = 10000
+): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    return response;
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new ApiError('Request timed out', 408, 'TIMEOUT');
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+// Generic fetch wrapper with error handling, timeout, and retry
 async function apiFetch<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  retries: number = 1
 ): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
 
-  const response = await fetch(url, {
-    ...options,
-    credentials: 'include', // Important: include cookies for auth
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
+  let lastError: Error | null = null;
 
-  // Handle non-JSON responses
-  const contentType = response.headers.get('content-type');
-  if (!contentType?.includes('application/json')) {
-    if (!response.ok) {
-      throw new ApiError('Server error', response.status);
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await fetchWithTimeout(url, {
+        ...options,
+        credentials: 'include', // Important: include cookies for auth
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+      });
+
+      // Handle non-JSON responses
+      const contentType = response.headers.get('content-type');
+      if (!contentType?.includes('application/json')) {
+        if (!response.ok) {
+          throw new ApiError('Server error', response.status);
+        }
+        return {} as T;
+      }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new ApiError(
+          data.message || data.error || 'An error occurred',
+          response.status,
+          data.code
+        );
+      }
+
+      return data;
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error('Unknown error');
+
+      // Don't retry on auth errors or client errors (4xx except 408 timeout)
+      if (error instanceof ApiError) {
+        if (error.statusCode >= 400 && error.statusCode < 500 && error.statusCode !== 408) {
+          throw error;
+        }
+      }
+
+      // Wait before retry (exponential backoff)
+      if (attempt < retries) {
+        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 500));
+      }
     }
-    return {} as T;
   }
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new ApiError(
-      data.message || data.error || 'An error occurred',
-      response.status,
-      data.code
-    );
-  }
-
-  return data;
+  throw lastError;
 }
 
 // ============================================

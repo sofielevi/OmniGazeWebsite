@@ -181,18 +181,8 @@ export default function BillingPage() {
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-[var(--text-muted)]">
-                    {tier.serverLimit === -1 ? "Unlimited" : tier.serverLimit} servers,{" "}
-                    {tier.userLimit === -1 ? "unlimited" : tier.userLimit} users
-                  </p>
                 </div>
               </div>
-              <Button
-                variant="secondary"
-                onClick={() => window.location.href = "/dashboard/subscription"}
-              >
-                Change Plan
-              </Button>
             </div>
 
             {/* Billing Details */}

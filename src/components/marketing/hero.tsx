@@ -3,21 +3,58 @@
 import { ChevronRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import { useEffect, useRef } from "react";
+import Hls from "hls.js";
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const hlsSrc = "/videos/hls/master.m3u8";
+
+    if (Hls.isSupported()) {
+      // Use hls.js for browsers without native HLS support
+      const hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: false,
+        startLevel: 0, // Start with lowest quality for fast initial load
+      });
+      hls.loadSource(hlsSrc);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play().catch(() => {
+          // Autoplay blocked - that's ok for background video
+        });
+      });
+
+      return () => {
+        hls.destroy();
+      };
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      // Safari has native HLS support
+      video.src = hlsSrc;
+      video.addEventListener("loadedmetadata", () => {
+        video.play().catch(() => {});
+      });
+    }
+  }, []);
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20">
-      {/* Background Video */}
+      {/* Background Video with HLS Adaptive Streaming */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
+          poster="/videos/hero-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
-        >
-          <source src="/videos/hero-animation.mp4" type="video/mp4" />
-        </video>
+        />
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-deep)] via-transparent to-[var(--bg-deep)]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-deep)] via-transparent to-[var(--bg-deep)]" />

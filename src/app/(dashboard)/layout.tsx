@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Sidebar } from "@/components/dashboard/sidebar";
-import { getCurrentUser, UserInfo } from "@/lib/api-client";
-import { Loader2 } from "lucide-react";
+import { getCurrentUser, UserInfo, ApiError } from "@/lib/api-client";
+import { Loader2, AlertTriangle, RefreshCw } from "lucide-react";
 
 export default function DashboardLayout({
   children,
@@ -15,22 +15,44 @@ export default function DashboardLayout({
   const [user, setUser] = useState<UserInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const mountedRef = useRef(true);
 
-  useEffect(() => {
-    async function checkAuth() {
-      try {
-        const userData = await getCurrentUser();
+  const checkAuth = async () => {
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const userData = await getCurrentUser();
+      if (mountedRef.current) {
         setUser(userData);
-      } catch {
-        // Not authenticated, redirect to login
-        setIsRedirecting(true);
-        router.push("/login");
-      } finally {
         setIsLoading(false);
       }
+    } catch (err) {
+      if (!mountedRef.current) return;
+
+      // Auth error - redirect to login
+      if (err instanceof ApiError && (err.statusCode === 401 || err.statusCode === 403)) {
+        setIsRedirecting(true);
+        router.push("/login");
+        return;
+      }
+
+      // Other error (timeout, network, server) - show retry option
+      setError(err instanceof Error ? err.message : "Failed to load. Please try again.");
+      setIsLoading(false);
     }
+  };
+
+  useEffect(() => {
+    mountedRef.current = true;
     checkAuth();
-  }, [router]);
+
+    return () => {
+      mountedRef.current = false;
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (isLoading || isRedirecting) {
     return (
@@ -45,8 +67,30 @@ export default function DashboardLayout({
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[var(--bg-deep)] flex items-center justify-center">
+        <div className="text-center max-w-md px-4">
+          <AlertTriangle className="w-12 h-12 text-[var(--amber-400)] mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
+            Connection Issue
+          </h2>
+          <p className="text-[var(--text-secondary)] mb-6">
+            {error}
+          </p>
+          <button
+            onClick={checkAuth}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--amber-400)] text-[var(--bg-deep)] rounded-lg font-medium hover:bg-[var(--amber-500)] transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (!user) {
-    // Show loading state while redirect happens
     return (
       <div className="min-h-screen bg-[var(--bg-deep)] flex items-center justify-center">
         <div className="text-center">

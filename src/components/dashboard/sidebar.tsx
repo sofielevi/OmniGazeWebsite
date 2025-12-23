@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
-  CreditCard,
   Key,
   Receipt,
   Users,
@@ -16,6 +15,7 @@ import {
   Menu,
   X,
   Home,
+  BookOpen,
 } from "lucide-react";
 import { useState } from "react";
 import { logout } from "@/lib/api-client";
@@ -29,11 +29,11 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Subscription", href: "/dashboard/subscription", icon: CreditCard },
   { label: "Licenses", href: "/dashboard/licenses", icon: Key },
   { label: "Billing", href: "/dashboard/billing", icon: Receipt },
   { label: "Team", href: "/dashboard/team", icon: Users, tier: "Business" },
   { label: "Settings", href: "/dashboard/settings", icon: Settings },
+  { label: "Docs", href: "/docs", icon: BookOpen },
 ];
 
 interface SidebarProps {

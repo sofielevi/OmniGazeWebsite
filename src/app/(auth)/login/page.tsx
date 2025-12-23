@@ -135,14 +135,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <div className="text-center">
-          <Link
-            href="/docs/getting-started/activation"
-            className="text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
-          >
-            Need help finding your license key?
-          </Link>
-        </div>
       </div>
 
       {/* Info box */}

@@ -1,37 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { StatCard, UsageMeter, TierBadge } from "@/components/dashboard/stat-card";
+import { UsageMeter, TierBadge } from "@/components/dashboard/stat-card";
 import { ButtonLink } from "@/components/ui/button";
-import { getCurrentUser, getCurrentTier, UserInfo, CurrentTierInfo } from "@/lib/api-client";
-import {
-  Server,
-  Users,
-  Download,
-  Key,
-  ArrowUpRight,
-  Sparkles,
-  BookOpen,
-  Headphones,
-} from "lucide-react";
+import { getCurrentTier, getTiers, CurrentTierInfo, TierInfo } from "@/lib/api-client";
+import { Check, ArrowRight } from "lucide-react";
 
-export default function DashboardPage() {
-  const [user, setUser] = useState<UserInfo | null>(null);
-  const [tier, setTier] = useState<CurrentTierInfo | null>(null);
+export default function OverviewPage() {
+  const [currentTier, setCurrentTier] = useState<CurrentTierInfo | null>(null);
+  const [allTiers, setAllTiers] = useState<TierInfo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       try {
-        const [userData, tierData] = await Promise.all([
-          getCurrentUser(),
+        const [current, tiers] = await Promise.all([
           getCurrentTier(),
+          getTiers(),
         ]);
-        setUser(userData);
-        setTier(tierData);
+        setCurrentTier(current);
+        setAllTiers(tiers);
       } catch (error) {
-        console.error("Failed to load dashboard data:", error);
+        console.error("Failed to load data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -43,11 +33,7 @@ export default function DashboardPage() {
     return (
       <div className="animate-pulse space-y-6">
         <div className="h-8 bg-[var(--bg-elevated)] rounded w-48" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-36 bg-[var(--bg-elevated)] rounded-xl" />
-          ))}
-        </div>
+        <div className="h-64 bg-[var(--bg-elevated)] rounded-xl" />
       </div>
     );
   }
@@ -57,146 +43,189 @@ export default function DashboardPage() {
       {/* Header */}
       <div>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)]">
-          Welcome back
+          Overview
         </h1>
         <p className="text-[var(--text-secondary)] mt-1">
-          Here&apos;s an overview of your OmniGaze account.
+          Your plan and usage at a glance.
         </p>
       </div>
 
-      {/* Tier banner */}
-      <div className="bg-gradient-to-r from-[var(--pyramid-infrastructure)]/20 to-[var(--amber-400)]/10 border border-[var(--border-subtle)] rounded-xl p-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      {/* Current plan */}
+      <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <TierBadge tier={user?.tier?.displayName || user?.tier?.name || "Community"} size="lg" />
-              <span className="text-sm text-[var(--text-muted)]">Current Plan</span>
+              <h2 className="font-display text-xl font-semibold text-[var(--text-primary)]">
+                Current Plan
+              </h2>
+              <TierBadge tier={currentTier?.displayName || "Community"} />
             </div>
             <p className="text-[var(--text-secondary)]">
-              {tier?.availableUpgrades && tier.availableUpgrades.length > 0
-                ? "Upgrade to unlock more features and capacity."
-                : "You're on our highest tier. Thank you!"}
+              {currentTier?.monthlyPrice
+                ? `$${currentTier.monthlyPrice}/month`
+                : "Free forever"}
             </p>
           </div>
-          {tier?.availableUpgrades && tier.availableUpgrades.length > 0 && (
-            <ButtonLink href="/dashboard/subscription" variant="primary">
-              <Sparkles className="w-4 h-4" />
-              Upgrade Plan
-            </ButtonLink>
-          )}
         </div>
-      </div>
 
-      {/* Stats grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatCard
-          title="Servers"
-          value={tier?.usage?.servers || 0}
-          subtitle={`of ${tier?.serverLimit === -1 ? "unlimited" : tier?.serverLimit || 50} limit`}
-          icon={Server}
-        />
-        <StatCard
-          title="Team Members"
-          value={tier?.usage?.users || 1}
-          subtitle={`of ${tier?.userLimit === -1 ? "unlimited" : tier?.userLimit || 1} limit`}
-          icon={Users}
-        />
-        <StatCard
-          title="Status"
-          value={user?.isAuthenticated ? "Active" : "Inactive"}
-          subtitle="License status"
-          icon={Key}
-        />
-      </div>
-
-      {/* Usage meters */}
-      <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
-        <h2 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-6">
-          Usage Overview
-        </h2>
-        <div className="space-y-6">
+        {/* Usage - Servers only */}
+        <div className="pt-6 border-t border-[var(--border-subtle)]">
           <UsageMeter
-            label="Servers Discovered"
-            current={tier?.usage?.servers || 0}
-            limit={tier?.serverLimit || 50}
-          />
-          <UsageMeter
-            label="Team Members"
-            current={tier?.usage?.users || 1}
-            limit={tier?.userLimit || 1}
+            label="Servers"
+            current={currentTier?.usage?.servers || 0}
+            limit={currentTier?.serverLimit || 50}
           />
         </div>
       </div>
 
-      {/* Quick actions */}
+      {/* Available upgrades */}
+      {currentTier?.availableUpgrades && currentTier.availableUpgrades.length > 0 && (
+        <div>
+          <h2 className="font-display text-xl font-semibold text-[var(--text-primary)] mb-4">
+            Upgrade Your Plan
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {currentTier.availableUpgrades.map((tier) => (
+              <UpgradeCard key={tier.id} tier={tier} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* All tiers comparison */}
       <div>
-        <h2 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-4">
-          Quick Actions
+        <h2 className="font-display text-xl font-semibold text-[var(--text-primary)] mb-4">
+          Compare All Plans
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <QuickActionCard
-            href="/download"
-            icon={Download}
-            title="Download OmniGaze"
-            description="Get the desktop application"
-          />
-          <QuickActionCard
-            href="/dashboard/licenses"
-            icon={Key}
-            title="View License Key"
-            description="Copy your activation key"
-          />
-          <QuickActionCard
-            href="/docs"
-            icon={BookOpen}
-            title="Documentation"
-            description="Get started guides"
-          />
-          <QuickActionCard
-            href="mailto:support@omnigaze.com"
-            icon={Headphones}
-            title="Get Support"
-            description="Contact our team"
-            external
-          />
+        <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-[var(--border-subtle)]">
+                  <th className="text-left p-4 text-sm font-medium text-[var(--text-secondary)]">
+                    Feature
+                  </th>
+                  {allTiers.map((tier) => (
+                    <th
+                      key={tier.id}
+                      className="text-center p-4 text-sm font-medium text-[var(--text-primary)]"
+                    >
+                      <TierBadge tier={tier.displayName} size="sm" />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[var(--border-subtle)]">
+                  <td className="p-4 text-sm text-[var(--text-secondary)]">
+                    Server Limit
+                  </td>
+                  {allTiers.map((tier) => (
+                    <td
+                      key={tier.id}
+                      className="p-4 text-center text-sm text-[var(--text-primary)]"
+                    >
+                      {tier.serverLimit === -1 ? "Unlimited" : tier.serverLimit}
+                    </td>
+                  ))}
+                </tr>
+                <tr className="border-b border-[var(--border-subtle)]">
+                  <td className="p-4 text-sm text-[var(--text-secondary)]">
+                    User Limit
+                  </td>
+                  {allTiers.map((tier) => (
+                    <td
+                      key={tier.id}
+                      className="p-4 text-center text-sm text-[var(--text-primary)]"
+                    >
+                      {tier.userLimit === -1 ? "Unlimited" : tier.userLimit}
+                    </td>
+                  ))}
+                </tr>
+                <tr className="border-b border-[var(--border-subtle)]">
+                  <td className="p-4 text-sm text-[var(--text-secondary)]">
+                    Monthly Price
+                  </td>
+                  {allTiers.map((tier) => (
+                    <td
+                      key={tier.id}
+                      className="p-4 text-center text-sm text-[var(--text-primary)]"
+                    >
+                      {tier.monthlyPrice === null
+                        ? "Contact Us"
+                        : tier.monthlyPrice === 0
+                        ? "Free"
+                        : `$${tier.monthlyPrice}`}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Features included */}
+      <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
+        <h2 className="font-display text-xl font-semibold text-[var(--text-primary)] mb-4">
+          Features Included
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {currentTier?.features?.map((feature, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <Check className="w-5 h-5 text-[var(--success)]" />
+              <span className="text-sm text-[var(--text-secondary)]">{feature}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-interface QuickActionCardProps {
-  href: string;
-  icon: React.ElementType;
-  title: string;
-  description: string;
-  external?: boolean;
-}
-
-function QuickActionCard({
-  href,
-  icon: Icon,
-  title,
-  description,
-  external,
-}: QuickActionCardProps) {
-  const Component = external ? "a" : Link;
+function UpgradeCard({ tier }: { tier: TierInfo }) {
+  const isContactUs = tier.monthlyPrice === null || tier.monthlyPrice === 0;
 
   return (
-    <Component
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-      className="group bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-5 hover:border-[var(--border-warm)] transition-colors"
-    >
-      <div className="flex items-start justify-between mb-3">
-        <div className="w-10 h-10 rounded-lg bg-[var(--amber-400)]/10 flex items-center justify-center">
-          <Icon className="w-5 h-5 text-[var(--amber-400)]" />
-        </div>
-        <ArrowUpRight className="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--amber-400)] transition-colors" />
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-6 hover:border-[var(--border-warm)] transition-colors">
+      <div className="flex items-center justify-between mb-4">
+        <TierBadge tier={tier.displayName} />
       </div>
-      <h3 className="font-medium text-[var(--text-primary)] mb-1">{title}</h3>
-      <p className="text-sm text-[var(--text-secondary)]">{description}</p>
-    </Component>
+      <div className="mb-4">
+        {isContactUs ? (
+          <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">
+            Contact Us
+          </span>
+        ) : (
+          <>
+            <span className="font-display text-3xl font-semibold text-[var(--text-primary)]">
+              ${tier.monthlyPrice}
+            </span>
+            <span className="text-[var(--text-muted)]">/mo</span>
+          </>
+        )}
+      </div>
+      <ul className="space-y-2 mb-6">
+        <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+          <Check className="w-4 h-4 text-[var(--success)]" />
+          {tier.serverLimit === -1 ? "Unlimited" : tier.serverLimit} servers
+        </li>
+        <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+          <Check className="w-4 h-4 text-[var(--success)]" />
+          {tier.userLimit === -1 ? "Unlimited" : tier.userLimit} users
+        </li>
+      </ul>
+      {isContactUs ? (
+        <ButtonLink href="mailto:sales@omnigaze.com" variant="primary" className="w-full">
+          Contact Sales
+          <ArrowRight className="w-4 h-4" />
+        </ButtonLink>
+      ) : (
+        <ButtonLink href={`/checkout?tier=${tier.name}`} variant="primary" className="w-full">
+          Upgrade
+          <ArrowRight className="w-4 h-4" />
+        </ButtonLink>
+      )}
+    </div>
   );
 }

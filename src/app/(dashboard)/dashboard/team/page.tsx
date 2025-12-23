@@ -211,9 +211,25 @@ export default function TeamPage() {
       </div>
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 flex items-center gap-3">
-          <AlertTriangle className="w-5 h-5 text-red-400" />
-          <p className="text-red-400">{error}</p>
+        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <AlertTriangle className="w-5 h-5 text-red-400" />
+            <p className="text-red-400">{error}</p>
+          </div>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              setError("");
+              setIsLoading(true);
+              getTeamInfo()
+                .then(setTeamInfo)
+                .catch((err) => setError(err instanceof ApiError ? err.message : "Failed to load"))
+                .finally(() => setIsLoading(false));
+            }}
+          >
+            Retry
+          </Button>
         </div>
       )}
 

@@ -6,8 +6,8 @@ interface BridgeVisualProps {
   className?: string;
 }
 
-const infrastructureTools = ["Faddom", "Device42", "Lansweeper", "SolarWinds"];
-const eaTools = ["LeanIX", "Ardoq", "Bizzdesign", "Mega"];
+const infrastructureTeams = ["IT Ops", "Sysadmins", "Infrastructure Teams", "Network Engineers"];
+const eaTeams = ["Enterprise Architects", "Strategy Teams", "Business Analysts", "C-Suite"];
 
 export function BridgeVisual({ className }: BridgeVisualProps) {
   return (
@@ -16,15 +16,15 @@ export function BridgeVisual({ className }: BridgeVisualProps) {
         {/* Infrastructure Discovery Side */}
         <div className="p-8 bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)]">
           <h3 className="text-sm font-mono uppercase tracking-wider text-[var(--text-muted)] mb-4">
-            Infrastructure Discovery
+            Infrastructure & Operations
           </h3>
           <div className="flex flex-wrap gap-2">
-            {infrastructureTools.map((tool) => (
+            {infrastructureTeams.map((team) => (
               <span
-                key={tool}
+                key={team}
                 className="px-3 py-1.5 bg-[var(--bg-card)] rounded-md text-xs text-[var(--text-secondary)]"
               >
-                {tool}
+                {team}
               </span>
             ))}
           </div>
@@ -52,15 +52,15 @@ export function BridgeVisual({ className }: BridgeVisualProps) {
         {/* Enterprise Architecture Side */}
         <div className="p-8 bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)]">
           <h3 className="text-sm font-mono uppercase tracking-wider text-[var(--text-muted)] mb-4">
-            Enterprise Architecture
+            Strategy & Architecture
           </h3>
           <div className="flex flex-wrap gap-2">
-            {eaTools.map((tool) => (
+            {eaTeams.map((team) => (
               <span
-                key={tool}
+                key={team}
                 className="px-3 py-1.5 bg-[var(--bg-card)] rounded-md text-xs text-[var(--text-secondary)]"
               >
-                {tool}
+                {team}
               </span>
             ))}
           </div>

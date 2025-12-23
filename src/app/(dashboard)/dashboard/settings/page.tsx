@@ -7,7 +7,6 @@ import {
   getUserSettings,
   updateUserSettings,
   deleteAccount,
-  logout,
   UserSettings,
   ApiError,
 } from "@/lib/api-client";
@@ -18,7 +17,6 @@ import {
   AlertTriangle,
   Check,
   Loader2,
-  LogOut,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -107,16 +105,6 @@ export default function SettingsPage() {
       }
     } finally {
       setIsSaving(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      router.push("/login");
-    } catch {
-      // Redirect anyway
-      router.push("/login");
     }
   };
 
@@ -277,28 +265,6 @@ export default function SettingsPage() {
             )}
           </Button>
         </div>
-      </div>
-
-      {/* Session Section */}
-      <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-lg bg-[var(--amber-400)]/10 flex items-center justify-center">
-            <LogOut className="w-5 h-5 text-[var(--amber-400)]" />
-          </div>
-          <div>
-            <h2 className="font-display text-lg font-semibold text-[var(--text-primary)]">
-              Session
-            </h2>
-            <p className="text-sm text-[var(--text-muted)]">
-              Manage your login session
-            </p>
-          </div>
-        </div>
-
-        <Button variant="secondary" onClick={handleLogout}>
-          <LogOut className="w-4 h-4" />
-          Sign Out
-        </Button>
       </div>
 
       {/* Danger Zone */}
