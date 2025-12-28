@@ -1,0 +1,598 @@
+---
+title: OmniGaze Website - Internal Presentation
+author: OmniGaze Team
+date: 2025-12-28
+theme: professional
+transition: slide
+---
+
+<!-- slide -->
+<div class="title-slide">
+    <div class="title-main">OmniGaze Website</div>
+    <div class="title-sub">The Public Face of Applied Observability</div>
+    <div class="title-tag">Internal Presentation</div>
+    <div class="title-meta">December 2025</div>
+</div>
+
+<!-- slide -->
+<div class="section-slide">
+    <div class="section-number">01</div>
+    <div class="section-title">What is OmniGaze Website?</div>
+    <div class="section-subtitle">The public-facing marketing, sales, and customer portal for the OmniGaze platform</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">The OmniGaze <span class="accent">Ecosystem</span></div>
+<div class="architecture">
+    <div class="arch-layer">
+        <div class="arch-box arch-box-primary">
+            <div class="arch-box-label">This Project</div>
+            <div class="arch-box-title">OmniGaze Website</div>
+        </div>
+        <div class="arch-box">
+            <div class="arch-box-label">Desktop App</div>
+            <div class="arch-box-title">OmniGaze Client</div>
+        </div>
+        <div class="arch-box">
+            <div class="arch-box-label">Admin Interface</div>
+            <div class="arch-box-title">Portal</div>
+        </div>
+    </div>
+    <div class="arch-connector"></div>
+    <div class="arch-layer">
+        <div class="arch-box" style="min-width: 400px;">
+            <div class="arch-box-label">Backend Services</div>
+            <div class="arch-box-title">OmniGaze API (api.omnigaze.com)</div>
+        </div>
+    </div>
+    <div class="arch-connector"></div>
+    <div class="arch-layer">
+        <div class="arch-box" style="min-width: 300px;">
+            <div class="arch-box-label">Data Layer</div>
+            <div class="arch-box-title">Shared Database</div>
+        </div>
+    </div>
+</div>
+<div class="callout">
+    <div class="callout-title">Key Point</div>
+    <div class="callout-text">The website is a separate Next.js project that consumes the OmniGaze API. It does NOT access the database directly.</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">What the Website <span class="accent">Does</span></div>
+<div class="card-grid card-grid-3">
+    <div class="card">
+        <div class="card-title">Marketing & Sales</div>
+        <div class="card-desc">Landing page, features showcase, pricing tiers, and competitive positioning to convert visitors into customers.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Registration & Onboarding</div>
+        <div class="card-desc">Email verification flow, tier selection, license key generation, and getting started guidance.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Account Portal</div>
+        <div class="card-desc">Dashboard, subscription management, billing history, license keys, team management, and settings.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Purchase & Checkout</div>
+        <div class="card-desc">Stripe-powered checkout for tier upgrades with monthly and annual billing options.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Documentation Hub</div>
+        <div class="card-desc">Comprehensive docs with getting started guides, feature tutorials, API reference, and security setup.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Download Center</div>
+        <div class="card-desc">Desktop client download with system requirements and version information.</div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="section-slide">
+    <div class="section-number">02</div>
+    <div class="section-title">The Value Proposition</div>
+    <div class="section-subtitle">How we position OmniGaze to the market</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">The <span class="accent">Value Pyramid</span> - Our Core Differentiator</div>
+<div class="pyramid-container">
+    <div class="pyramid">
+        <div class="pyramid-layer pyramid-strategy">STRATEGY (1-4)</div>
+        <div class="pyramid-layer pyramid-value-streams">VALUE STREAMS (10-20)</div>
+        <div class="pyramid-layer pyramid-capabilities">BUSINESS CAPABILITIES (100-200)</div>
+        <div class="pyramid-layer pyramid-applications">APPLICATIONS (1,000-2,000)</div>
+        <div class="pyramid-layer pyramid-infrastructure">INFRASTRUCTURE (10,000+)</div>
+    </div>
+</div>
+<div class="callout">
+    <div class="callout-title">Marketing Message</div>
+    <div class="callout-text">"From Servers to Strategy" - OmniGaze uniquely connects infrastructure discovery all the way up to strategic business value. This pyramid is prominently featured on the landing page and features page.</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">The <span class="accent">Bridge</span> Positioning</div>
+<div class="bridge-container">
+    <div class="bridge-side">
+        <div class="bridge-side-title">Infrastructure Tools</div>
+        <div class="bridge-side-items">
+            <div class="bridge-item">Faddom</div>
+            <div class="bridge-item">Device42</div>
+            <div class="bridge-item">Lansweeper</div>
+        </div>
+    </div>
+    <div class="bridge-arrow">&#8594;</div>
+    <div class="bridge-center">
+        <div class="bridge-center-title">OMNIGAZE</div>
+        <div class="bridge-center-subtitle">The Bridge</div>
+    </div>
+    <div class="bridge-arrow">&#8594;</div>
+    <div class="bridge-side">
+        <div class="bridge-side-title">EA Platforms</div>
+        <div class="bridge-side-items">
+            <div class="bridge-item">LeanIX</div>
+            <div class="bridge-item">ServiceNow</div>
+            <div class="bridge-item">Ardoq</div>
+        </div>
+    </div>
+</div>
+<div class="callout">
+    <div class="callout-title">Unique Position</div>
+    <div class="callout-text">We're more comprehensive than infrastructure-only tools, and more affordable than enterprise architecture platforms. A single platform that spans the full pyramid.</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header"><span class="accent">Pricing</span> Tiers</div>
+<div class="tier-grid">
+    <div class="tier-card">
+        <div class="tier-name">Community</div>
+        <div class="tier-price">Free</div>
+        <div class="tier-period">forever</div>
+        <div class="tier-limit">50 servers</div>
+        <div class="tier-limit">1 user</div>
+    </div>
+    <div class="tier-card">
+        <div class="tier-name">Starter</div>
+        <div class="tier-price">$99</div>
+        <div class="tier-period">/month</div>
+        <div class="tier-limit">200 servers</div>
+        <div class="tier-limit">3 users</div>
+    </div>
+    <div class="tier-card tier-card-featured">
+        <div class="tier-name">Professional</div>
+        <div class="tier-price">$349</div>
+        <div class="tier-period">/month</div>
+        <div class="tier-limit">1,000 servers</div>
+        <div class="tier-limit">10 users</div>
+    </div>
+    <div class="tier-card">
+        <div class="tier-name">Business</div>
+        <div class="tier-price">$799</div>
+        <div class="tier-period">/month</div>
+        <div class="tier-limit">5,000 servers</div>
+        <div class="tier-limit">25 users</div>
+    </div>
+    <div class="tier-card">
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-price">Custom</div>
+        <div class="tier-period">contact sales</div>
+        <div class="tier-limit">Unlimited</div>
+        <div class="tier-limit">Unlimited</div>
+    </div>
+</div>
+<ul class="bullet-list" style="margin-top: 24px;">
+    <li><strong>17% discount</strong> for annual billing (2 months free)</li>
+    <li>Pricing is <strong>dynamic from the API</strong> - single source of truth</li>
+    <li>Professional tier highlighted as <strong>recommended</strong></li>
+</ul>
+
+<!-- slide -->
+<div class="section-slide">
+    <div class="section-number">03</div>
+    <div class="section-title">Technical Implementation</div>
+    <div class="section-subtitle">Modern stack, SEO-optimized, API-driven</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Tech <span class="accent">Stack</span></div>
+<div class="two-column">
+    <div class="column">
+        <div class="column-header">Core Technologies</div>
+        <div class="tech-stack">
+            <span class="tech-tag tech-tag-primary">Next.js 16</span>
+            <span class="tech-tag tech-tag-primary">TypeScript</span>
+            <span class="tech-tag tech-tag-primary">Tailwind CSS 4</span>
+            <span class="tech-tag">App Router</span>
+            <span class="tech-tag">Static Export</span>
+            <span class="tech-tag">HLS.js</span>
+        </div>
+        <ul class="bullet-list" style="margin-top: 20px;">
+            <li><strong>SSG for marketing pages</strong> - SEO critical</li>
+            <li><strong>SSR for account portal</strong> - dynamic user data</li>
+            <li><strong>API-driven content</strong> - pricing from backend</li>
+        </ul>
+    </div>
+    <div class="column">
+        <div class="column-header">Design System</div>
+        <div class="tech-stack">
+            <span class="tech-tag tech-tag-primary">Warm Technical</span>
+            <span class="tech-tag">Dark Theme</span>
+            <span class="tech-tag">Amber Accent</span>
+            <span class="tech-tag">Lucide Icons</span>
+        </div>
+        <ul class="bullet-list" style="margin-top: 20px;">
+            <li><strong>Source Serif 4</strong> - display headings</li>
+            <li><strong>JetBrains Mono</strong> - body text</li>
+            <li><strong>Consistent with landing-page.html</strong> reference</li>
+            <li><strong>HLS video streaming</strong> for hero background</li>
+        </ul>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Page <span class="accent">Architecture</span></div>
+<div class="two-column">
+    <div class="column">
+        <div class="column-header">Marketing (Public - SSG)</div>
+        <ul class="bullet-list">
+            <li><strong>/</strong> - Landing with hero video, pyramid, bridge</li>
+            <li><strong>/features</strong> - Pyramid layers with detailed features</li>
+            <li><strong>/pricing</strong> - Dynamic tier cards, feature matrix</li>
+            <li><strong>/download</strong> - Client download + requirements</li>
+            <li><strong>/contact</strong> - Sales inquiry form</li>
+            <li><strong>/enterprise</strong> - Enterprise/custom solutions</li>
+            <li><strong>/docs/*</strong> - 30+ documentation pages</li>
+        </ul>
+    </div>
+    <div class="column">
+        <div class="column-header">Account Portal (Protected - SSR)</div>
+        <ul class="bullet-list">
+            <li><strong>/dashboard</strong> - Overview, usage, upgrade options</li>
+            <li><strong>/dashboard/licenses</strong> - License keys, activations</li>
+            <li><strong>/dashboard/billing</strong> - Payment history, invoices</li>
+            <li><strong>/dashboard/team</strong> - Team management (Business+)</li>
+            <li><strong>/dashboard/settings</strong> - Profile, preferences</li>
+            <li><strong>/checkout</strong> - Stripe checkout flow</li>
+        </ul>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Registration <span class="accent">Flow</span></div>
+<div class="flow-horizontal">
+    <div class="flow-step">
+        <div class="flow-step-title">/register</div>
+        <div class="flow-step-desc">Company email</div>
+    </div>
+    <div class="flow-arrow">&#8594;</div>
+    <div class="flow-step">
+        <div class="flow-step-title">API Call</div>
+        <div class="flow-step-desc">Send verification</div>
+    </div>
+    <div class="flow-arrow">&#8594;</div>
+    <div class="flow-step flow-step-active">
+        <div class="flow-step-title">/verify</div>
+        <div class="flow-step-desc">6-digit code</div>
+    </div>
+    <div class="flow-arrow">&#8594;</div>
+    <div class="flow-step">
+        <div class="flow-step-title">/success</div>
+        <div class="flow-step-desc">License key shown</div>
+    </div>
+</div>
+<div class="callout" style="margin-top: 24px;">
+    <div class="callout-title">Company Email Validation</div>
+    <div class="callout-text">70+ personal email domains blocked (Gmail, Yahoo, Outlook, etc.). Only company emails allowed to ensure B2B focus and lead quality.</div>
+</div>
+<ul class="bullet-list" style="margin-top: 16px;">
+    <li><strong>6-character code</strong> valid for 24 hours</li>
+    <li><strong>Max 3 attempts</strong> per code, <strong>5 codes</strong> per email per day</li>
+    <li>License key displayed on success page for desktop client activation</li>
+</ul>
+
+<!-- slide -->
+<div class="slide-header">API <span class="accent">Integration</span></div>
+<div class="two-column">
+    <div class="column">
+        <div class="column-header">Website API Endpoints</div>
+        <ul class="bullet-list">
+            <li><strong>POST /api/website/register</strong> - New user</li>
+            <li><strong>POST /api/website/verify</strong> - Verify code</li>
+            <li><strong>POST /api/website/login</strong> - License key login</li>
+            <li><strong>POST /api/website/logout</strong> - Clear session</li>
+            <li><strong>GET /api/website/me</strong> - Current user</li>
+            <li><strong>GET /api/website/tiers</strong> - All tiers (public)</li>
+            <li><strong>GET /api/website/tier</strong> - Current tier + usage</li>
+        </ul>
+    </div>
+    <div class="column">
+        <div class="column-header">Authentication</div>
+        <ul class="bullet-list">
+            <li><strong>HttpOnly cookies</strong> set by API</li>
+            <li><strong>CORS protected</strong> endpoints</li>
+            <li><strong>No OmniToken required</strong> for web endpoints</li>
+            <li>Automatic redirect to <strong>/login</strong> on 401</li>
+        </ul>
+        <div class="callout" style="margin-top: 16px;">
+            <div class="callout-title">Stripe Integration</div>
+            <div class="callout-text">Uses Stripe Checkout (hosted) - not custom payment forms. Webhooks handle subscription updates.</div>
+        </div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="section-slide">
+    <div class="section-number">04</div>
+    <div class="section-title">Features in Detail</div>
+    <div class="section-subtitle">What users see and experience</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Marketing <span class="accent">Features</span></div>
+<div class="card-grid card-grid-2">
+    <div class="card card-featured">
+        <div class="card-title">Hero with Video Background</div>
+        <div class="card-desc">HLS adaptive streaming video with gradient overlays, animated network nodes, and clear CTAs. Optimized for all bandwidths.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Interactive Value Pyramid</div>
+        <div class="card-desc">Clickable pyramid layers with tooltips explaining each level from Infrastructure to Strategy. Core visual differentiator.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Bridge Positioning Visual</div>
+        <div class="card-desc">Diagram showing OmniGaze between infrastructure tools (Faddom, Device42) and EA platforms (LeanIX, ServiceNow).</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Dynamic Pricing</div>
+        <div class="card-desc">Tier cards with monthly/annual toggle, feature matrix comparison, and FAQs. Prices fetched from API for single source of truth.</div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Account <span class="accent">Portal</span></div>
+<div class="card-grid card-grid-3">
+    <div class="card">
+        <div class="card-title">Dashboard Overview</div>
+        <div class="card-desc">Current tier badge, server/user usage meters, quick actions, and upgrade prompts based on usage.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">License Management</div>
+        <div class="card-desc">View and copy license key, see activation history with machine names and dates.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Billing & Invoices</div>
+        <div class="card-desc">Payment method management, invoice history, Stripe Customer Portal integration.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Team Management</div>
+        <div class="card-desc">Invite team members, manage roles, remove users. Available for Business tier and above.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Settings & Preferences</div>
+        <div class="card-desc">Profile updates, notification preferences, account deletion capability.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Tier-Based Access</div>
+        <div class="card-desc">Sidebar shows tier badge, navigation items gated by tier (e.g., Team only for Business+).</div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Documentation <span class="accent">Hub</span></div>
+<div class="stats-grid">
+    <div class="stat-item">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Pages</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Categories</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">API References</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Search</div>
+    </div>
+</div>
+<div class="two-column" style="margin-top: 24px;">
+    <div class="column">
+        <div class="column-header">Documentation Categories</div>
+        <ul class="bullet-list">
+            <li><strong>Getting Started</strong> - Install, activate, first scan</li>
+            <li><strong>Infrastructure</strong> - Discovery, servers, 3D, clusters</li>
+            <li><strong>Applications</strong> - App discovery, dependency mapping</li>
+            <li><strong>Capabilities</strong> - Business capability modeling</li>
+        </ul>
+    </div>
+    <div class="column">
+        <div class="column-header">Advanced Topics</div>
+        <ul class="bullet-list">
+            <li><strong>Security</strong> - WinRM setup, credentials, troubleshooting</li>
+            <li><strong>Advanced</strong> - Architecture deep-dives</li>
+            <li><strong>API Reference</strong> - REST and OData documentation</li>
+            <li>Code blocks, command examples, tier badges</li>
+        </ul>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="section-slide">
+    <div class="section-number">05</div>
+    <div class="section-title">Implementation Status</div>
+    <div class="section-subtitle">What's done, what's next</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Work Chunk <span class="accent">Progress</span></div>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Work Chunk</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>WEB-01</td>
+            <td>Infrastructure (Next.js, Tailwind, TypeScript)</td>
+            <td><span class="status-badge status-complete">Complete</span></td>
+        </tr>
+        <tr>
+            <td>WEB-02</td>
+            <td>Marketing Pages (Landing, Pricing, Features)</td>
+            <td><span class="status-badge status-complete">Complete</span></td>
+        </tr>
+        <tr>
+            <td>WEB-03</td>
+            <td>Registration Flow (Register, Verify, Login)</td>
+            <td><span class="status-badge status-complete">UI Complete</span></td>
+        </tr>
+        <tr>
+            <td>WEB-04</td>
+            <td>Purchase Flow (Stripe Checkout)</td>
+            <td><span class="status-badge status-in-progress">In Progress</span></td>
+        </tr>
+        <tr>
+            <td>WEB-05</td>
+            <td>Account Portal (Dashboard, Billing, Licenses)</td>
+            <td><span class="status-badge status-complete">Complete</span></td>
+        </tr>
+        <tr>
+            <td>WEB-06</td>
+            <td>Download & Docs</td>
+            <td><span class="status-badge status-complete">MVP Complete</span></td>
+        </tr>
+        <tr>
+            <td>WEB-07</td>
+            <td>Testing & Launch</td>
+            <td><span class="status-badge status-pending">Not Started</span></td>
+        </tr>
+    </tbody>
+</table>
+<div class="progress-container" style="margin-top: 24px;">
+    <div class="progress-label">
+        <span class="progress-label-text">Overall Completion</span>
+        <span class="progress-label-value">~85%</span>
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 85%;"></div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Deployment <span class="accent">Setup</span></div>
+<div class="two-column">
+    <div class="column">
+        <div class="column-header">Staging Environment</div>
+        <ul class="bullet-list">
+            <li><strong>URL:</strong> fingerscrossed.omnigaze.com</li>
+            <li><strong>Method:</strong> FTP to web hotel (static export)</li>
+            <li><strong>One-click:</strong> Deploy Staging.lnk shortcut</li>
+            <li>Runs build + FTP upload automatically</li>
+        </ul>
+        <div class="callout" style="margin-top: 16px;">
+            <div class="callout-text">Pin "Deploy Staging.lnk" to taskbar for quick deploys during development.</div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="column-header">Production</div>
+        <ul class="bullet-list">
+            <li><strong>URL:</strong> omnigaze.com</li>
+            <li><strong>Deployment:</strong> Static export to web hotel</li>
+            <li>SEO-optimized with metadata & JSON-LD</li>
+            <li>Mobile responsive across all pages</li>
+        </ul>
+        <div class="callout" style="margin-top: 16px;">
+            <div class="callout-text">Static export ensures fast load times and CDN-friendly hosting.</div>
+        </div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Next <span class="accent">Steps</span></div>
+<div class="numbered-list">
+    <div class="list-item">
+        <div class="item-number">1</div>
+        <div class="item-content">
+            <div class="item-title">Complete Stripe Webhook Integration</div>
+            <div class="item-desc">Handle subscription events, payment confirmations, and tier updates from Stripe webhooks.</div>
+        </div>
+    </div>
+    <div class="list-item">
+        <div class="item-number">2</div>
+        <div class="item-content">
+            <div class="item-title">API Integration Testing</div>
+            <div class="item-desc">End-to-end testing with live OmniGaze API for registration, verification, and tier management.</div>
+        </div>
+    </div>
+    <div class="list-item">
+        <div class="item-number">3</div>
+        <div class="item-content">
+            <div class="item-title">Performance Optimization</div>
+            <div class="item-desc">Lighthouse audits, image optimization, bundle size analysis, and Core Web Vitals improvements.</div>
+        </div>
+    </div>
+    <div class="list-item">
+        <div class="item-number">4</div>
+        <div class="item-content">
+            <div class="item-title">Production Launch</div>
+            <div class="item-desc">DNS configuration, SSL setup, final QA, and go-live on omnigaze.com.</div>
+        </div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="section-slide">
+    <div class="section-number">06</div>
+    <div class="section-title">Key Takeaways</div>
+    <div class="section-subtitle">Summary and critical rules</div>
+</div>
+
+<!-- slide -->
+<div class="slide-header">Critical <span class="accent">Rules</span></div>
+<div class="card-grid card-grid-2">
+    <div class="card">
+        <div class="card-title">Separate Project</div>
+        <div class="card-desc">This is the public website, NOT the internal Portal. Different codebase, different concerns.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">API Consumer Only</div>
+        <div class="card-desc">Website calls api.omnigaze.com. It does NOT access the database directly.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">SEO Critical</div>
+        <div class="card-desc">Marketing pages MUST be statically generated. Use SSG for landing, pricing, features, docs.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Stripe Checkout (Hosted)</div>
+        <div class="card-desc">Use Stripe's hosted checkout, NOT custom payment forms. Reduces PCI compliance burden.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Pyramid is Key</div>
+        <div class="card-desc">The value pyramid MUST be prominently featured on landing and features pages. It's our core differentiator.</div>
+    </div>
+    <div class="card">
+        <div class="card-title">Email Required</div>
+        <div class="card-desc">All tiers including Community require verified company email. No personal emails allowed.</div>
+    </div>
+</div>
+
+<!-- slide -->
+<div class="quote-slide">
+    <div class="quote-text">From Servers to Strategy - OmniGaze connects infrastructure discovery to business value. The website is where that journey begins.</div>
+    <div class="quote-author">Applied Observability</div>
+</div>
+
+<!-- slide -->
+<div class="end-slide">
+    <div class="end-title">Questions?</div>
+    <div class="end-subtitle">OmniGaze Website - The Public Face of Applied Observability</div>
+    <div class="end-links">
+        <div class="end-link">Staging: fingerscrossed.omnigaze.com</div>
+        <div class="end-link">Production: omnigaze.com</div>
+    </div>
+</div>
