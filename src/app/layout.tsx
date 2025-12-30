@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@/components/analytics";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
@@ -192,6 +194,8 @@ export default function RootLayout({
         className={`${sourceSerif.variable} ${jetbrainsMono.variable} antialiased min-h-screen`}
       >
         {children}
+        <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );
