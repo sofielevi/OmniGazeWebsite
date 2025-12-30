@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 /* OmniGaze Design System - "Warm Technical" Aesthetic */
+/* Updated with hybrid purple/amber palette per Sofie's feedback */
 :root {
-  /* Background */
-  --bg-deep: #0d0f12;
-  --bg-card: #14171c;
-  --bg-elevated: #1a1e25;
-  --bg-hover: #22272f;
+  /* Background - Warm purple tones */
+  --bg-deep: #1A0E1F;
+  --bg-card: #241825;
+  --bg-elevated: #2B1533;
+  --bg-hover: #3a2040;
 
   /* Borders */
   --border-subtle: rgba(255, 255, 255, 0.06);
@@ -17,7 +18,7 @@
   --text-secondary: #9a958d;
   --text-muted: #5f5b54;
 
-  /* Amber - Primary Brand */
+  /* Amber - Primary Brand (keeping for recognition) */
   --amber-50: #fef7e8;
   --amber-100: #fdecc8;
   --amber-200: #f9d68a;
@@ -26,6 +27,11 @@
   --amber-500: #d4841c;
   --amber-600: #b86814;
   --amber-glow: rgba(232, 160, 48, 0.15);
+
+  /* Rose - Secondary Accent (new) */
+  --rose-accent: #B0588A;
+  --rose-light: #C06A9A;
+  --rose-dark: #9F4F7A;
 
   /* Status */
   --success: #4ade80;
@@ -84,6 +90,19 @@ body {
   color: var(--text-primary);
   background: var(--bg-deep);
   overflow-x: hidden;
+}
+
+/* Desktop font size increase per feedback */
+@media (min-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
 }
 
 /* Typography */

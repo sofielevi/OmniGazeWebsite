@@ -200,19 +200,30 @@ export function GravityWell({ className }: GravityWellProps) {
           </div>
         </div>
 
-        {/* OmniGaze Logo - Center (The Gravity) */}
+        {/* OmniGaze Center (The Gravity) - Abstract convergence point */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 mt-2">
           <div className="flex flex-col items-center">
             <div className="relative">
               {/* Pulsing ring */}
-              <div className="absolute -inset-2 rounded-2xl bg-[var(--amber-400)]/20 animate-pulse-slow" />
-              {/* Logo */}
-              <div className="relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[var(--amber-400)] to-[var(--amber-600)] rounded-2xl flex items-center justify-center font-display text-2xl md:text-3xl font-semibold text-[var(--bg-deep)] shadow-xl shadow-[var(--amber-500)]/40">
-                OG
+              <div className="absolute -inset-3 rounded-full bg-[var(--amber-400)]/20 animate-pulse-slow" />
+              <div className="absolute -inset-6 rounded-full bg-[var(--amber-400)]/10 animate-pulse-slow" style={{ animationDelay: "0.5s" }} />
+              {/* Convergence point - abstract eye/focus symbol */}
+              <div className="relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[var(--amber-400)] to-[var(--amber-600)] rounded-full flex items-center justify-center shadow-xl shadow-[var(--amber-500)]/40">
+                <svg viewBox="0 0 40 40" className="w-10 h-10 md:w-12 md:h-12" fill="none">
+                  {/* Outer ring */}
+                  <circle cx="20" cy="20" r="16" stroke="var(--bg-deep)" strokeWidth="2" opacity="0.3" />
+                  {/* Inner focus point */}
+                  <circle cx="20" cy="20" r="6" fill="var(--bg-deep)" />
+                  {/* Crosshairs */}
+                  <line x1="20" y1="8" x2="20" y2="14" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="20" y1="26" x2="20" y2="32" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="8" y1="20" x2="14" y2="20" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="26" y1="20" x2="32" y2="20" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
+                </svg>
               </div>
             </div>
             <span className="mt-3 text-xs uppercase tracking-widest text-[var(--amber-400)]">
-              The Gravity
+              The Convergence
             </span>
           </div>
         </div>

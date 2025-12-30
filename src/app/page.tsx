@@ -7,6 +7,7 @@ import { ValuePyramid } from "@/components/marketing/value-pyramid";
 import { BridgeVisual } from "@/components/marketing/bridge-visual";
 import { DataSovereignty } from "@/components/marketing/data-sovereignty";
 import { GravityWell } from "@/components/marketing/gravity-well";
+import { CustomerLogos } from "@/components/marketing/customer-logos";
 import { ButtonLink } from "@/components/ui/button";
 import {
   ChevronRight,
@@ -137,6 +138,11 @@ export default function HomePage() {
           </div>
         </Section>
 
+        {/* Customer Logos Section */}
+        <Section className="py-12">
+          <CustomerLogos />
+        </Section>
+
         {/* CTA Section */}
         <Section>
           <div className="relative bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-card)] border border-[var(--border-warm)] rounded-3xl p-12 md:p-20 text-center overflow-hidden">
@@ -146,9 +152,24 @@ export default function HomePage() {
             <h2 className="font-display text-3xl md:text-5xl mb-4 relative z-10">
               Ready to See Everything?
             </h2>
-            <p className="font-display font-light text-lg text-[var(--text-secondary)] mb-8 relative z-10">
+            <p className="font-display font-light text-lg text-[var(--text-secondary)] mb-4 relative z-10">
               Discover a better way to understand your infrastructure, from servers to strategy.
             </p>
+            {/* Trust signals */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8 relative z-10">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-deep)]/60 rounded-full text-sm text-[var(--text-secondary)] border border-[var(--border-subtle)]">
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                No sales calls required
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-deep)]/60 rounded-full text-sm text-[var(--text-secondary)] border border-[var(--border-subtle)]">
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                No payment required
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-deep)]/60 rounded-full text-sm text-[var(--text-secondary)] border border-[var(--border-subtle)]">
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                50 servers free forever
+              </span>
+            </div>
             <div className="flex flex-wrap justify-center gap-4 relative z-10">
               <ButtonLink href="/register" variant="primary" size="lg">
                 Start Free Today

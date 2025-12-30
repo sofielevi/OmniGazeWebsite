@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <linearGradient id="amber-gradient" x1="0" y1="250" x2="500" y2="250" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8a030"/>
+      <stop offset="1" stop-color="#d4841c"/>
+    </linearGradient>
+  </defs>
+  <rect fill="url(#amber-gradient)" y="0" width="500" height="500" rx="60"/>
+  <g>
+    <path fill="#1A0E1F" d="m265.51,201.17c-12.87,0-25.17,2.42-36.48,6.83v34.24h-44.51c-12.19,16.62-19.38,37.11-19.38,59.29,0,55.43,44.94,100.38,100.37,100.38s100.38-44.94,100.38-100.38-44.94-100.37-100.38-100.37Zm0,153.24c-29.2,0-52.87-23.67-52.87-52.87s23.67-52.87,52.87-52.87,52.87,23.67,52.87,52.87-23.67,52.87-52.87,52.87Z"/>
+    <rect fill="#1A0E1F" x="222.57" y="133.75" width="37.73" height="37.73"/>
+    <rect fill="#1A0E1F" x="134.11" y="98.08" width="57.74" height="57.74"/>
+    <rect fill="#1A0E1F" x="168.63" y="181.84" width="44.01" height="44.01"/>
+  </g>
+</svg>

@@ -15,11 +15,13 @@ export function Header() {
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 no-underline">
-            <div className="w-9 h-9 bg-gradient-to-br from-[var(--amber-400)] to-[var(--amber-600)] rounded-lg flex items-center justify-center font-semibold text-base text-[var(--bg-deep)] glow-amber">
-              OG
-            </div>
-            <span className="font-display text-xl font-semibold text-[var(--text-primary)]">
+          <Link href="/" className="flex items-center gap-3 no-underline group">
+            <img
+              src="/images/omnigaze-logo.svg"
+              alt="OmniGaze"
+              className="w-9 h-9 rounded-lg"
+            />
+            <span className="font-display text-xl font-semibold text-[var(--text-primary)] group-hover:text-[var(--amber-400)] transition-colors duration-200">
               {siteConfig.name}
             </span>
           </Link>

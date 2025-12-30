@@ -12,96 +12,119 @@ Sofie reviewed the website and provided actionable feedback. Overall impression 
 ## Feedback Items
 
 ### 1. OmniGaze Logo - HIGH PRIORITY
-**Issue:** Logo missing from website
-**Action:** Add OmniGaze logo prominently on the site
+- [x] Add OmniGaze logo prominently on the site (text-only "OmniGaze" in header)
+- [x] Remove OG logo from gravity visualization (replaced with abstract convergence symbol)
 
 ---
 
 ### 2. Customer Logos / Trust Badges - HIGH PRIORITY
-**Issue:** Missing social proof from existing customers
-**Suggestions:**
-- Add "Trusted by enterprises" section
-- Display customer logos (Stark, GN, etc.)
-- **No testimonials needed** - just logos are sufficient
-- Customers have given permission to use their logos
+- [x] Collect customer logos
+- [x] Add "Trusted by enterprises" section to website
+- [x] Create logo carousel/grid component
 
-**Action:** Create logo carousel/grid with customer logos
-
----
-
-### 3. Color Palette Suggestion - MEDIUM PRIORITY
-**Issue:** If deviating from brand book anyway, consider these colors
-**Suggested hex codes:**
-| Color | Hex |
-|-------|-----|
-| Dark Purple | `#1A0E1F` |
-| Deep Purple | `#2B1533` |
-| Muted Purple | `#241825` |
-| Pink | `#C06A9A` |
-| Rose | `#B0588A` |
-| Dark Rose | `#9F4F7A` |
-
-**Action:** Evaluate incorporating these colors into design
+**Collected Logos:**
+| Customer | File | Format | Size |
+|----------|------|--------|------|
+| Danske Fragtmænd | `assets/logos/customers/danske-fragtmaend.svg` | SVG | Vector |
+| Wrist Ship Supply | `assets/logos/customers/wrist-ship-supply.jpg` | JPEG | 200x200 |
+| GN Store Nord | `assets/logos/customers/gn-store-nord.png` | PNG | 1530x709 |
+| Billund Airport | `assets/logos/customers/billund-airport.png` | PNG | 900x500 |
 
 ---
 
-### 4. 3D Visualization Quality - MEDIUM PRIORITY
-**Issue:** "det der 3d visualisering er lidt for blurry"
-**Note from Morten:** Gets cleaner after load time
-**Action:**
-- Consider adding loading state/skeleton
-- Optimize image/asset loading
-- Pre-load higher resolution version
+### 3. Color Palette - MEDIUM PRIORITY
+- [x] Update color palette based on recommendation below (purple backgrounds with amber accents)
+
+**Current Palette (CLAUDE.md):**
+| Role | Color | Hex |
+|------|-------|-----|
+| Background Deep | Dark Blue-Gray | `#0d0f12` |
+| Background Card | Blue-Gray | `#14171c` |
+| Background Elevated | Light Blue-Gray | `#1a1e25` |
+| Primary Accent | Amber | `#e8a030` |
+| Secondary Accent | Dark Amber | `#d4841c` |
+
+**Sofie's Suggested Palette:**
+| Role | Color | Hex |
+|------|-------|-----|
+| Dark Purple | Background | `#1A0E1F` |
+| Deep Purple | Cards | `#2B1533` |
+| Muted Purple | Elevated | `#241825` |
+| Pink | Accent | `#C06A9A` |
+| Rose | Accent Alt | `#B0588A` |
+| Dark Rose | Accent Dark | `#9F4F7A` |
+
+**RECOMMENDATION: Hybrid Approach**
+
+| Role | Current | Recommended | Hex | Rationale |
+|------|---------|-------------|-----|-----------|
+| Background Deep | `#0d0f12` | Sofie's Dark Purple | `#1A0E1F` | Warmer, more distinctive |
+| Background Card | `#14171c` | Sofie's Muted Purple | `#241825` | Cohesive purple family |
+| Background Elevated | `#1a1e25` | Sofie's Deep Purple | `#2B1533` | Subtle elevation contrast |
+| Primary Accent | `#e8a030` | **Keep Amber** | `#e8a030` | Brand recognition, "Warm Technical" |
+| Secondary Accent | `#d4841c` | Sofie's Rose | `#B0588A` | Adds warmth, complements purple |
+| Hover/Highlight | - | Sofie's Pink | `#C06A9A` | Interactive states |
+| Text Primary | `#f0ede8` | Keep | `#f0ede8` | Good contrast on purple |
+| Text Secondary | `#9a958d` | Keep | `#9a958d` | Neutral, readable |
+
+**Why this works:**
+1. Purple backgrounds are warmer and more unique than blue-gray
+2. Amber primary accent maintains brand identity and "Warm Technical" aesthetic
+3. Rose/Pink secondary adds visual interest without overwhelming
+4. Purple backgrounds complement existing pyramid visualization colors
+5. Maintains sufficient contrast for accessibility
 
 ---
 
-### 5. Text Size on Desktop - LOW PRIORITY
-**Issue:** "Generelt kan tekst være større på desktop" (just a bit larger)
-**Action:** Increase base font size slightly for desktop breakpoints
+### 4. Text Size on Desktop - LOW PRIORITY
+- [x] Increase base font size slightly for desktop breakpoints (15px tablet, 16px desktop)
 
 ---
 
-### 6. "Stays Here" Copy - HIGH PRIORITY
-**Issue:** "hvad betyder stays here? tror dem der ser det ikke forstår"
-**Context:** Refers to security messaging about data not leaving
-**Morten's note:** May need different wording - refers to "the recipe for hacking your company doesn't end up elsewhere"
-**Action:** Revise security/privacy messaging to be clearer for non-technical readers
+### 5. "Stays Here" Copy - HIGH PRIORITY
+- [x] Revise security/privacy messaging to be clearer
+- [x] Replace "stays here" with more understandable copy ("100% On-Premise. Zero Cloud Upload.")
 
 ---
 
-### 7. "Try It Yourself" CTA Enhancement - MEDIUM PRIORITY
-**Suggestion:** Add "no sales calls or payment required" to the Try It Yourself section
-**Action:** Add trust-building subtext under CTA button
+### 6. "Try It Yourself" CTA - MEDIUM PRIORITY
+- [x] Add "No sales calls required" subtext
+- [x] Add "No payment required" subtext
+- [x] Add "50 servers free forever" subtext
 
 ---
 
-### 8. Pricing Justification - NEEDS DISCUSSION
-**Issue:** "er prissætning på en måde som vi kan forsvare overfor stark og gn? At de har features i enterprise edition?"
-**Concern:** Can we justify to Stark and GN that they have Enterprise features while others don't?
-**Action:** Review pricing tier structure and feature allocation
+### 7. Pricing Justification - NEEDS DISCUSSION
+- [ ] Review pricing tier structure with Sofie
+- [ ] Ensure Stark and GN features are justified
 
 ---
 
-### 9. Transcript Input - MEDIUM PRIORITY
-**Issue:** "Synes også vi manglede en del input fra transcript, kan vi køre transcript igennem?"
-**Context:** Missing content/copy from some source transcript
-**Action:** Review transcript and incorporate relevant content
+### 8. Transcript Input - MEDIUM PRIORITY
+- [ ] Review source transcript
+- [ ] Incorporate missing content/copy
 
 ---
 
-## Action Summary
+## Quick Reference Checklist
 
-| Priority | Item | Owner |
-|----------|------|-------|
-| HIGH | Add OmniGaze logo | Dev |
-| HIGH | Add customer logos section | Dev |
-| HIGH | Clarify "stays here" messaging | Copy |
-| MEDIUM | Review color palette | Design |
-| MEDIUM | Improve 3D visualization loading | Dev |
-| MEDIUM | Add "no sales call" to CTA | Dev |
-| MEDIUM | Process transcript for content | Marketing |
-| LOW | Increase desktop text size | Dev |
-| DISCUSS | Pricing tier justification | Morten/Sofie |
+### HIGH PRIORITY
+- [x] Add OmniGaze logo to site (stylized eye icon in header)
+- [x] Remove OG logo from gravity visualization (replaced with abstract convergence symbol)
+- [x] Collect customer logos
+- [x] Add customer logo section to site ("Trusted by enterprises")
+- [x] Fix "stays here" messaging (now: "100% On-Premise. Zero Cloud Upload.")
+
+### MEDIUM PRIORITY
+- [x] Update color palette (hybrid recommendation - purple backgrounds with amber accents)
+- [x] Add "no sales call/payment" to CTA (added trust signals section)
+- [ ] Process transcript content
+
+### LOW PRIORITY
+- [x] Increase desktop text size (15px tablet, 16px desktop)
+
+### NEEDS DISCUSSION
+- [ ] Pricing tier justification
 
 ---
 
