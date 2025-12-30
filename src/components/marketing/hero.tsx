@@ -101,8 +101,7 @@ export function Hero() {
 
         {/* Subtitle */}
         <p className="font-display font-light text-lg md:text-xl text-[var(--text-secondary)] max-w-xl mb-10 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          Auto-discover your servers, map dependencies, and bridge the gap between
-          IT operations and enterprise architecture—all in one platform your team will actually enjoy using.
+          Auto-discover your infrastructure. See how it connects. Understand what it means for your business.
         </p>
 
         {/* CTA */}

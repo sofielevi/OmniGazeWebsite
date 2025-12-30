@@ -23,6 +23,10 @@ const customers = [
     name: "Wrist Ship Supply",
     logo: "/images/customers/wrist-ship-supply.jpg",
   },
+  {
+    name: "Stark",
+    logo: "/images/customers/stark.png",
+  },
 ];
 
 export function CustomerLogos({ className }: CustomerLogosProps) {
