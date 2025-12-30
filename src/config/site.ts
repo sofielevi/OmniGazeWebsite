@@ -36,6 +36,7 @@ export const siteConfig = {
 
   nav: [
     { label: "Features", href: "/features" },
+    { label: "Why", href: "/why" },
     { label: "Pricing", href: "/pricing" },
     { label: "My Account", href: "/dashboard" },
   ],
