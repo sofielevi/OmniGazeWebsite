@@ -6,25 +6,26 @@ import { ButtonLink } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Why We Built This",
+  title: "Why We Built This | OmniGaze",
   description:
-    "Most complex systems don't fail because people lack intelligence or effort. They fail because the system becomes hard to see. Here's why we built OmniGaze.",
+    "Two co-founders, one vision. Morten spent years building enterprise software. Sofie spent years selling it. We both kept seeing the same gap: nobody had a clear picture of what was actually running.",
   keywords: [
-    "enterprise architecture philosophy",
+    "enterprise architecture",
     "IT visibility",
-    "infrastructure complexity",
-    "digital transformation",
+    "infrastructure discovery",
+    "OmniGaze founders",
     "system observability",
     "enterprise decision making",
   ],
   openGraph: {
     title: "Why We Built This | OmniGaze",
     description:
-      "Most complex systems don't fail because people lack intelligence or effort. They fail because the system becomes hard to see. Here's why we built OmniGaze.",
+      "Two co-founders, one vision. We both kept seeing the same gap: nobody had a clear picture of what was actually running.",
     url: "https://omnigaze.com/why",
+    type: "article",
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "Why We Built OmniGaze",
@@ -35,8 +36,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Why We Built This | OmniGaze",
     description:
-      "Most complex systems don't fail because people lack intelligence or effort. They fail because the system becomes hard to see.",
-    images: ["/og-image.png"],
+      "Two co-founders, one vision. We both kept seeing the same gap: nobody had a clear picture of what was actually running.",
+    images: ["/images/og-image.png"],
   },
   alternates: {
     canonical: "https://omnigaze.com/why",
@@ -45,20 +46,16 @@ export const metadata: Metadata = {
 
 function PullQuote({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote className="my-12 py-8 border-l-2 border-[var(--amber-400)] pl-8 md:pl-12">
-      <p className="font-display text-2xl md:text-3xl text-[var(--text-primary)] leading-relaxed italic">
-        {children}
+    <blockquote className="my-16 py-6 border-l-2 border-[var(--amber-400)] pl-8 md:pl-10">
+      <p className="font-display text-xl md:text-2xl text-[var(--text-primary)] leading-relaxed">
+        &ldquo;{children}&rdquo;
       </p>
     </blockquote>
   );
 }
 
-function Divider() {
-  return (
-    <div className="my-16 flex justify-center">
-      <div className="w-16 h-px bg-gradient-to-r from-transparent via-[var(--border-warm)] to-transparent" />
-    </div>
-  );
+function SectionDivider() {
+  return <div className="my-20 md:my-24" />;
 }
 
 export default function WhyPage() {
@@ -68,7 +65,7 @@ export default function WhyPage() {
 
       <main className="pt-32 pb-24">
         {/* Hero Section */}
-        <section className="container mx-auto px-6 max-w-3xl mb-20">
+        <section className="container mx-auto px-6 max-w-3xl mb-24">
           <div className="text-center mb-12 animate-fade-up">
             <span className="text-xs uppercase tracking-widest text-[var(--amber-400)] mb-4 block">
               The thinking behind OmniGaze
@@ -79,7 +76,7 @@ export default function WhyPage() {
           </div>
 
           {/* Hero Image */}
-          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-8">
+          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden">
             <Image
               src="/images/why-hero.png"
               alt="Complexity emerging into clarity"
@@ -92,267 +89,223 @@ export default function WhyPage() {
         </section>
 
         {/* Content */}
-        <article className="container mx-auto px-6 max-w-[720px]">
-          {/* Section 1: The Problem */}
-          <section className="mb-8">
-            <p className="text-lg md:text-xl text-[var(--text-primary)] leading-relaxed mb-6">
+        <article className="container mx-auto px-6 max-w-[680px] text-lg leading-[1.7]">
+          {/* Section 1: The Problem We Kept Seeing */}
+          <section>
+            <p className="text-xl md:text-2xl text-[var(--text-primary)] leading-relaxed mb-6">
               Most complex systems don&apos;t fail because people lack intelligence or effort.
             </p>
-            <p className="text-lg md:text-xl text-[var(--text-primary)] leading-relaxed mb-8">
+            <p className="text-xl md:text-2xl text-[var(--text-primary)] leading-relaxed mb-10">
               They fail because the system becomes hard to see.
             </p>
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
+
+            <div className="space-y-6 text-[var(--text-secondary)]">
               <p>
-                Inside large organizations, complexity accumulates quietly. Tools multiply.
-                Processes thicken. Dependencies spread. Each addition makes sense in isolation.
-                Together, they create something no single person can hold in their head.
+                Morten spent years building software for enterprises — defense, healthcare,
+                transportation. Complex environments where things have to work.
               </p>
               <p>
-                People compensate with activity. More meetings. More documentation. More dashboards.
-                More tools to manage the other tools.
+                What he kept running into wasn&apos;t a lack of skill. It was a lack of visibility.
+                Teams making decisions about systems they couldn&apos;t fully observe. Dependencies
+                that only existed in someone&apos;s head. Architecture diagrams that stopped being
+                accurate the week after they were drawn.
               </p>
               <p>
-                Clarity continues to erode.
+                Sofie spent years selling enterprise software across Europe. Hundreds of companies.
+                Different industries, different sizes, different problems they thought they had.
               </p>
               <p>
-                This isn&apos;t a failure of discipline. It&apos;s a structural problem. The system
-                outgrows the ability to observe it. And once that happens, every decision carries
-                hidden risk.
+                But underneath, the same thing kept showing up: nobody had a clear picture of
+                what was actually running.
+              </p>
+              <p>
+                The infrastructure knowledge lived in the heads of two people who&apos;d been there
+                since 2007. The architecture diagrams were from a project that finished eighteen
+                months ago. The dependency maps existed, sort of, in a spreadsheet that nobody
+                fully trusted.
+              </p>
+              <p>
+                We came at this from opposite directions — one building systems, one selling into
+                them. We saw the same gap.
               </p>
             </div>
 
             <PullQuote>
-              You can&apos;t coordinate what you can&apos;t see. You can&apos;t govern what you
-              can&apos;t map. You can&apos;t control what you don&apos;t understand.
+              Nobody had a clear picture of what was actually running.
             </PullQuote>
           </section>
 
-          <Divider />
+          <SectionDivider />
 
-          {/* Section 2: Why Existing Tools Make It Worse */}
-          <section className="mb-8">
-            <h2 className="font-display text-2xl md:text-3xl mb-8 text-[var(--text-primary)]">
-              Why Existing Tools Make It Worse
+          {/* Section 2: How We Met */}
+          <section>
+            <h2 className="font-display text-2xl md:text-3xl mb-10 text-[var(--text-primary)]">
+              How We Met
             </h2>
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
-              <p>
-                The standard response to complexity is more tooling.
-              </p>
-              <p>
-                Infrastructure monitoring. Application performance management. Configuration databases.
-                Architecture repositories. Security scanners. Compliance platforms.
-              </p>
-              <p>
-                Each one solves a real problem. Each one creates another silo.
-              </p>
-              <p>
-                The infrastructure team has their view. The architects have theirs. Security has a
-                different lens entirely. The CIO sees dashboards that aggregate fragments of
-                each—but the fragments don&apos;t connect.
-              </p>
-              <p>
-                So when someone asks a simple question—&ldquo;What depends on this system?&rdquo;
-                or &ldquo;What&apos;s the blast radius if this fails?&rdquo; or &ldquo;Are we
-                compliant across these environments?&rdquo;—the answer requires archaeology.
-              </p>
-              <p>
-                Hours spent reconciling spreadsheets. Days chasing down owners. Weeks rebuilding
-                context that should already exist.
-              </p>
-            </div>
 
-            <PullQuote>
-              The tools that were supposed to create clarity have created fragmentation instead.
-            </PullQuote>
-
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
+            <div className="space-y-6 text-[var(--text-secondary)]">
               <p>
-                This is not a technology problem. It&apos;s a design problem. The tools weren&apos;t
-                built to connect. They were built to serve their own domain.
+                Morten was one of Sofie&apos;s customers. That&apos;s the short version.
+              </p>
+              <p>
+                The longer version: he&apos;d been building OmniGaze on the side for years.
+                Started in 2016. What began as a way to solve his own frustration — needing
+                to understand infrastructure that was poorly documented — kept growing into
+                something bigger.
+              </p>
+              <p>
+                When he showed Sofie a demo, she recognized it immediately.
+              </p>
+              <p>
+                Every company she&apos;d tried to sell to had the same underlying problem.
+                They wanted to modernize, adopt new technology, improve security, demonstrate
+                compliance. And they couldn&apos;t, because they didn&apos;t know what they
+                were working with. They didn&apos;t have a current state.
+              </p>
+              <p>
+                Morten had built a tool that created that current state automatically.
+              </p>
+              <p>
+                A few years later, he quit his job and said: if we&apos;re going to do this
+                for real, it&apos;s now. So Sofie quit hers too. That was 2023.
               </p>
             </div>
           </section>
 
-          <Divider />
-
-          {/* Section 3: The Principle */}
-          <section className="mb-8">
-            <h2 className="font-display text-2xl md:text-3xl mb-8 text-[var(--text-primary)]">
-              The Principle
-            </h2>
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
-              <p>
-                We started with a simple belief:
-              </p>
-            </div>
-
-            <PullQuote>
-              You cannot control what you cannot see.
-            </PullQuote>
-
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
-              <p>
-                Before you can optimize, you need to understand what exists. Before you can govern,
-                you need to know what&apos;s running. Before you can transform, you need a map of
-                where you are.
-              </p>
-              <p className="text-[var(--text-primary)] font-medium">
-                Visibility is not a feature. It&apos;s a prerequisite.
-              </p>
-              <p>
-                This sounds obvious. But most organizations skip it. They jump to transformation
-                initiatives without a shared view of the current state. They adopt AI agents without
-                knowing what systems those agents will touch. They promise compliance without being
-                able to demonstrate it.
-              </p>
-              <p>
-                The gap between &ldquo;we think we know&rdquo; and &ldquo;we can actually show&rdquo;
-                is where risk accumulates.
-              </p>
-              <p>
-                That gap is what we set out to close.
-              </p>
-            </div>
-          </section>
-
-          {/* Visual Break - Clarity Image */}
-          <div className="my-16 -mx-6 md:mx-0">
-            <div className="relative aspect-[4/1] rounded-xl overflow-hidden">
+          {/* Visual Break - Network Diagram */}
+          <div className="my-20 -mx-6 md:mx-0">
+            <div className="relative aspect-[21/9] rounded-xl overflow-hidden">
               <Image
-                src="/images/why-clarity.png"
-                alt="Fragmentation transforming into unity"
+                src="/images/hero-network.png"
+                alt="Infrastructure to strategy visualization"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center opacity-70"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-deep)]/40 via-transparent to-[var(--bg-deep)]/40" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-deep)]/60 via-transparent to-[var(--bg-deep)]/60" />
             </div>
           </div>
 
-          {/* Section 4: What Usable Clarity Means */}
-          <section className="mb-8">
-            <h2 className="font-display text-2xl md:text-3xl mb-8 text-[var(--text-primary)]">
-              What Usable Clarity Means
+          {/* Section 3: What We Actually Believe */}
+          <section>
+            <h2 className="font-display text-2xl md:text-3xl mb-10 text-[var(--text-primary)]">
+              What We Actually Believe
             </h2>
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
+
+            <div className="space-y-6 text-[var(--text-secondary)]">
               <p>
-                Clarity alone isn&apos;t enough. It has to be usable.
+                We started with one idea we kept coming back to:
+              </p>
+              <p className="text-[var(--text-primary)] text-xl font-display">
+                You cannot control what you cannot see.
               </p>
               <p>
-                Usable means: accessible to the people who need it, when they need it, without
-                requiring a PhD in the tooling.
+                Before you can govern anything, you need to know what&apos;s actually there.
+                Before you can transform, you need a map of where you are now. Before you can
+                promise compliance, you need to be able to show it.
               </p>
               <p>
-                Usable means: the infrastructure team and the enterprise architects can look at the
-                same system and have a conversation grounded in shared reality.
+                This sounds so obvious it&apos;s almost embarrassing to say out loud. But most
+                organizations skip it.
               </p>
               <p>
-                Usable means: you can answer the board&apos;s question about risk exposure without a
-                two-week data-gathering exercise.
+                They start transformation programs without a shared view of the current state.
+                They&apos;re adopting AI agents right now without knowing what systems those
+                agents will interact with. They tell the board risk is managed, and then spend
+                three weeks scrambling when someone asks for proof.
               </p>
               <p>
-                Usable means: it works under real constraints—limited time, distributed teams,
-                incomplete information, shifting priorities.
+                The gap between &ldquo;we think we know&rdquo; and &ldquo;we can actually
+                demonstrate&rdquo; — that&apos;s where the real risk sits.
               </p>
               <p>
-                We&apos;ve seen too many platforms that promise visibility but deliver complexity.
-                Dashboards that require dedicated analysts to interpret. Data models that only the
-                vendor understands. Implementations that take eighteen months before anyone sees value.
-              </p>
-              <p>
-                That&apos;s not clarity. That&apos;s a new form of opacity.
+                In most places we&apos;ve seen, that gap is wider than anyone wants to admit.
               </p>
             </div>
 
             <PullQuote>
-              Usable clarity reduces cognitive load. It makes responsibility possible. It lets
-              people act with confidence instead of guessing.
+              The gap between &lsquo;we think we know&rsquo; and &lsquo;we can actually
+              demonstrate&rsquo; — that&apos;s where the real risk sits.
             </PullQuote>
           </section>
 
-          <Divider />
+          <SectionDivider />
 
-          {/* Section 5: How This Shaped OmniGaze */}
-          <section className="mb-8">
-            <h2 className="font-display text-2xl md:text-3xl mb-8 text-[var(--text-primary)]">
-              How This Shaped OmniGaze
+          {/* Section 4: What We Built */}
+          <section>
+            <h2 className="font-display text-2xl md:text-3xl mb-10 text-[var(--text-primary)]">
+              What We Built
             </h2>
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
+
+            <div className="space-y-6 text-[var(--text-secondary)]">
               <p>
-                OmniGaze exists because we kept running into the same wall.
+                OmniGaze auto-discovers infrastructure. Servers, services, dependencies.
+                No agents required on every machine.
               </p>
               <p>
-                Organizations wanted to modernize, adopt AI, improve security posture, demonstrate
-                compliance—and they couldn&apos;t, because they didn&apos;t have a clear view of
-                what they were working with.
-              </p>
-              <p>
-                The infrastructure knowledge lived in the heads of people who&apos;d been there for
-                twenty years. The architecture diagrams were eighteen months out of date. The
-                dependency maps were incomplete or wrong.
-              </p>
-              <p>
-                So we built something different.
-              </p>
-              <p>
-                A platform that auto-discovers infrastructure—servers, services, dependencies—without
-                requiring agents on every machine. That connects infrastructure reality to architecture
-                planning. That spans from 10,000+ assets up to strategic initiatives.
+                It connects what it finds to architecture planning. So you can go from 10,000
+                assets at the bottom up to strategic initiatives at the top.
               </p>
               <p className="text-[var(--text-primary)] font-medium">
                 One view. From servers to strategy.
               </p>
               <p>
-                We designed it for organizations that can&apos;t afford to upload their data to
-                external clouds. We made it deployable on-premise, air-gap ready, because the
-                enterprises that need this most are often the ones with the strictest security
-                requirements.
+                We made it deployable on-premise because the organizations that need this most
+                usually can&apos;t send their infrastructure data to someone else&apos;s cloud.
+                Air-gap ready. Your data stays yours.
               </p>
               <p>
-                And we made it usable. Not &ldquo;usable after six months of training.&rdquo;
-                Usable now. Setup in minutes. Value in hours.
+                Morten&apos;s been building this for eight years now. More than 600,000 lines
+                of code. It&apos;s not a side project anymore.
+              </p>
+              <p>
+                We made it fast. Setup in minutes. Useful in hours. Not &ldquo;you&apos;ll see
+                value in Q3 after the consultants finish.&rdquo;
               </p>
             </div>
 
             <PullQuote>
-              Clarity that takes a year to achieve isn&apos;t clarity. It&apos;s a roadmap to a
-              destination that&apos;s already moved.
+              One view. From servers to strategy.
             </PullQuote>
           </section>
 
-          <Divider />
+          <SectionDivider />
 
-          {/* Section 6: Closing */}
-          <section className="mb-16">
-            <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed">
+          {/* Section 5: Who This Is For */}
+          <section>
+            <h2 className="font-display text-2xl md:text-3xl mb-10 text-[var(--text-primary)]">
+              Who This Is For
+            </h2>
+
+            <div className="space-y-6 text-[var(--text-secondary)]">
               <p>
-                We didn&apos;t build OmniGaze because the market needed another tool.
+                If you&apos;re an enterprise architect being asked to govern systems you&apos;ve
+                never fully mapped — this is for you.
               </p>
               <p>
-                We built it because the people responsible for complex systems deserve to see what
-                they&apos;re responsible for.
+                If you&apos;re an infrastructure lead who knows something is fragile but
+                can&apos;t prove it to anyone with budget — this is for you.
               </p>
               <p>
-                Enterprise architects who are asked to govern systems they&apos;ve never fully mapped.
-                Infrastructure leads who know something is fragile but can&apos;t prove it. CIOs who
-                have to answer for risk they can&apos;t quantify.
+                If you&apos;re a CTO or CIO and you&apos;re tired of finding out about
+                dependencies the hard way, after something breaks — this is for you.
               </p>
-              <p>
-                These people aren&apos;t failing. They&apos;re operating without visibility.
+              <p className="text-[var(--text-primary)] font-medium text-xl mt-10">
+                You&apos;re not failing. You&apos;re working without visibility.
               </p>
-              <p className="text-[var(--text-primary)] text-lg font-medium">
-                That&apos;s what we&apos;re here to change.
+              <p className="text-[var(--text-primary)]">
+                That&apos;s fixable.
               </p>
             </div>
           </section>
 
           {/* Footer CTA */}
-          <section className="mt-20">
+          <section className="mt-24">
             <div className="relative bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-card)] border border-[var(--border-warm)] rounded-2xl p-10 md:p-14 text-center overflow-hidden">
               {/* Glow effect */}
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,var(--amber-glow),transparent)] pointer-events-none" />
 
               <h2 className="font-display text-2xl md:text-3xl mb-6 relative z-10">
-                Ready to see your systems clearly?
+                See what you&apos;re working with.
               </h2>
 
               <div className="flex flex-wrap justify-center gap-4 mb-6 relative z-10">
@@ -366,7 +319,7 @@ export default function WhyPage() {
               </div>
 
               <p className="text-sm text-[var(--text-muted)] relative z-10">
-                No sales calls required. No payment required. 50 servers free forever.
+                No sales calls. No payment required. 50 servers free.
               </p>
             </div>
           </section>

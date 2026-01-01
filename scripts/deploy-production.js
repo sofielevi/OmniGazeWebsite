@@ -59,7 +59,7 @@ async function deployProduction() {
   console.log('\n' + '='.repeat(60));
   log('  OmniGaze Website - PRODUCTION Deployment', 'bright');
   log('  Target: omnigaze.com', 'yellow');
-  log('  Mode: CLEAN SLATE (replacing old site)', 'red');
+  log('  Mode: INCREMENTAL (only changed files uploaded)', 'green');
   console.log('='.repeat(60));
 
   try {
@@ -103,11 +103,11 @@ async function deployProduction() {
     const totalFiles = countFiles(outDir);
     log(`Found ${totalFiles} files in build output`, 'green');
 
-    // Step 3: Deploy via FTP with clean slate (delete old files)
-    logStep('3/4', 'Deploying to FTP server (clean slate - deleting old files)...');
+    // Step 3: Deploy via FTP (incremental sync)
+    logStep('3/4', 'Deploying to FTP server (incremental sync)...');
     log(`Host: ${FTP_CONFIG.host}`, 'blue');
     log(`Remote path: /public_html/`, 'blue');
-    log('This will DELETE all existing files and upload new site...', 'yellow');
+    log('Comparing local files with server state...', 'dim');
 
     // Track stats
     let uploadCount = 0;
@@ -124,7 +124,7 @@ async function deployProduction() {
       'server-dir': '/public_html/',
       'state-name': STATE_FILE,
       'dry-run': false,
-      'dangerous-clean-slate': true, // DELETE all existing files first
+      'dangerous-clean-slate': false, // Incremental sync - only upload changes
       timeout: 600000, // 10 minute timeout for large files (like video)
       exclude: [
         '.git/**',
@@ -197,7 +197,7 @@ async function deployProduction() {
     log('  Deployment Summary', 'bright');
     console.log('='.repeat(60));
     log(`  Status: SUCCESS`, 'green');
-    log(`  Mode: Clean Slate`, 'red');
+    log(`  Mode: Incremental`, 'green');
     log(`  Files uploaded: ${uploadCount}`, 'blue');
     if (deleteCount > 0) {
       log(`  Files removed: ${deleteCount}`, 'yellow');
