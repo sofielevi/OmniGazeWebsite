@@ -494,6 +494,39 @@ export async function deleteAccount(): Promise<{ success: boolean }> {
 }
 
 // ============================================
+// Lead Capture
+// ============================================
+
+export interface LeadData {
+  email: string;
+  source: 'roi-calculator' | 'visibility-quiz' | 'templates' | 'other';
+  data?: Record<string, unknown>;
+}
+
+/**
+ * Submit a lead from marketing tools (ROI calculator, quiz, templates)
+ * Sends notification to sales@omnigaze.com
+ */
+export async function submitLead(lead: LeadData): Promise<{ success: boolean }> {
+  const endpoint = '/api/website/leads';
+  try {
+    return await apiFetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: lead.email,
+        source: lead.source,
+        data: lead.data,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  } catch (error) {
+    // Don't fail silently - log but don't block the user experience
+    console.error('Lead submission failed:', error);
+    return { success: false };
+  }
+}
+
+// ============================================
 // Health Check
 // ============================================
 

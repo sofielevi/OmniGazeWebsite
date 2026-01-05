@@ -1,0 +1,11 @@
+Application ID,Application Name,Description,Business Owner,IT Owner,Department,Business Criticality,Lifecycle Status,Technology Stack,Vendor,License Type,Annual Cost (DKK),Users,Data Classification,Last Review Date,Notes
+APP-001,Example CRM,Customer relationship management system,John Smith,Jane Doe,Sales,Critical,Run,SaaS / Cloud,Salesforce,Subscription,120000,50,Confidential,2024-01-15,Primary sales tool
+APP-002,HR System,Human resources and payroll,HR Director,IT Manager,HR,High,Run,On-Premise / .NET,Internal,N/A,0,200,Restricted,2024-02-01,Legacy system - consider replacement
+APP-003,Finance ERP,Enterprise resource planning,CFO,IT Lead,Finance,Critical,Run,Hybrid / SAP,SAP,Perpetual + Maintenance,450000,30,Highly Confidential,2024-01-20,Core financial system
+APP-004,Marketing Platform,Campaign management and analytics,Marketing VP,IT Manager,Marketing,Medium,Run,SaaS / Cloud,HubSpot,Subscription,85000,15,Internal,2024-03-01,
+APP-005,Legacy Inventory,Old inventory tracking system,Operations,IT Support,Operations,Low,Retire,On-Premise / VB6,Internal,N/A,0,5,Internal,2023-06-01,Scheduled for decommission Q2 2024
+,,,,,,,,,,,,,,,
+INSTRUCTIONS:,,,,,,,,,,,,,,,
+"Business Criticality: Critical, High, Medium, Low",,,,,,,,,,,,,,,
+"Lifecycle Status: Plan, Build, Run, Retire",,,,,,,,,,,,,,,
+"Data Classification: Public, Internal, Confidential, Restricted, Highly Confidential",,,,,,,,,,,,,,,

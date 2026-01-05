@@ -38,6 +38,7 @@ export const siteConfig = {
     { label: "Features", href: "/features" },
     { label: "Why", href: "/why" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Resources", href: "/resources/templates" },
     { label: "My Account", href: "/dashboard" },
   ],
 
@@ -45,6 +46,9 @@ export const siteConfig = {
     links: [
       { label: "Documentation", href: "/docs" },
       { label: "API Reference", href: "/docs/api/rest" },
+      { label: "ROI Calculator", href: "/tools/roi-calculator" },
+      { label: "Visibility Quiz", href: "/tools/visibility-quiz" },
+      { label: "Free Templates", href: "/resources/templates" },
       { label: "Team", href: "/team" },
       { label: "Support", href: "/support" },
       { label: "Privacy", href: "/privacy" },

@@ -1,0 +1,30 @@
+Capability ID,Level 1 Capability,Level 2 Capability,Level 3 Capability,Description,Supporting Applications,Maturity Score (1-5),Strategic Importance,Investment Priority,Gap Analysis,Owner,Notes
+CAP-1,Customer Management,,,"All capabilities related to managing customer relationships",,,,,,,
+CAP-1.1,Customer Management,Customer Acquisition,,"Capabilities for acquiring new customers",,,,,,,
+CAP-1.1.1,Customer Management,Customer Acquisition,Lead Generation,Generating and qualifying sales leads,"Marketing Platform, CRM",4,High,Maintain,None,Marketing VP,Well supported
+CAP-1.1.2,Customer Management,Customer Acquisition,Sales Process,Managing the sales pipeline and closing deals,"CRM, Sales Tools",3,High,Invest,Need better forecasting,Sales Director,Priority for Q2
+CAP-1.2,Customer Management,Customer Service,,"Capabilities for serving existing customers",,,,,,,
+CAP-1.2.1,Customer Management,Customer Service,Support Ticketing,Handling customer support requests,"Help Desk System",2,High,Invest,Legacy system - needs replacement,Support Manager,RFP in progress
+CAP-1.2.2,Customer Management,Customer Service,Customer Communication,Proactive customer communication,"Email Platform, CRM",4,Medium,Maintain,None,Customer Success,
+CAP-2,Financial Management,,,"All financial management capabilities",,,,,,,
+CAP-2.1,Financial Management,Accounting,,"Core accounting functions",,,,,,,
+CAP-2.1.1,Financial Management,Accounting,General Ledger,Managing the general ledger,"ERP System",5,Critical,Maintain,None,Finance Director,SAP based
+CAP-2.1.2,Financial Management,Accounting,Accounts Payable,Managing vendor payments,"ERP System",4,High,Maintain,None,AP Manager,
+CAP-2.1.3,Financial Management,Accounting,Accounts Receivable,Managing customer invoices and collections,"ERP System, CRM",4,High,Maintain,None,AR Manager,
+CAP-3,Human Resources,,,"People management capabilities",,,,,,,
+CAP-3.1,Human Resources,Talent Management,,"Recruiting and developing talent",,,,,,,
+CAP-3.1.1,Human Resources,Talent Management,Recruitment,Hiring new employees,"HR System, LinkedIn",3,High,Invest,Manual processes,HR Director,ATS evaluation ongoing
+CAP-3.1.2,Human Resources,Talent Management,Performance Management,Managing employee performance,"HR System",2,Medium,Invest,Spreadsheet-based,HR Director,Need dedicated tool
+,,,,,,,,,,,,
+MATURITY SCORING:,,,,,,,,,,,,
+"1 - Initial: Ad-hoc, no formal process",,,,,,,,,,,,
+"2 - Developing: Basic processes, limited tool support",,,,,,,,,,,,
+"3 - Defined: Documented processes, adequate tools",,,,,,,,,,,,
+"4 - Managed: Measured and controlled processes",,,,,,,,,,,,
+"5 - Optimized: Continuous improvement, best-in-class",,,,,,,,,,,,
+,,,,,,,,,,,,
+INVESTMENT PRIORITY:,,,,,,,,,,,,
+"Invest - Needs significant investment",,,,,,,,,,,,
+"Maintain - Current investment level appropriate",,,,,,,,,,,,
+"Reduce - Consider reducing investment",,,,,,,,,,,,
+"Divest - Phase out or outsource",,,,,,,,,,,,

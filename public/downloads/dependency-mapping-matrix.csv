@@ -1,0 +1,21 @@
+Source System,Target System,Dependency Type,Data Flow Direction,Integration Method,Protocol/Port,Criticality,Data Types,Frequency,Owner,Documentation Link,Last Verified,Notes
+CRM System,ERP System,Data,Bidirectional,API,HTTPS/443,Critical,Customer Orders,Real-time,Integration Team,/docs/crm-erp,2024-02-15,Core business integration
+Web Application,Database Server,Infrastructure,Unidirectional,Direct,TCP/1433,Critical,All Application Data,Real-time,DBA Team,/docs/web-db,2024-03-01,Primary data store
+Web Application,Cache Server,Infrastructure,Bidirectional,Direct,TCP/6379,High,Session Data,Real-time,Dev Team,/docs/web-cache,2024-03-01,Redis cache
+HR System,Active Directory,Authentication,Unidirectional,LDAP,LDAP/389,Critical,User Credentials,On-demand,IT Security,/docs/hr-ad,2024-01-20,SSO integration
+Marketing Platform,CRM System,Data,Unidirectional,API,HTTPS/443,Medium,Lead Data,Hourly,Marketing IT,/docs/mkt-crm,2024-02-01,Lead sync
+Finance ERP,Bank API,External,Bidirectional,API,HTTPS/443,Critical,Payment Data,Daily,Finance IT,/docs/erp-bank,2024-03-01,Payment processing
+Monitoring System,All Servers,Monitoring,Unidirectional,Agent,TCP/8080,High,Metrics,Continuous,IT Operations,/docs/monitoring,2024-02-15,Prometheus/Grafana
+,,,,,,,,,,,
+DEPENDENCY TYPES:,,,,,,,,,,,
+"Data - Business data exchange",,,,,,,,,,,
+"Infrastructure - Technical dependency (DB, cache, storage)",,,,,,,,,,,
+"Authentication - Identity/access management",,,,,,,,,,,
+"Monitoring - Observability and alerting",,,,,,,,,,,
+"External - Third-party service",,,,,,,,,,,
+,,,,,,,,,,,
+CRITICALITY:,,,,,,,,,,,
+"Critical - System fails without this dependency",,,,,,,,,,,
+"High - Significant degradation without dependency",,,,,,,,,,,
+"Medium - Some features unavailable",,,,,,,,,,,
+"Low - Minor impact",,,,,,,,,,,
