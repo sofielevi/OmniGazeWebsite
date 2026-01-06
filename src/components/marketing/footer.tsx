@@ -1,5 +1,6 @@
 import Link from "@/components/ui/link";
 import { siteConfig } from "@/config/site";
+import { Linkedin } from "lucide-react";
 
 export function Footer() {
   return (
@@ -17,6 +18,19 @@ export function Footer() {
                 {link.label}
               </Link>
             ))}
+          </div>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.linkedin.com/company/omnigaze/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--text-muted)] hover:text-[var(--amber-400)] transition-colors duration-200"
+              aria-label="Follow OmniGaze on LinkedIn"
+            >
+              <Linkedin size={20} />
+            </a>
           </div>
 
           {/* Copyright */}

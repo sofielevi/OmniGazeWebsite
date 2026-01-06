@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { getCurrentUser, UserInfo } from "@/lib/api-client";
 import { canAccessTier, getTierBadgeText, Tier } from "@/lib/docs-access";
 import { DocsSearch } from "@/components/docs";
+import { ShareButtons } from "@/components/ui/share-buttons";
 
 interface NavSection {
   title: string;
@@ -256,6 +257,37 @@ export default function DocsLayout({
               ))}
             </nav>
           )}
+
+          {/* BreadcrumbList Schema for SEO */}
+          {breadcrumbs.length > 1 && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "BreadcrumbList",
+                  itemListElement: [
+                    { "@type": "ListItem", position: 1, name: "Home", item: "https://omnigaze.com" },
+                    ...breadcrumbs.map((crumb, i) => ({
+                      "@type": "ListItem",
+                      position: i + 2,
+                      name: crumb.label,
+                      item: `https://omnigaze.com${crumb.href}`,
+                    })),
+                  ],
+                }),
+              }}
+            />
+          )}
+
+          {/* Share Buttons */}
+          <div className="flex justify-end mb-6">
+            <ShareButtons
+              url={`https://omnigaze.com${pathname}`}
+              title={`OmniGaze Docs - ${breadcrumbs[breadcrumbs.length - 1]?.label || "Documentation"}`}
+              description="OmniGaze documentation - infrastructure discovery, application mapping, and enterprise architecture."
+            />
+          </div>
 
           {children}
         </div>

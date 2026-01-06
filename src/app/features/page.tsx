@@ -3,6 +3,7 @@ import { Footer } from "@/components/marketing/footer";
 import { Section, SectionHeader } from "@/components/marketing/section";
 import { ValuePyramid } from "@/components/marketing/value-pyramid";
 import { ButtonLink } from "@/components/ui/button";
+import { ShareButtons } from "@/components/ui/share-buttons";
 import { pyramidLayers } from "@/config/site";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -56,7 +57,7 @@ export default function FeaturesPage() {
           />
 
           {/* Anchor Navigation */}
-          <nav className="flex flex-wrap justify-center gap-3 mb-12" aria-label="Feature sections">
+          <nav className="flex flex-wrap justify-center gap-3 mb-8" aria-label="Feature sections">
             {pyramidLayers.slice().reverse().map((layer) => (
               <a
                 key={layer.id}
@@ -71,6 +72,15 @@ export default function FeaturesPage() {
               </a>
             ))}
           </nav>
+
+          {/* Share Buttons */}
+          <div className="flex justify-center mb-12">
+            <ShareButtons
+              url="https://omnigaze.com/features"
+              title="OmniGaze Features - From Infrastructure to Strategy"
+              description="Everything you need to understand, visualize, and optimize your IT landscape—in one unified platform."
+            />
+          </div>
 
           <div className="flex justify-center">
             <ValuePyramid />

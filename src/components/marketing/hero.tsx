@@ -42,8 +42,35 @@ export function Hero() {
     }
   }, []);
 
+  // VideoObject schema for SEO
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: "OmniGaze Infrastructure Discovery",
+    description: "See how OmniGaze auto-discovers your IT infrastructure and visualizes dependencies from servers to strategy.",
+    thumbnailUrl: "https://omnigaze.com/videos/hero-poster.jpg",
+    uploadDate: "2024-01-01",
+    contentUrl: "https://omnigaze.com/videos/hls/master.m3u8",
+    embedUrl: "https://omnigaze.com",
+    duration: "PT8S",
+    publisher: {
+      "@type": "Organization",
+      name: "OmniGaze",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://omnigaze.com/logo.svg",
+      },
+    },
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20">
+      {/* VideoObject Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
+
       {/* Background Video with HLS Adaptive Streaming */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <video

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { ButtonLink } from "@/components/ui/button";
+import { ShareButtons } from "@/components/ui/share-buttons";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -85,6 +86,15 @@ export default function WhyPage() {
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-deep)] via-transparent to-transparent opacity-60" />
+          </div>
+
+          {/* Share Buttons */}
+          <div className="flex justify-center mt-6">
+            <ShareButtons
+              url="https://omnigaze.com/why"
+              title="Why We Built OmniGaze"
+              description="Two co-founders, one vision. We both kept seeing the same gap: nobody had a clear picture of what was actually running."
+            />
           </div>
         </section>
 
