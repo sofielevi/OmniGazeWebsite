@@ -1,5 +1,11 @@
 # OmniGaze Website - Apache Configuration
 
+# MIME types
+<IfModule mod_mime.c>
+    AddType application/xml .xml
+    AddType text/xml .xml
+</IfModule>
+
 # Custom 404 error page
 ErrorDocument 404 /404.html
 
