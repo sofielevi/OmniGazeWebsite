@@ -10,8 +10,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "deploy:staging": "node scripts/deploy-staging.js",
-    "deploy:production": "node scripts/deploy-production.js",
-    "upload:installer": "node scripts/upload-installer.js"
+    "deploy:production": "node scripts/deploy-production.js"
   },
   "dependencies": {
     "@next/third-parties": "^16.1.1",

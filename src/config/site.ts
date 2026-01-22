@@ -11,8 +11,8 @@ export const siteConfig = {
     buildNumber: "1436",
     releaseDate: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
     fileSize: "97 MB",
-    // Primary download URL - staging site for now
-    url: "https://fingerscrossed.omnigaze.com/install/OmniGazeSetup.exe",
+    // Primary download URL - production site
+    url: "https://omnigaze.com/install/OmniGazeSetup.exe",
     // Fallback to Portal API if available
     fallbackUrl: "https://portal.omnigaze.com/api/download/installer",
     // System requirements
