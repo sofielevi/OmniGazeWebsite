@@ -263,17 +263,6 @@ function CheckoutContent() {
                 Complete Your Order
               </h2>
 
-              {/* 14-day trial notice */}
-              <div className="bg-[var(--amber-400)]/10 border border-[var(--amber-400)]/30 rounded-xl p-4 mb-6">
-                <p className="text-sm text-[var(--amber-400)] font-medium mb-1">
-                  14-Day Free Trial Included
-                </p>
-                <p className="text-sm text-[var(--text-secondary)]">
-                  You won&apos;t be charged today. Your trial starts immediately and you
-                  can cancel anytime before it ends.
-                </p>
-              </div>
-
               {error && (
                 <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6 flex items-center gap-3">
                   <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0" />
@@ -285,14 +274,14 @@ function CheckoutContent() {
               <div className="border-t border-[var(--border-subtle)] pt-4 mb-6">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[var(--text-secondary)]">
-                    Due today
+                    Total due today
                   </span>
                   <span className="font-display text-2xl font-medium text-[var(--text-primary)]">
-                    {formatPrice(0)}
+                    {formatPrice(price || 0)}
                   </span>
                 </div>
                 <p className="text-sm text-[var(--text-muted)]">
-                  Then {formatPrice(price || 0)}/{billingCycle === "monthly" ? "month" : "year"} after trial
+                  Billed {billingCycle === "monthly" ? "monthly" : "annually"}
                 </p>
               </div>
 
@@ -312,7 +301,7 @@ function CheckoutContent() {
                 ) : (
                   <>
                     <CreditCard className="w-5 h-5" />
-                    Start Free Trial
+                    Complete Purchase
                   </>
                 )}
               </Button>
@@ -331,7 +320,7 @@ function CheckoutContent() {
 
               {/* Terms */}
               <p className="text-xs text-[var(--text-muted)] text-center mt-6">
-                By starting your trial, you agree to our{" "}
+                By completing your purchase, you agree to our{" "}
                 <Link href="/terms" className="text-[var(--amber-400)] hover:underline">
                   Terms of Service
                 </Link>{" "}

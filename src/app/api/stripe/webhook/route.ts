@@ -207,19 +207,6 @@ export async function POST(request: NextRequest) {
         break;
       }
 
-      case "customer.subscription.trial_will_end": {
-        // Trial ending soon (3 days before)
-        const { id, customer, trial_end } = eventData;
-        console.log(`Trial ending for subscription: ${id}`);
-
-        await notifyOmniGazeAPI("trial.ending", {
-          subscriptionId: id,
-          customerId: customer,
-          trialEnd: trial_end,
-        });
-        break;
-      }
-
       default:
         console.log(`Unhandled webhook event: ${eventType}`);
     }

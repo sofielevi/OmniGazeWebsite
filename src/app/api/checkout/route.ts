@@ -66,7 +66,6 @@ export async function POST(request: NextRequest) {
         "line_items[0][quantity]": "1",
         "success_url": `${APP_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
         "cancel_url": `${APP_URL}/checkout/cancel`,
-        "subscription_data[trial_period_days]": "14",
         "subscription_data[description]": `OmniGaze ${tierDisplayName} Plan (${cycleDisplayName})`,
         "allow_promotion_codes": "true",
         "billing_address_collection": "required",

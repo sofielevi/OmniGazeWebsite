@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Pricing - Plans That Grow With You",
   description:
-    "OmniGaze pricing: Free Community tier with 50 servers, Starter at $99/mo, Professional at $349/mo, Business at $799/mo, and custom Enterprise. 14-day free trial on all paid plans.",
+    "OmniGaze pricing: Free Community tier with 50 servers, Starter at $99/mo, Professional at $349/mo, Business at $799/mo, and custom Enterprise. Start free, upgrade when ready.",
   keywords: [
     "OmniGaze pricing",
     "infrastructure discovery pricing",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OmniGaze Pricing - Start Free, Scale When Ready",
     description:
-      "Choose the right OmniGaze plan: Free tier with 50 servers, or upgrade to unlock more capacity and features. 14-day free trial, no credit card required.",
+      "Choose the right OmniGaze plan: Free tier with 50 servers, or upgrade to unlock more capacity and features. Instant access upon subscription.",
     url: "https://omnigaze.com/pricing",
     images: [
       {

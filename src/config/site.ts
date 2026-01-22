@@ -168,7 +168,7 @@ export const pricingTiers = [
       "Scheduled scans",
       "CSV export",
     ],
-    cta: "Start 14-Day Trial",
+    cta: "Subscribe Now",
     ctaVariant: "secondary" as const,
   },
   {
@@ -190,7 +190,7 @@ export const pricingTiers = [
       "AD/LDAP sync",
     ],
     featured: true,
-    cta: "Start 14-Day Trial",
+    cta: "Subscribe Now",
     ctaVariant: "primary" as const,
   },
   {
@@ -210,7 +210,7 @@ export const pricingTiers = [
       "SSO (EntraId)",
       "Priority support",
     ],
-    cta: "Start 14-Day Trial",
+    cta: "Subscribe Now",
     ctaVariant: "secondary" as const,
   },
   {

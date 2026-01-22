@@ -156,9 +156,7 @@ function SuccessContent() {
               Welcome to OmniGaze {tierName}!
             </h1>
             <p className="text-lg text-[var(--text-secondary)]">
-              {isPaidTier
-                ? "Your subscription is now active. You're all set to discover your infrastructure."
-                : "Your trial has started. You're all set to discover your infrastructure."}
+              Your subscription is now active. You&apos;re all set to discover your infrastructure.
             </p>
           </div>
 
@@ -254,17 +252,6 @@ function SuccessContent() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Trial Info */}
-          <div className="bg-[var(--amber-400)]/10 border border-[var(--amber-400)]/30 rounded-xl p-6 mb-8">
-            <h3 className="font-medium text-[var(--amber-400)] mb-2">
-              14-Day Free Trial
-            </h3>
-            <p className="text-sm text-[var(--text-secondary)]">
-              Your trial starts today and you won&apos;t be charged until it ends.
-              You can cancel anytime from your account dashboard or by contacting support.
-            </p>
           </div>
 
           {/* Actions */}

@@ -15,7 +15,6 @@ import {
   Calendar,
   CreditCard,
   Zap,
-  Loader2,
 } from "lucide-react";
 
 export default function BillingPage() {
@@ -160,11 +159,6 @@ export default function BillingPage() {
                         /{subscription?.billingCycle === 'annual' ? 'year' : 'month'}
                       </span>
                     </p>
-                    {subscription?.status === 'trialing' && (
-                      <span className="px-2 py-0.5 bg-[var(--amber-400)]/20 text-[var(--amber-400)] text-xs rounded-full font-medium">
-                        Trial
-                      </span>
-                    )}
                     {subscription?.status === 'active' && (
                       <span className="px-2 py-0.5 bg-[var(--success)]/20 text-[var(--success)] text-xs rounded-full font-medium">
                         Active
@@ -206,26 +200,6 @@ export default function BillingPage() {
                       ${(billingInfo.nextBillingAmount / 100).toFixed(2)} will be charged
                     </p>
                   )}
-                </div>
-              )}
-
-              {/* Trial Info */}
-              {subscription?.status === 'trialing' && subscription.trialEnd && (
-                <div className="p-4 bg-[var(--amber-400)]/10 border border-[var(--amber-400)]/30 rounded-lg">
-                  <div className="flex items-center gap-2 text-[var(--amber-400)] mb-1">
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm font-medium">Trial Period</span>
-                  </div>
-                  <p className="font-medium text-[var(--text-primary)]">
-                    Ends {new Date(subscription.trialEnd).toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}
-                  </p>
-                  <p className="text-sm text-[var(--text-muted)]">
-                    You won&apos;t be charged until trial ends
-                  </p>
                 </div>
               )}
 

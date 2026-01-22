@@ -132,18 +132,18 @@ const tierUIMetadata: Record<string, {
   },
   Starter: {
     description: "Small Teams",
-    cta: "Start 14-Day Trial",
+    cta: "Subscribe Now",
     ctaVariant: "secondary",
   },
   Professional: {
     description: "Growing Teams",
-    cta: "Start 14-Day Trial",
+    cta: "Subscribe Now",
     ctaVariant: "primary",
     featured: true,
   },
   Business: {
     description: "Operations",
-    cta: "Start 14-Day Trial",
+    cta: "Subscribe Now",
     ctaVariant: "secondary",
   },
   Enterprise: {
@@ -455,8 +455,8 @@ const faqs = [
     answer: "You'll receive a notification and have 14 days to upgrade or remove servers. Discovery continues but new servers won't be added until you're within limits.",
   },
   {
-    question: "Is there a free trial of paid tiers?",
-    answer: "Yes, all paid tiers include a 14-day free trial. No credit card required to start.",
+    question: "How does payment work for paid tiers?",
+    answer: "Payment is processed securely through Stripe when you subscribe. Your subscription activates immediately after successful payment.",
   },
   {
     question: "Do you offer discounts for nonprofits or education?",
