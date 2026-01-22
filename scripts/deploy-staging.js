@@ -73,7 +73,8 @@ async function deployStaging() {
       env: {
         ...process.env,
         STATIC_EXPORT: 'true',
-        NODE_ENV: 'production'
+        NODE_ENV: 'production',
+        NEXT_PUBLIC_API_URL: 'https://api.omnigaze.com'
       }
     });
 
