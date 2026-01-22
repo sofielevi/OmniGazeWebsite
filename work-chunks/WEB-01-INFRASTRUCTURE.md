@@ -218,8 +218,6 @@ Set up the Next.js 14 project with all required tooling, configurations, and dep
 - [ ] `npm run build` completes successfully
 - [ ] `npm run lint` passes
 - [ ] `npm run typecheck` passes
-- [ ] Staging URL loads (Vercel preview)
-- [ ] Environment variables work in staging
 - [ ] shadcn/ui components render correctly
 - [ ] Custom Tailwind colors work
 
@@ -253,5 +251,4 @@ Set up the Next.js 14 project with all required tooling, configurations, and dep
 
 - [ ] All tasks above completed
 - [ ] Code compiles without errors
-- [ ] Staging deployment working
 - [ ] Ready for WEB-02 development

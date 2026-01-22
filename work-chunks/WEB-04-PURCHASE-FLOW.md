@@ -370,4 +370,3 @@ stripe trigger checkout.session.completed
 - [ ] Full purchase flow tested end-to-end (needs Stripe credentials)
 - [x] Webhook events processed correctly
 - [x] Customer portal working
-- [ ] Deployed to staging

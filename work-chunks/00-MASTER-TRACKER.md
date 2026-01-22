@@ -165,13 +165,11 @@ Complete redesign of the public OmniGaze website to support self-service registr
 | Complete WEB-01-INFRASTRUCTURE | **Complete** | Next.js 16, Tailwind 4, TypeScript |
 | Next.js project scaffolded | **Complete** | App Router, static export configured |
 | CI/CD pipeline configured | Not Started | |
-| Staging environment ready | Not Started | |
 
 **Exit Criteria:**
 - [x] Next.js project runs locally
 - [x] Tailwind configured with OmniGaze design system
 - [ ] Environment variables set
-- [ ] Staging deployment working
 - [ ] CI/CD pipeline passes
 
 ### Phase 2: Content
@@ -235,7 +233,6 @@ Complete redesign of the public OmniGaze website to support self-service registr
 - [ ] All E2E tests pass
 - [ ] Performance audit passed
 - [ ] Accessibility audit passed
-- [ ] Staging fully tested
 - [ ] Production deployed
 - [ ] DNS cutover complete
 
@@ -331,20 +328,17 @@ Complete redesign of the public OmniGaze website to support self-service registr
 **Target Date:** _____________
 - [ ] WEB-01-INFRASTRUCTURE complete
 - [ ] Development environment working
-- [ ] Staging deployment working
 
 ### Checkpoint 2: Content Ready
 **Target Date:** _____________
 - [ ] WEB-02-MARKETING-PAGES complete
 - [ ] WEB-06-DOWNLOAD-DOCS complete
-- [ ] All marketing pages live on staging
 
 ### Checkpoint 3: Flows Ready
 **Target Date:** _____________
 - [ ] WEB-03-REGISTRATION complete
 - [ ] WEB-04-PURCHASE-FLOW complete
 - [ ] WEB-05-ACCOUNT-PORTAL complete
-- [ ] All user flows working on staging
 
 ### Checkpoint 4: Production Ready
 **Target Date:** _____________
@@ -371,8 +365,6 @@ A work chunk is complete when:
 - [ ] E2E tests written and passing (where applicable)
 - [ ] Accessibility checked (WCAG 2.1 AA)
 - [ ] Mobile responsive verified
-- [ ] Deployed to staging
-- [ ] Tested on staging
 - [ ] No critical bugs
 
 ---

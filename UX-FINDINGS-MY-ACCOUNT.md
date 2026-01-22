@@ -1,6 +1,6 @@
 # UX Findings: My Account Pages
 
-**Tested:** https://fingerscrossed.omnigaze.com
+**Tested:** https://omnigaze.com
 **User:** morten@omnigaze.com (Business tier, Trial)
 **Date:** 2024-12-23
 

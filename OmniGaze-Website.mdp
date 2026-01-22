@@ -495,31 +495,16 @@ transition: slide
 
 <!-- slide -->
 <div class="slide-header">Deployment <span class="accent">Setup</span></div>
-<div class="two-column">
-    <div class="column">
-        <div class="column-header">Staging Environment</div>
-        <ul class="bullet-list">
-            <li><strong>URL:</strong> fingerscrossed.omnigaze.com</li>
-            <li><strong>Method:</strong> FTP to web hotel (static export)</li>
-            <li><strong>One-click:</strong> Deploy Staging.lnk shortcut</li>
-            <li>Runs build + FTP upload automatically</li>
-        </ul>
-        <div class="callout" style="margin-top: 16px;">
-            <div class="callout-text">Pin "Deploy Staging.lnk" to taskbar for quick deploys during development.</div>
-        </div>
-    </div>
-    <div class="column">
-        <div class="column-header">Production</div>
-        <ul class="bullet-list">
-            <li><strong>URL:</strong> omnigaze.com</li>
-            <li><strong>Deployment:</strong> Static export to web hotel</li>
-            <li>SEO-optimized with metadata & JSON-LD</li>
-            <li>Mobile responsive across all pages</li>
-        </ul>
-        <div class="callout" style="margin-top: 16px;">
-            <div class="callout-text">Static export ensures fast load times and CDN-friendly hosting.</div>
-        </div>
-    </div>
+<div class="column-header">Production Environment</div>
+<ul class="bullet-list">
+    <li><strong>URL:</strong> omnigaze.com</li>
+    <li><strong>Method:</strong> Static export to web hotel via FTP</li>
+    <li><strong>One-click:</strong> Deploy Production.lnk shortcut</li>
+    <li>SEO-optimized with metadata & JSON-LD</li>
+    <li>Mobile responsive across all pages</li>
+</ul>
+<div class="callout" style="margin-top: 16px;">
+    <div class="callout-text">Static export ensures fast load times and CDN-friendly hosting.</div>
 </div>
 
 <!-- slide -->
@@ -603,7 +588,6 @@ transition: slide
     <div class="end-title">Questions?</div>
     <div class="end-subtitle">OmniGaze Website - The Public Face of Applied Observability</div>
     <div class="end-links">
-        <div class="end-link">Staging: fingerscrossed.omnigaze.com</div>
         <div class="end-link">Production: omnigaze.com</div>
     </div>
 </div>

@@ -298,5 +298,4 @@ Implement the complete user registration flow including email signup, verificati
 - [ ] All tasks above completed
 - [ ] Full registration flow tested end-to-end
 - [ ] Error scenarios handled
-- [ ] Deployed to staging
 - [ ] API integration verified

@@ -386,5 +386,4 @@ if (!canAccessFeature(user, 'team_management')) {
 - [x] All tasks above completed
 - [x] All dashboard pages functional
 - [x] API integration verified (client complete)
-- [ ] Deployed to staging
 - [ ] User acceptance testing passed

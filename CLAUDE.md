@@ -397,24 +397,4 @@ npm run lint
 
 # Type check
 npm run typecheck
-
-# Deploy to staging (fingerscrossed.omnigaze.com)
-npm run deploy:staging
 ```
-
----
-
-## Deployment
-
-### Staging Deployment
-- **URL:** https://fingerscrossed.omnigaze.com
-- **Method:** FTP to web hotel (static export)
-- **One-click:** Use `Deploy Staging.lnk` shortcut (pin to taskbar)
-- **Script:** `Deploy-Staging.bat` runs build + FTP upload
-- **Config:** `scripts/deploy-staging.js` contains FTP settings
-
-| File | Purpose |
-|------|---------|
-| `Deploy Staging.lnk` | Windows shortcut with rocket icon - pin to taskbar |
-| `Deploy-Staging.bat` | Batch file that runs the deploy script |
-| `scripts/deploy-staging.js` | Node.js FTP deploy script |

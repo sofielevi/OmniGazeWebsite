@@ -453,4 +453,3 @@ Generated using Google Veo 3.1 via MCP integration:
 - [ ] Pages reviewed for design accuracy
 - [ ] SEO audit passed
 - [ ] Accessibility audit passed (WCAG 2.1 AA)
-- [ ] Deployed to staging

@@ -276,5 +276,4 @@ export const metadata: Metadata = {
 
 - [ ] All tasks above completed
 - [ ] Content reviewed and approved
-- [ ] Deployed to staging
 - [ ] Links verified working
