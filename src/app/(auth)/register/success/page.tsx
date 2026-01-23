@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { AuthCard } from "@/components/auth/auth-card";
 import { ButtonLink } from "@/components/ui/button";
 import { VerifyResponse } from "@/lib/api-client";
+import { trackEvent } from "@/lib/analytics";
 import { CheckCircle2, Download, BookOpen, LayoutDashboard } from "lucide-react";
 
 export default function SuccessPage() {
@@ -15,8 +16,15 @@ export default function SuccessPage() {
     // Get verification result from session storage
     const storedResult = sessionStorage.getItem("verifyResult");
     if (storedResult) {
-      setResult(JSON.parse(storedResult));
+      const parsed: VerifyResponse = JSON.parse(storedResult);
+      setResult(parsed);
       sessionStorage.removeItem("verifyResult");
+
+      // Track sign_up conversion in Google Analytics
+      trackEvent("sign_up", {
+        method: "email",
+        tier: parsed.tier?.name || "Community",
+      });
     } else {
       // No result stored, redirect to register
       router.push("/register");
