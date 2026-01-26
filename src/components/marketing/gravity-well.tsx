@@ -76,105 +76,52 @@ export function GravityWell({ className }: GravityWellProps) {
             </filter>
           </defs>
 
-          {/* Left field lines - multiple curves for depth, more visible */}
+          {/* Left splines - smooth cubic bezier curves */}
           <path
-            d="M 60,360 Q 180,310 280,220 Q 360,140 400,70"
+            d="M 60,360 C 120,340 200,280 280,220 C 340,170 380,120 400,70"
             stroke="url(#leftGradient)"
-            strokeWidth="3"
+            strokeWidth="2.5"
             strokeLinecap="round"
             className="animate-field-line-left"
           />
           <path
-            d="M 100,370 Q 200,300 300,210 Q 365,130 400,70"
+            d="M 100,380 C 160,350 240,290 320,220 C 370,170 390,120 400,70"
             stroke="url(#leftGradient)"
-            strokeWidth="2.5"
+            strokeWidth="2"
             strokeLinecap="round"
             className="animate-field-line-left"
             style={{ animationDelay: "0.3s" }}
           />
           <path
-            d="M 140,380 Q 230,290 320,200 Q 370,120 400,70"
-            stroke="url(#leftGradient)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            className="animate-field-line-left"
-            style={{ animationDelay: "0.6s" }}
-          />
-          <path
-            d="M 180,385 Q 260,280 340,190 Q 375,115 400,70"
+            d="M 150,395 C 200,360 280,300 350,230 C 380,190 395,130 400,70"
             stroke="#e8a030"
-            strokeWidth="1"
+            strokeWidth="1.5"
             strokeLinecap="round"
-            opacity="0.3"
+            opacity="0.4"
           />
 
-          {/* Right field lines - multiple curves for depth, more visible */}
+          {/* Right splines - smooth cubic bezier curves */}
           <path
-            d="M 740,360 Q 620,310 520,220 Q 440,140 400,70"
+            d="M 740,360 C 680,340 600,280 520,220 C 460,170 420,120 400,70"
             stroke="url(#rightGradient)"
-            strokeWidth="3"
+            strokeWidth="2.5"
             strokeLinecap="round"
             className="animate-field-line-right"
           />
           <path
-            d="M 700,370 Q 600,300 500,210 Q 435,130 400,70"
+            d="M 700,380 C 640,350 560,290 480,220 C 430,170 410,120 400,70"
             stroke="url(#rightGradient)"
-            strokeWidth="2.5"
+            strokeWidth="2"
             strokeLinecap="round"
             className="animate-field-line-right"
             style={{ animationDelay: "0.3s" }}
           />
           <path
-            d="M 660,380 Q 570,290 480,200 Q 430,120 400,70"
-            stroke="url(#rightGradient)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            className="animate-field-line-right"
-            style={{ animationDelay: "0.6s" }}
-          />
-          <path
-            d="M 620,385 Q 540,280 460,190 Q 425,115 400,70"
+            d="M 650,395 C 600,360 520,300 450,230 C 420,190 405,130 400,70"
             stroke="#e8a030"
-            strokeWidth="1"
+            strokeWidth="1.5"
             strokeLinecap="round"
-            opacity="0.3"
-          />
-
-          {/* Center gravitational glow */}
-          <circle
-            cx="400"
-            cy="220"
-            r="70"
-            fill="#d4841c"
-            opacity="0.1"
-            filter="url(#glow)"
-          />
-          <circle
-            cx="400"
-            cy="220"
-            r="40"
-            fill="#e8a030"
-            opacity="0.15"
-          />
-
-          {/* EIO glow at top */}
-          <circle
-            cx="400"
-            cy="50"
-            r="50"
-            fill="#e8a030"
-            opacity="0.2"
-            filter="url(#eioGlow)"
-          />
-
-          {/* Upward pull indicator lines */}
-          <path
-            d="M 400,210 L 400,90"
-            stroke="#e8a030"
-            strokeWidth="2.5"
-            strokeDasharray="8 5"
-            opacity="0.7"
-            className="animate-field-line-left"
+            opacity="0.4"
           />
         </svg>
 
@@ -197,34 +144,6 @@ export function GravityWell({ className }: GravityWellProps) {
               <span className="px-2 py-1 text-xs bg-[var(--bg-elevated)]/90 backdrop-blur-sm border border-[var(--amber-500)]/20 rounded-full text-[var(--amber-300)]">CTO</span>
               <span className="px-2 py-1 text-xs bg-[var(--bg-elevated)]/90 backdrop-blur-sm border border-[var(--amber-500)]/20 rounded-full text-[var(--amber-300)]">EA Lead</span>
             </div>
-          </div>
-        </div>
-
-        {/* OmniGaze Center (The Gravity) - Abstract convergence point */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 mt-2">
-          <div className="flex flex-col items-center">
-            <div className="relative">
-              {/* Pulsing ring */}
-              <div className="absolute -inset-3 rounded-full bg-[var(--amber-400)]/20 animate-pulse-slow" />
-              <div className="absolute -inset-6 rounded-full bg-[var(--amber-400)]/10 animate-pulse-slow" style={{ animationDelay: "0.5s" }} />
-              {/* Convergence point - abstract eye/focus symbol */}
-              <div className="relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[var(--amber-400)] to-[var(--amber-600)] rounded-full flex items-center justify-center shadow-xl shadow-[var(--amber-500)]/40">
-                <svg viewBox="0 0 40 40" className="w-10 h-10 md:w-12 md:h-12" fill="none">
-                  {/* Outer ring */}
-                  <circle cx="20" cy="20" r="16" stroke="var(--bg-deep)" strokeWidth="2" opacity="0.3" />
-                  {/* Inner focus point */}
-                  <circle cx="20" cy="20" r="6" fill="var(--bg-deep)" />
-                  {/* Crosshairs */}
-                  <line x1="20" y1="8" x2="20" y2="14" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="20" y1="26" x2="20" y2="32" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="8" y1="20" x2="14" y2="20" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="26" y1="20" x2="32" y2="20" stroke="var(--bg-deep)" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-            </div>
-            <span className="mt-3 text-xs uppercase tracking-widest text-[var(--amber-400)]">
-              The Convergence
-            </span>
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Section } from "@/components/marketing/section";
-import { Linkedin, Mail } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "The Team - Meet the People Behind OmniGaze",
@@ -25,24 +25,28 @@ const team = [
     role: "CEO",
     image: "/images/team/MortenVinther.png",
     bio: "CEO with 20+ years in IT and software development, specializing in scalable, enterprise technology platforms.",
+    linkedin: "https://www.linkedin.com/in/morten-vinther-4297965/",
   },
   {
     name: "Sofie Levi Pourhadi",
     role: "CRO",
     image: "/images/team/SofieLeviPourhadi.png",
     bio: "CRO and Co-Founder, with expertise in scaling software businesses, strategy, and sustainable growth.",
+    linkedin: "https://www.linkedin.com/in/sofie-levi/",
   },
   {
     name: "John Fabienke",
     role: "CTO",
     image: "/images/team/JohnFabienke.jpg",
     bio: "CTO, with strong tech leadership background. 25+ years of architecture and product development background.",
+    linkedin: "https://www.linkedin.com/in/john-vindahl-fabienke-a96a171/",
   },
   {
     name: "John Webb",
     role: "Technical Sales & Solutions Engineer",
     image: "/images/team/JohnWebb.png",
     bio: "Technical Sales & Solutions Engineer, with a background in software engineering and management.",
+    linkedin: "https://www.linkedin.com/in/john-christopher-webb/",
   },
 ];
 
@@ -129,7 +133,20 @@ function TeamCard({ member }: { member: typeof team[0] }) {
 
         {/* Info */}
         <div className="flex-1 text-center sm:text-left">
-          <h3 className="font-display text-xl md:text-2xl mb-1">{member.name}</h3>
+          <div className="flex items-center justify-center sm:justify-start gap-3 mb-1">
+            <h3 className="font-display text-xl md:text-2xl">{member.name}</h3>
+            {member.linkedin && (
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0A66C2] hover:text-[#004182] transition-colors"
+                aria-label={`${member.name} on LinkedIn`}
+              >
+                <Linkedin className="w-5 h-5 fill-current" />
+              </a>
+            )}
+          </div>
           <div className="text-[var(--amber-400)] text-sm font-medium mb-3">
             {member.role}
           </div>
