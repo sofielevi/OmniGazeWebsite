@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniGaze New Brand Palette - Futuristic Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Core Brand Colors */
+      --midnight-intelligence: #000034;
+      --omni-violet: #7D67E1;
+      --deep-magenta: #8B1E5D;
+
+      /* Supporting Futuristic */
+      --electric-lilac: #816AE6;
+      --neural-indigo: #2B2F7F;
+      --soft-plasma-pink: #BD909A;
+
+      /* Neutral System */
+      --pure-white: #FFFFFF;
+      --cloud-gray: #EEF0F4;
+      --mist-gray: #C9CCD6;
+      --graphite-slate: #3A3F5C;
+
+      /* Power Mode */
+      --signal-cyan: #3FF3E0;
+      --plasma-rose: #C94A7C;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--midnight-intelligence);
+      color: var(--pure-white);
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3rem;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--omni-violet) 0%, var(--electric-lilac) 50%, var(--soft-plasma-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: var(--cloud-gray);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .positioning {
+      color: var(--mist-gray);
+      font-size: 13px;
+    }
+
+    h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      margin: 50px 0 24px;
+      color: var(--pure-white);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2 .emoji {
+      font-size: 1.2rem;
+    }
+
+    .section-subtitle {
+      color: var(--mist-gray);
+      font-size: 13px;
+      margin-top: -16px;
+      margin-bottom: 24px;
+    }
+
+    .color-section {
+      background: var(--neural-indigo);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 32px;
+      border: 1px solid rgba(125, 103, 225, 0.2);
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .color-card {
+      background: var(--graphite-slate);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .color-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(125, 103, 225, 0.2);
+    }
+
+    .color-swatch {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .color-swatch::after {
+      content: 'Click to copy';
+      position: absolute;
+      bottom: 10px;
+      font-size: 10px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .color-swatch:hover::after {
+      opacity: 0.6;
+    }
+
+    .color-info {
+      padding: 16px;
+      background: var(--midnight-intelligence);
+    }
+
+    .color-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--pure-white);
+    }
+
+    .color-value {
+      font-size: 12px;
+      color: var(--mist-gray);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .color-usage {
+      font-size: 11px;
+      color: var(--cloud-gray);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* Featured color card */
+    .color-card.featured {
+      grid-column: span 2;
+    }
+
+    .color-card.featured .color-swatch {
+      height: 140px;
+    }
+
+    /* Hero Demo Section */
+    .hero-demo {
+      background: var(--midnight-intelligence);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      margin: 40px 0;
+      border: 1px solid var(--neural-indigo);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-demo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(125, 103, 225, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-demo h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .hero-demo p {
+      color: var(--cloud-gray);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+
+    /* Button demos */
+    .button-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--omni-violet);
+      color: var(--pure-white);
+      box-shadow: 0 4px 20px rgba(125, 103, 225, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: var(--electric-lilac);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(125, 103, 225, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--pure-white);
+      border: 1px solid var(--omni-violet);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(125, 103, 225, 0.1);
+    }
+
+    .btn-magenta {
+      background: var(--deep-magenta);
+      color: var(--pure-white);
+      box-shadow: 0 4px 20px rgba(139, 30, 93, 0.4);
+    }
+
+    .btn-magenta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(139, 30, 93, 0.5);
+    }
+
+    /* Card Demo */
+    .card-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .demo-card {
+      background: var(--neural-indigo);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(125, 103, 225, 0.2);
+    }
+
+    .demo-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .demo-card p {
+      font-size: 13px;
+      color: var(--cloud-gray);
+      line-height: 1.6;
+    }
+
+    .demo-card .metric {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--signal-cyan);
+      margin: 16px 0 8px;
+    }
+
+    .demo-card .label {
+      font-size: 12px;
+      color: var(--mist-gray);
+    }
+
+    /* Data visualization demo */
+    .data-viz {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 80px;
+      margin-top: 20px;
+    }
+
+    .data-bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    /* Comparison section */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin: 60px 0;
+    }
+
+    .comparison-box {
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .comparison-box.old {
+      background: #1A0E1F;
+      border: 1px solid rgba(232, 160, 48, 0.3);
+    }
+
+    .comparison-box.new {
+      background: var(--midnight-intelligence);
+      border: 1px solid var(--omni-violet);
+    }
+
+    .comparison-box h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+
+    .palette-preview {
+      display: flex;
+      gap: 4px;
+      margin-top: 16px;
+    }
+
+    .palette-preview .swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    /* Typography demo */
+    .type-demo {
+      margin: 40px 0;
+    }
+
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--graphite-slate);
+    }
+
+    .type-label {
+      width: 120px;
+      font-size: 11px;
+      color: var(--mist-gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .type-sample {
+      flex: 1;
+    }
+
+    /* Gradient demos */
+    .gradient-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .gradient-card {
+      height: 100px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .grad-violet {
+      background: linear-gradient(135deg, var(--omni-violet) 0%, var(--electric-lilac) 100%);
+    }
+
+    .grad-magenta {
+      background: linear-gradient(135deg, var(--deep-magenta) 0%, var(--plasma-rose) 100%);
+    }
+
+    .grad-cyber {
+      background: linear-gradient(135deg, var(--omni-violet) 0%, var(--signal-cyan) 100%);
+    }
+
+    .grad-hero {
+      background: linear-gradient(180deg, var(--midnight-intelligence) 0%, var(--neural-indigo) 100%);
+      color: var(--pure-white);
+    }
+
+    .grad-warm {
+      background: linear-gradient(135deg, var(--soft-plasma-pink) 0%, var(--plasma-rose) 100%);
+      color: var(--pure-white);
+    }
+
+    .grad-premium {
+      background: linear-gradient(135deg, var(--midnight-intelligence) 0%, var(--deep-magenta) 50%, var(--omni-violet) 100%);
+      color: var(--pure-white);
+    }
+
+    /* Copy indicator */
+    .copied {
+      animation: flash 0.3s ease;
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @media (max-width: 768px) {
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+      .card-demo-grid {
+        grid-template-columns: 1fr;
+      }
+      .color-card.featured {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <p class="tagline">New Brand Direction</p>
+    <h1>OmniGaze Brand Colors</h1>
+    <p class="positioning">Futuristic · Intelligent · Confident · Category Leader</p>
+  </div>
+
+  <!-- Comparison -->
+  <h2><span class="emoji">⚖️</span> Old vs New Palette</h2>
+  <div class="comparison">
+    <div class="comparison-box old">
+      <h3 style="color: #e8a030;">Current: Warm Technical</h3>
+      <p style="color: #9a958d; font-size: 13px;">Amber/Purple hybrid, approachable, technical warmth</p>
+      <div class="palette-preview">
+        <div class="swatch" style="background: #1A0E1F;"></div>
+        <div class="swatch" style="background: #241825;"></div>
+        <div class="swatch" style="background: #e8a030;"></div>
+        <div class="swatch" style="background: #d4841c;"></div>
+        <div class="swatch" style="background: #B0588A;"></div>
+        <div class="swatch" style="background: #7c6aef;"></div>
+      </div>
+    </div>
+    <div class="comparison-box new">
+      <h3 style="color: var(--omni-violet);">New: Futuristic Intelligence</h3>
+      <p style="color: var(--cloud-gray); font-size: 13px;">Violet/Indigo core, confident, enterprise authority</p>
+      <div class="palette-preview">
+        <div class="swatch" style="background: #000034;"></div>
+        <div class="swatch" style="background: #2B2F7F;"></div>
+        <div class="swatch" style="background: #7D67E1;"></div>
+        <div class="swatch" style="background: #8B1E5D;"></div>
+        <div class="swatch" style="background: #3FF3E0;"></div>
+        <div class="swatch" style="background: #BD909A;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Brand Colors -->
+  <h2><span class="emoji">1️⃣</span> Core Brand Colors</h2>
+  <p class="section-subtitle">Non-negotiable. These define OmniGaze's identity.</p>
+  <div class="color-section">
+    <div class="color-grid">
+      <div class="color-card featured">
+        <div class="color-swatch" style="background: #000034; color: #FFFFFF;" data-hex="#000034">
+          🖤 Midnight Intelligence
+        </div>
+        <div class="color-info">
+          <div class="color-name">Midnight Intelligence</div>
+          <div class="color-value">#000034</div>
+          <div class="color-usage">Primary background · Hero sections · Dark mode default<br>Deep, serious, premium without going "black startup"</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #7D67E1; color: #FFFFFF;" data-hex="#7D67E1">
+          💜 Omni Violet
+        </div>
+        <div class="color-info">
+          <div class="color-name">Omni Violet (Primary)</div>
+          <div class="color-value">#7D67E1</div>
+          <div class="color-usage">CTAs · Active states · Highlights · Logos<br>Signals innovation + trust + leadership</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #8B1E5D; color: #FFFFFF;" data-hex="#8B1E5D">
+          ❤️ Deep Magenta
+        </div>
+        <div class="color-info">
+          <div class="color-name">Deep Magenta (Power)</div>
+          <div class="color-value">#8B1E5D</div>
+          <div class="color-usage">Emphasis · Data highlights · Emotional punch<br>Authority + boldness. Use sparingly.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supporting Colors -->
+  <h2><span class="emoji">2️⃣</span> Supporting Futuristic Colors</h2>
+  <p class="section-subtitle">Expand flexibility while staying on-brand</p>
+  <div class="color-section">
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #816AE6; color: #FFFFFF;" data-hex="#816AE6">
+          💠 Electric Lilac
+        </div>
+        <div class="color-info">
+          <div class="color-name">Electric Lilac</div>
+          <div class="color-value">#816AE6</div>
+          <div class="color-usage">Secondary buttons · Hover states · Graph accents</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #2B2F7F; color: #FFFFFF;" data-hex="#2B2F7F">
+          🌌 Neural Indigo
+        </div>
+        <div class="color-info">
+          <div class="color-name">Neural Indigo</div>
+          <div class="color-value">#2B2F7F</div>
+          <div class="color-usage">Card backgrounds · Section separators · UI depth</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #BD909A; color: #000034;" data-hex="#BD909A">
+          🌸 Soft Plasma Pink
+        </div>
+        <div class="color-info">
+          <div class="color-name">Soft Plasma Pink</div>
+          <div class="color-value">#BD909A</div>
+          <div class="color-usage">Human warmth · Founder content · Brand storytelling<br>Keeps brand from feeling cold</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Neutral System -->
+  <h2><span class="emoji">3️⃣</span> Neutral System</h2>
+  <p class="section-subtitle">For readability & scale in long-form content and SaaS UI</p>
+  <div class="color-section">
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #FFFFFF; color: #000034;" data-hex="#FFFFFF">
+          ⚪ Pure White
+        </div>
+        <div class="color-info">
+          <div class="color-name">Pure White</div>
+          <div class="color-value">#FFFFFF</div>
+          <div class="color-usage">Primary text on dark backgrounds</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #EEF0F4; color: #000034;" data-hex="#EEF0F4">
+          🧊 Cloud Gray
+        </div>
+        <div class="color-info">
+          <div class="color-name">Cloud Gray</div>
+          <div class="color-value">#EEF0F4</div>
+          <div class="color-usage">Secondary text · Borders · UI separators</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #C9CCD6; color: #000034;" data-hex="#C9CCD6">
+          🪶 Mist Gray
+        </div>
+        <div class="color-info">
+          <div class="color-name">Mist Gray</div>
+          <div class="color-value">#C9CCD6</div>
+          <div class="color-usage">Placeholder text · Disabled states · Subtle hints</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #3A3F5C; color: #FFFFFF;" data-hex="#3A3F5C">
+          🌫 Graphite Slate
+        </div>
+        <div class="color-info">
+          <div class="color-name">Graphite Slate</div>
+          <div class="color-value">#3A3F5C</div>
+          <div class="color-usage">Secondary backgrounds · Footer · Tables</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Power Mode -->
+  <h2><span class="emoji">4️⃣</span> Power Mode Highlights</h2>
+  <p class="section-subtitle">Use sparingly for product launches, hero visuals, keynote slides</p>
+  <div class="color-section">
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #3FF3E0; color: #000034;" data-hex="#3FF3E0">
+          ⚡ Signal Cyan
+        </div>
+        <div class="color-info">
+          <div class="color-name">Signal Cyan</div>
+          <div class="color-value">#3FF3E0</div>
+          <div class="color-usage">AI / data points · Performance indicators</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #C94A7C; color: #FFFFFF;" data-hex="#C94A7C">
+          🔥 Plasma Rose
+        </div>
+        <div class="color-info">
+          <div class="color-name">Plasma Rose</div>
+          <div class="color-value">#C94A7C</div>
+          <div class="color-usage">Success states · Callouts · Key story moments</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gradients -->
+  <h2><span class="emoji">🎨</span> Gradient Options</h2>
+  <div class="color-section">
+    <div class="gradient-grid">
+      <div class="gradient-card grad-violet">Violet Primary</div>
+      <div class="gradient-card grad-magenta">Magenta Power</div>
+      <div class="gradient-card grad-cyber">Cyber Accent</div>
+      <div class="gradient-card grad-hero">Hero Background</div>
+      <div class="gradient-card grad-warm">Warm Storytelling</div>
+      <div class="gradient-card grad-premium">Premium Hero</div>
+    </div>
+  </div>
+
+  <!-- Hero Demo -->
+  <h2><span class="emoji">🖥️</span> Hero Section Demo</h2>
+  <div class="hero-demo">
+    <h3>See Your Infrastructure Clearly</h3>
+    <p>From servers to strategy — OmniGaze gives you complete visibility across your entire IT landscape.</p>
+    <div class="button-row">
+      <button class="btn btn-primary">Start Free Trial</button>
+      <button class="btn btn-secondary">Book a Demo</button>
+    </div>
+  </div>
+
+  <!-- Card Demo -->
+  <h2><span class="emoji">📊</span> Dashboard Card Demo</h2>
+  <div class="card-demo-grid">
+    <div class="demo-card">
+      <h4>Infrastructure Discovered</h4>
+      <div class="metric" style="color: var(--omni-violet);">2,847</div>
+      <div class="label">Assets mapped automatically</div>
+    </div>
+    <div class="demo-card">
+      <h4>Cost Savings Identified</h4>
+      <div class="metric" style="color: var(--signal-cyan);">$847K</div>
+      <div class="label">Annual optimization potential</div>
+    </div>
+    <div class="demo-card">
+      <h4>Risk Score</h4>
+      <div class="metric" style="color: var(--plasma-rose);">Medium</div>
+      <div class="label">3 critical dependencies found</div>
+      <div class="data-viz">
+        <div class="data-bar" style="background: var(--omni-violet); height: 60%;"></div>
+        <div class="data-bar" style="background: var(--electric-lilac); height: 80%;"></div>
+        <div class="data-bar" style="background: var(--signal-cyan); height: 45%;"></div>
+        <div class="data-bar" style="background: var(--plasma-rose); height: 100%;"></div>
+        <div class="data-bar" style="background: var(--omni-violet); height: 70%;"></div>
+        <div class="data-bar" style="background: var(--electric-lilac); height: 55%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button States -->
+  <h2><span class="emoji">🔘</span> Button Variants</h2>
+  <div class="color-section">
+    <div class="button-row" style="justify-content: flex-start; gap: 24px;">
+      <div style="text-align: center;">
+        <button class="btn btn-primary">Primary CTA</button>
+        <div style="font-size: 11px; color: var(--mist-gray); margin-top: 8px;">Omni Violet</div>
+      </div>
+      <div style="text-align: center;">
+        <button class="btn btn-secondary">Secondary</button>
+        <div style="font-size: 11px; color: var(--mist-gray); margin-top: 8px;">Outlined</div>
+      </div>
+      <div style="text-align: center;">
+        <button class="btn btn-magenta">Power CTA</button>
+        <div style="font-size: 11px; color: var(--mist-gray); margin-top: 8px;">Deep Magenta</div>
+      </div>
+      <div style="text-align: center;">
+        <button class="btn" style="background: var(--graphite-slate); color: var(--mist-gray);">Disabled</button>
+        <div style="font-size: 11px; color: var(--mist-gray); margin-top: 8px;">Graphite Slate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Palette Reference -->
+  <h2><span class="emoji">5️⃣</span> Full Palette (Copy-Ready)</h2>
+  <div class="color-section" style="background: var(--graphite-slate);">
+    <pre style="font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 2; color: var(--cloud-gray);">
+<span style="color: #7D67E1;">#000034</span>  Midnight Intelligence (Background)
+<span style="color: #7D67E1;">#7D67E1</span>  Omni Violet (Primary CTA)
+<span style="color: #C94A7C;">#8B1E5D</span>  Deep Magenta (Power Accent)
+<span style="color: #816AE6;">#816AE6</span>  Electric Lilac (Hover/Secondary)
+<span style="color: #7D67E1;">#2B2F7F</span>  Neural Indigo (Cards)
+<span style="color: #BD909A;">#BD909A</span>  Soft Plasma Pink (Warmth)
+<span style="color: #FFFFFF;">#FFFFFF</span>  Pure White (Primary Text)
+<span style="color: #EEF0F4;">#EEF0F4</span>  Cloud Gray (Secondary Text)
+<span style="color: #C9CCD6;">#C9CCD6</span>  Mist Gray (Placeholder)
+<span style="color: #7D67E1;">#3A3F5C</span>  Graphite Slate (Footer/Tables)
+<span style="color: #3FF3E0;">#3FF3E0</span>  Signal Cyan (AI/Data - optional)
+<span style="color: #C94A7C;">#C94A7C</span>  Plasma Rose (Success - optional)
+    </pre>
+  </div>
+
+  <script>
+    // Copy hex code on click
+    document.querySelectorAll('.color-swatch').forEach(swatch => {
+      swatch.addEventListener('click', function() {
+        const hex = this.getAttribute('data-hex');
+        if (hex) {
+          navigator.clipboard.writeText(hex);
+          this.classList.add('copied');
+          const original = this.innerHTML;
+          this.innerHTML = '✓ Copied!';
+          setTimeout(() => {
+            this.innerHTML = original;
+            this.classList.remove('copied');
+          }, 1000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

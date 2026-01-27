@@ -1,48 +1,68 @@
 @import "tailwindcss";
 
-/* OmniGaze Design System - "Warm Technical" Aesthetic */
-/* Updated with hybrid purple/amber palette per Sofie's feedback */
+/* OmniGaze Design System - "Futuristic Intelligence" Aesthetic */
+/* 2026 Sofie's Version - Violet/Indigo Palette */
 :root {
-  /* Background - Warm purple tones */
-  --bg-deep: #1A0E1F;
-  --bg-card: #241825;
-  --bg-elevated: #2B1533;
-  --bg-hover: #3a2040;
+  /* Core Brand Colors */
+  --midnight-intelligence: #000034;
+  --omni-violet: #7D67E1;
+  --deep-magenta: #8B1E5D;
+
+  /* Supporting Futuristic Colors */
+  --electric-lilac: #816AE6;
+  --neural-indigo: #2B2F7F;
+  --soft-plasma-pink: #BD909A;
+
+  /* Neutral System - Darker with blue undertone */
+  --pure-white: #FFFFFF;
+  --cloud-gray: #9499AB;
+  --mist-gray: #6B7089;
+  --graphite-slate: #252840;
+
+  /* Power Mode Highlights */
+  --signal-cyan: #3FF3E0;
+  --plasma-rose: #C94A7C;
+
+  /* Background - Mapped to new palette */
+  --bg-deep: #000034;
+  --bg-card: #0D1042;
+  --bg-elevated: #191D54;
+  --bg-hover: #252966;
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-warm: rgba(232, 175, 100, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-warm: rgba(125, 103, 225, 0.3);
 
-  /* Text */
-  --text-primary: #f0ede8;
-  --text-secondary: #9a958d;
-  --text-muted: #5f5b54;
+  /* Text - Adjusted for better contrast */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9499AB;
+  --text-muted: #6B7089;
 
-  /* Amber - Primary Brand (keeping for recognition) */
-  --amber-50: #fef7e8;
-  --amber-100: #fdecc8;
-  --amber-200: #f9d68a;
-  --amber-300: #f4b94d;
-  --amber-400: #e8a030;
-  --amber-500: #d4841c;
-  --amber-600: #b86814;
-  --amber-glow: rgba(232, 160, 48, 0.15);
+  /* Primary Brand Colors (mapped for compatibility) */
+  --amber-50: #EDE8FF;
+  --amber-100: #D4CCFF;
+  --amber-200: #B5A8F5;
+  --amber-300: #9688EB;
+  --amber-400: #7D67E1;
+  --amber-500: #6B55CF;
+  --amber-600: #5A45BD;
+  --amber-glow: rgba(125, 103, 225, 0.25);
 
-  /* Rose - Secondary Accent (new) */
-  --rose-accent: #B0588A;
-  --rose-light: #C06A9A;
-  --rose-dark: #9F4F7A;
+  /* Magenta Accent (replacing rose) */
+  --rose-accent: #8B1E5D;
+  --rose-light: #C94A7C;
+  --rose-dark: #6B1747;
 
   /* Status */
-  --success: #4ade80;
-  --success-muted: rgba(74, 222, 128, 0.15);
+  --success: #3FF3E0;
+  --success-muted: rgba(63, 243, 224, 0.15);
 
-  /* Pyramid Layer Colors */
-  --pyramid-strategy: #7c6aef;
-  --pyramid-value-streams: #8b7cf5;
-  --pyramid-capabilities: #9d91f8;
-  --pyramid-applications: #b0a6fb;
-  --pyramid-infrastructure: #1e3a8a;
+  /* Pyramid Layer Colors - Updated */
+  --pyramid-strategy: #7D67E1;
+  --pyramid-value-streams: #816AE6;
+  --pyramid-capabilities: #BD909A;
+  --pyramid-applications: #8B1E5D;
+  --pyramid-infrastructure: #2B2F7F;
 
   /* Animation timing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -50,15 +70,38 @@
 }
 
 @theme inline {
+  /* Core Brand */
+  --color-midnight: var(--midnight-intelligence);
+  --color-violet: var(--omni-violet);
+  --color-magenta: var(--deep-magenta);
+  --color-lilac: var(--electric-lilac);
+  --color-indigo: var(--neural-indigo);
+  --color-pink: var(--soft-plasma-pink);
+  --color-cyan: var(--signal-cyan);
+  --color-rose: var(--plasma-rose);
+
+  /* Background */
   --color-bg-deep: var(--bg-deep);
   --color-bg-card: var(--bg-card);
   --color-bg-elevated: var(--bg-elevated);
   --color-bg-hover: var(--bg-hover);
+
+  /* Borders */
   --color-border-subtle: var(--border-subtle);
   --color-border-warm: var(--border-warm);
+
+  /* Text */
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
+
+  /* Neutral */
+  --color-white: var(--pure-white);
+  --color-cloud: var(--cloud-gray);
+  --color-mist: var(--mist-gray);
+  --color-slate: var(--graphite-slate);
+
+  /* Legacy amber mapping (for compatibility) */
   --color-amber-50: var(--amber-50);
   --color-amber-100: var(--amber-100);
   --color-amber-200: var(--amber-200);
@@ -67,13 +110,19 @@
   --color-amber-500: var(--amber-500);
   --color-amber-600: var(--amber-600);
   --color-amber-glow: var(--amber-glow);
+
+  /* Status */
   --color-success: var(--success);
   --color-success-muted: var(--success-muted);
+
+  /* Pyramid */
   --color-pyramid-strategy: var(--pyramid-strategy);
   --color-pyramid-value-streams: var(--pyramid-value-streams);
   --color-pyramid-capabilities: var(--pyramid-capabilities);
   --color-pyramid-applications: var(--pyramid-applications);
   --color-pyramid-infrastructure: var(--pyramid-infrastructure);
+
+  /* Typography */
   --font-display: 'Source Serif 4', Georgia, serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
@@ -114,7 +163,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--amber-200) 0%, var(--amber-400) 50%, var(--amber-300) 100%);
+  background: linear-gradient(135deg, var(--electric-lilac) 0%, var(--omni-violet) 50%, var(--soft-plasma-pink) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -230,19 +279,29 @@ h1, h2, h3, h4, h5, h6 {
 /* Grid Pattern Background */
 .bg-grid-pattern {
   background-image:
-    linear-gradient(rgba(232, 160, 48, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232, 160, 48, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(125, 103, 225, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 103, 225, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 70%);
 }
 
 /* Glow Effect */
-.glow-amber {
+.glow-amber,
+.glow-violet {
   box-shadow: 0 4px 20px var(--amber-glow), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-.glow-amber-lg {
+.glow-amber-lg,
+.glow-violet-lg {
   box-shadow: 0 8px 40px var(--amber-glow);
+}
+
+.glow-magenta {
+  box-shadow: 0 4px 20px rgba(139, 30, 93, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.glow-cyan {
+  box-shadow: 0 4px 20px rgba(63, 243, 224, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 /* Custom Scrollbar */
@@ -266,6 +325,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Selection */
 ::selection {
-  background: var(--amber-500);
-  color: var(--bg-deep);
+  background: var(--omni-violet);
+  color: var(--pure-white);
 }
