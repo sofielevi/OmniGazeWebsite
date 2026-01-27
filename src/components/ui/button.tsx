@@ -74,6 +74,8 @@ export interface ButtonLinkProps {
   size?: "sm" | "md" | "lg";
   className?: string;
   children?: React.ReactNode;
+  target?: string;
+  rel?: string;
 }
 
 export function ButtonLink({
@@ -82,6 +84,8 @@ export function ButtonLink({
   variant = "primary",
   size = "md",
   children,
+  target,
+  rel,
 }: ButtonLinkProps) {
   const baseStyles = `
     inline-flex items-center justify-center gap-2
@@ -126,6 +130,8 @@ export function ButtonLink({
     <Link
       href={href}
       className={cn(baseStyles, variants[variant], sizes[size], className)}
+      target={target}
+      rel={rel}
     >
       {children}
     </Link>

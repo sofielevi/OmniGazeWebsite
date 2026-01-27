@@ -8,6 +8,9 @@ import { BridgeVisual } from "@/components/marketing/bridge-visual";
 import { DataSovereignty } from "@/components/marketing/data-sovereignty";
 import { GravityWell } from "@/components/marketing/gravity-well";
 import { CustomerLogos } from "@/components/marketing/customer-logos";
+import { PainPoints } from "@/components/marketing/pain-points";
+import { FAQ } from "@/components/marketing/faq";
+import { ComparisonTable } from "@/components/marketing/comparison-table";
 import { ButtonLink } from "@/components/ui/button";
 import {
   ChevronRight,
@@ -70,6 +73,9 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <Hero />
+
+        {/* Pain Points - Say goodbye to... */}
+        <PainPoints className="bg-[var(--bg-card)]" />
 
         {/* Value Pyramid Section - Core Differentiator */}
         <Section id="pyramid" className="bg-gradient-to-b from-transparent via-[var(--bg-card)] to-transparent">
@@ -138,10 +144,16 @@ export default function HomePage() {
           </div>
         </Section>
 
+        {/* Comparison Table */}
+        <ComparisonTable />
+
         {/* Customer Logos Section */}
         <Section className="py-12">
           <CustomerLogos />
         </Section>
+
+        {/* FAQ Section */}
+        <FAQ className="bg-[var(--bg-card)]" />
 
         {/* CTA Section */}
         <Section>
@@ -174,8 +186,14 @@ export default function HomePage() {
               <ButtonLink href="/register" variant="primary" size="lg">
                 Start Free Today
               </ButtonLink>
-              <ButtonLink href="/contact" variant="secondary" size="lg">
-                Schedule a Demo
+              <ButtonLink
+                href="https://calendly.com/omnigaze/introductory-call"
+                variant="secondary"
+                size="lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book a Demo
               </ButtonLink>
             </div>
           </div>

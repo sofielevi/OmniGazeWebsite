@@ -137,6 +137,15 @@ export function Hero() {
             Start Free
             <ChevronRight size={18} />
           </ButtonLink>
+          <ButtonLink
+            href="https://calendly.com/omnigaze/introductory-call"
+            variant="secondary"
+            size="lg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Book a Demo
+          </ButtonLink>
         </div>
 
         {/* Stats */}

@@ -7,7 +7,7 @@ import { Section, SectionHeader } from "@/components/marketing/section";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { submitLead } from "@/lib/api-client";
-import { Calculator, TrendingDown, Clock, Users, Share2, Mail, ChevronRight } from "lucide-react";
+import { Calculator, TrendingDown, Clock, Users, Share2, Mail, ChevronRight, AlertTriangle, DollarSign, BarChart3, PiggyBank } from "lucide-react";
 
 interface CalculationResult {
   annualCostOfDarkness: number;
@@ -195,10 +195,75 @@ Calculate yours: https://omnigaze.com/tools/roi-calculator
             {/* Results */}
             <div>
               {!result ? (
-                <div className="bg-[var(--bg-card)] rounded-2xl p-8 border border-[var(--border-subtle)] h-full flex items-center justify-center">
-                  <div className="text-center text-[var(--text-muted)]">
-                    <Calculator className="w-12 h-12 mx-auto mb-4 opacity-30" />
-                    <p>Fill out the form to see your results</p>
+                <div className="bg-[var(--bg-card)] rounded-2xl p-8 border border-[var(--border-subtle)] h-full">
+                  {/* Empty State Preview */}
+                  <div className="text-center mb-8">
+                    <h3 className="font-display text-2xl mb-2">See What Fits Your Reality</h3>
+                    <p className="text-[var(--text-muted)]">
+                      Your personalized cost analysis awaits
+                    </p>
+                  </div>
+
+                  {/* Preview Cards */}
+                  <div className="space-y-4">
+                    {/* Cost Preview Card */}
+                    <div className="bg-[var(--bg-elevated)] rounded-xl p-5 border border-[var(--border-subtle)] opacity-60">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center">
+                          <DollarSign className="w-4 h-4 text-red-400" />
+                        </div>
+                        <span className="text-sm text-[var(--text-muted)]">Annual Hidden Costs</span>
+                      </div>
+                      {/* Placeholder bar chart */}
+                      <div className="flex items-end gap-2 h-16 mb-3">
+                        <div className="flex-1 bg-red-500/30 rounded-t" style={{ height: '60%' }} />
+                        <div className="flex-1 bg-red-500/30 rounded-t" style={{ height: '80%' }} />
+                        <div className="flex-1 bg-red-500/30 rounded-t" style={{ height: '45%' }} />
+                        <div className="flex-1 bg-red-500/30 rounded-t" style={{ height: '100%' }} />
+                      </div>
+                      <div className="font-display text-2xl text-[var(--text-muted)]">$???</div>
+                    </div>
+
+                    {/* Risk Indicators */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-[var(--bg-elevated)] rounded-xl p-4 border border-[var(--border-subtle)] opacity-60">
+                        <div className="flex items-center gap-2 mb-2">
+                          <AlertTriangle className="w-4 h-4 text-orange-400" />
+                          <span className="text-xs text-[var(--text-muted)]">Risk Score</span>
+                        </div>
+                        <div className="flex gap-1">
+                          <div className="h-2 flex-1 bg-orange-500/40 rounded" />
+                          <div className="h-2 flex-1 bg-orange-500/30 rounded" />
+                          <div className="h-2 flex-1 bg-[var(--bg-card)] rounded" />
+                        </div>
+                      </div>
+                      <div className="bg-[var(--bg-elevated)] rounded-xl p-4 border border-[var(--border-subtle)] opacity-60">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Clock className="w-4 h-4 text-blue-400" />
+                          <span className="text-xs text-[var(--text-muted)]">Wasted Hours</span>
+                        </div>
+                        <div className="font-display text-lg text-[var(--text-muted)]">??? hrs/yr</div>
+                      </div>
+                    </div>
+
+                    {/* Savings Preview */}
+                    <div className="bg-[var(--bg-elevated)] rounded-xl p-5 border border-green-500/20 opacity-60">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+                          <PiggyBank className="w-4 h-4 text-green-400" />
+                        </div>
+                        <span className="text-sm text-[var(--text-muted)]">Potential Savings</span>
+                      </div>
+                      <div className="font-display text-2xl text-green-400/50">$??? / year</div>
+                    </div>
+                  </div>
+
+                  {/* CTA hint */}
+                  <div className="mt-6 text-center">
+                    <div className="inline-flex items-center gap-2 text-sm text-[var(--amber-400)]">
+                      <BarChart3 className="w-4 h-4" />
+                      <span>Enter your numbers to reveal your costs</span>
+                    </div>
                   </div>
                 </div>
               ) : (
