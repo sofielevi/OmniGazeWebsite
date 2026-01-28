@@ -2,6 +2,7 @@
 
 import { ChevronRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
+import { DownloadButton } from "@/components/marketing/download-button";
 import { siteConfig } from "@/config/site";
 import { useEffect, useRef } from "react";
 import Hls from "hls.js";
@@ -146,6 +147,7 @@ export function Hero() {
           >
             Book a Demo
           </ButtonLink>
+          <DownloadButton size="lg" />
         </div>
 
         {/* Stats */}

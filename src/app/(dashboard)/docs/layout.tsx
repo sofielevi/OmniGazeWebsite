@@ -42,6 +42,7 @@ const navSections: NavSection[] = [
     items: [
       { label: "Overview", href: "/docs", icon: BookOpen, tier: "community" },
       { label: "Installation", href: "/docs/getting-started/installation", icon: Rocket, tier: "community" },
+      { label: "SmartScreen", href: "/docs/getting-started/smartscreen", icon: Shield, tier: "community" },
       { label: "Activation", href: "/docs/getting-started/activation", icon: Rocket, tier: "community" },
       { label: "First Scan", href: "/docs/getting-started/first-scan", icon: Rocket, tier: "community" },
     ],

@@ -78,7 +78,7 @@ export default function InstallationPage() {
             {
               title: "Run the Installer",
               description:
-                "Double-click the downloaded OmniGaze-Setup.exe file. If prompted by Windows Defender SmartScreen, click 'More info' then 'Run anyway'.",
+                "Double-click the downloaded OmniGaze-Setup.exe file. If Windows Defender SmartScreen appears, see our SmartScreen workaround guide for step-by-step instructions.",
             },
             {
               title: "Accept the License Agreement",
@@ -97,6 +97,16 @@ export default function InstallationPage() {
             },
           ]}
         />
+        <Callout type="info" title="Windows SmartScreen">
+          If Windows Defender SmartScreen blocks the installer, follow our{" "}
+          <Link
+            href="/docs/getting-started/smartscreen"
+            className="text-[var(--amber-400)] hover:underline"
+          >
+            SmartScreen workaround guide
+          </Link>{" "}
+          for detailed step-by-step instructions.
+        </Callout>
       </section>
 
       {/* Silent Install */}
