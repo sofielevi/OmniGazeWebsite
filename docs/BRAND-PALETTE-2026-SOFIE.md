@@ -90,29 +90,32 @@ Designed for long-form content and SaaS UI.
 ```
 - Primary text on dark backgrounds
 
-### Cloud Gray
+### Cloud Gray (Updated)
 ```
-#EEF0F4
+#9499AB
 ```
 - Secondary text
 - Borders
 - UI separators
+- *Darker with blue undertone to blend with midnight background*
 
-### Mist Gray
+### Mist Gray (Updated)
 ```
-#C9CCD6
+#6B7089
 ```
 - Placeholder text
 - Disabled states
 - Subtle UI hints
+- *Darker blue-gray for better cohesion*
 
-### Graphite Slate
+### Graphite Slate (Updated)
 ```
-#3A3F5C
+#252840
 ```
 - Secondary backgrounds
 - Footer sections
 - Tables
+- *Deeper to match the dark palette*
 
 ---
 
@@ -151,11 +154,17 @@ For product launches, hero visuals, or keynote slides.
 --neural-indigo: #2B2F7F;
 --soft-plasma-pink: #BD909A;
 
-/* Neutral System */
+/* Neutral System (Darker with blue undertone) */
 --pure-white: #FFFFFF;
---cloud-gray: #EEF0F4;
---mist-gray: #C9CCD6;
---graphite-slate: #3A3F5C;
+--cloud-gray: #9499AB;
+--mist-gray: #6B7089;
+--graphite-slate: #252840;
+
+/* Background Layers */
+--bg-deep: #000034;
+--bg-card: #0D1042;
+--bg-elevated: #191D54;
+--bg-hover: #252966;
 
 /* Power Mode (optional) */
 --signal-cyan: #3FF3E0;
