@@ -74,7 +74,7 @@ export function ResultsPanel({ result, className }: ResultsPanelProps) {
           <p className="text-sm text-[var(--text-muted)] mb-1">
             Total Annual Savings
           </p>
-          <div className="font-display text-4xl md:text-5xl font-semibold text-[var(--amber-400)] mb-2">
+          <div className="font-display text-4xl md:text-5xl font-semibold text-[var(--omnigaze-gold)] mb-2">
             {formatCurrency(result.totalUnlockedSavings)}
           </div>
           <p className="text-sm text-[var(--text-secondary)]">
@@ -92,7 +92,7 @@ export function ResultsPanel({ result, className }: ResultsPanelProps) {
             <div className="text-xs text-[var(--text-muted)]">ROI</div>
           </div>
           <div className="text-center p-3 bg-[var(--bg-elevated)] rounded-lg">
-            <Clock className="w-5 h-5 mx-auto mb-1 text-[var(--amber-400)]" />
+            <Clock className="w-5 h-5 mx-auto mb-1 text-[var(--omnigaze-gold)]" />
             <div className="font-mono text-xl text-[var(--text-primary)]">
               {result.paybackMonths < 1
                 ? "<1"
@@ -134,10 +134,10 @@ export function ResultsPanel({ result, className }: ResultsPanelProps) {
       </div>
 
       {/* Recommended tier CTA */}
-      <div className="bg-gradient-to-br from-[var(--amber-400)]/10 to-[var(--amber-500)]/5 border border-[var(--amber-400)]/30 rounded-2xl p-6">
+      <div className="bg-gradient-to-br from-[var(--omnigaze-gold)]/10 to-[var(--omnigaze-gold-dark)]/5 border border-[var(--omnigaze-gold)]/30 rounded-2xl p-6">
         <div className="flex items-start gap-4">
-          <div className="p-3 bg-[var(--amber-400)]/20 rounded-full">
-            <Award className="w-6 h-6 text-[var(--amber-400)]" />
+          <div className="p-3 bg-[var(--omnigaze-gold)]/20 rounded-full">
+            <Award className="w-6 h-6 text-[var(--omnigaze-gold)]" />
           </div>
           <div className="flex-1">
             <h3 className="font-display text-lg text-[var(--text-primary)] mb-1">
@@ -165,7 +165,7 @@ export function ResultsPanel({ result, className }: ResultsPanelProps) {
         <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-[var(--bg-elevated)] rounded-full">
-              <Lock className="w-5 h-5 text-[var(--amber-400)]" />
+              <Lock className="w-5 h-5 text-[var(--omnigaze-gold)]" />
             </div>
             <div>
               <h3 className="font-display text-lg text-[var(--text-primary)]">
@@ -289,7 +289,7 @@ function LayerBreakdown({
           )}
         </div>
         <div className="flex items-center gap-3">
-          <span className="font-mono text-[var(--amber-400)]">
+          <span className="font-mono text-[var(--omnigaze-gold)]">
             {formatCurrency(layer.totalAnnual)}
           </span>
           {isExpanded ? (
@@ -314,7 +314,7 @@ function LayerBreakdown({
                     {saving.description}
                   </div>
                 </div>
-                <div className="font-mono text-sm text-[var(--amber-400)] whitespace-nowrap ml-4">
+                <div className="font-mono text-sm text-[var(--omnigaze-gold)] whitespace-nowrap ml-4">
                   {formatCurrency(saving.amount)}
                 </div>
               </div>

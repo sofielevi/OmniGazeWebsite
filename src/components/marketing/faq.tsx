@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "Can I upgrade my tier later?",
     answer:
-      "Absolutely. You can upgrade at any time directly from the application. Your existing data and configurations are preserved, and you immediately gain access to the new tier's features.",
+      "Absolutely. Contact our sales team to discuss upgrading to a higher tier. Your existing data and configurations are preserved, and you immediately gain access to the new tier's features.",
   },
   {
     question: "What platforms do you support?",

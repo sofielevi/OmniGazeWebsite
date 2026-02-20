@@ -21,16 +21,15 @@ interface PricingCardProps {
     cta: string;
     ctaVariant: "primary" | "secondary";
   };
-  billingCycle: "monthly" | "annual";
 }
 
-export function PricingCard({ tier, billingCycle }: PricingCardProps) {
-  const price = billingCycle === "annual" && tier.annualPrice !== null
-    ? Math.round(tier.annualPrice / 12)
-    : tier.monthlyPrice;
-
-  const annualTotal = tier.annualPrice;
+export function PricingCard({ tier }: PricingCardProps) {
+  const isFree = tier.monthlyPrice === 0;
+  const isPaid = tier.monthlyPrice !== null && tier.monthlyPrice > 0;
   const isUnlimited = tier.serverLimit === -1;
+
+  // Paid tiers link to /contact, free to /download
+  const ctaHref = isFree ? "/download" : "/contact";
 
   return (
     <div
@@ -39,19 +38,19 @@ export function PricingCard({ tier, billingCycle }: PricingCardProps) {
       className={cn(
         "relative bg-[var(--bg-card)] border rounded-2xl p-7 transition-all duration-500",
         tier.featured
-          ? "border-[var(--amber-500)] bg-gradient-to-b from-[var(--bg-elevated)] to-[var(--bg-card)] shadow-[0_0_60px_var(--amber-glow)]"
+          ? "border-[var(--omnigaze-gold)] bg-gradient-to-b from-[var(--bg-elevated)] to-[var(--bg-card)] shadow-[0_0_60px_var(--omnigaze-gold-glow)]"
           : "border-[var(--border-subtle)] hover:border-[var(--border-warm)] hover:translate-y-[-4px] hover:shadow-xl"
       )}
     >
       {/* Featured badge */}
       {tier.featured && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[var(--amber-400)] to-[var(--amber-500)] text-[var(--bg-deep)] px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[var(--omnigaze-gold)] to-[var(--omnigaze-gold-dark)] text-[var(--bg-deep)] px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wide shadow-[0_4px_20px_var(--omnigaze-gold-glow)]">
           Most Popular
         </div>
       )}
 
       {/* Tier label */}
-      <div className="text-xs uppercase tracking-wider text-[var(--amber-400)] mb-2">
+      <div className="text-xs uppercase tracking-wider text-[var(--omnigaze-gold)] mb-2">
         {tier.description}
       </div>
 
@@ -60,28 +59,21 @@ export function PricingCard({ tier, billingCycle }: PricingCardProps) {
 
       {/* Price */}
       <div className="mb-2">
-        {price === null ? (
-          <span className="font-display text-4xl font-semibold">Custom</span>
-        ) : price === 0 ? (
+        {isFree ? (
           <span className="font-display text-4xl font-semibold text-[var(--success)]">$0</span>
         ) : (
-          <>
-            <span className="font-display text-4xl font-semibold">${price}</span>
-            <span className="text-[var(--text-muted)] text-sm">/month</span>
-          </>
+          <span className="font-display text-3xl font-semibold">Contact Us</span>
         )}
       </div>
 
-      {/* Annual info */}
+      {/* Subtitle */}
       <div className="text-xs text-[var(--text-muted)] mb-6 h-4">
-        {price === 0 ? (
+        {isFree ? (
           "No credit card needed"
-        ) : price === null ? (
-          "Tailored to your needs"
-        ) : billingCycle === "annual" && annualTotal ? (
-          `$${annualTotal.toLocaleString()} billed annually`
+        ) : isPaid ? (
+          "Standard pricing available"
         ) : (
-          ""
+          "Tailored to your needs"
         )}
       </div>
 
@@ -89,13 +81,13 @@ export function PricingCard({ tier, billingCycle }: PricingCardProps) {
       <div className="flex gap-4 py-4 border-y border-[var(--border-subtle)] mb-6">
         <div className="flex-1">
           <div className="text-lg font-semibold">
-            {isUnlimited ? "∞" : tier.serverLimit.toLocaleString()}
+            {isUnlimited ? "\u221e" : tier.serverLimit.toLocaleString()}
           </div>
           <div className="text-xs uppercase text-[var(--text-muted)]">Servers</div>
         </div>
         <div className="flex-1">
           <div className="text-lg font-semibold">
-            {tier.userLimit === -1 ? "∞" : tier.userLimit}
+            {tier.userLimit === -1 ? "\u221e" : tier.userLimit}
           </div>
           <div className="text-xs uppercase text-[var(--text-muted)]">Users</div>
         </div>
@@ -124,7 +116,7 @@ export function PricingCard({ tier, billingCycle }: PricingCardProps) {
 
       {/* CTA */}
       <ButtonLink
-        href={tier.id === "enterprise" ? "/contact" : "/register"}
+        href={ctaHref}
         variant={tier.ctaVariant}
         className="w-full justify-center"
       >

@@ -67,7 +67,7 @@ export default function NotFound() {
               <QuickLink
                 href="/pricing"
                 icon={ArrowRight}
-                title="Pricing"
+                title="Plans"
                 description="Find the right plan"
               />
             </div>

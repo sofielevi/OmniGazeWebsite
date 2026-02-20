@@ -35,7 +35,7 @@ export function PainPoints({ className }: PainPointsProps) {
     <div className={cn("py-16", className)}>
       <div className="container mx-auto px-6 max-w-5xl">
         <h2 className="font-display text-3xl md:text-4xl text-center mb-4">
-          Say <span className="text-[var(--amber-400)]">Goodbye</span> to...
+          Say <span className="text-[var(--omnigaze-gold)]">Goodbye</span> to...
         </h2>
         <p className="text-[var(--text-secondary)] text-center mb-12 max-w-2xl mx-auto">
           Stop struggling with disconnected tools and manual processes

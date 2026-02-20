@@ -49,7 +49,31 @@ These define OmniGaze's identity. Use consistently across all touchpoints.
 
 ---
 
-## 2. Supporting Futuristic Colors
+## 2. OmniGaze Gold (Logo Accent)
+
+The signature warm gold from the OmniGaze logo. Use for warmth and brand recognition.
+
+### OmniGaze Gold
+```
+#E8A030
+```
+- Logo color
+- Warm accent highlights
+- Premium/special callouts
+- Data visualization accents
+- **Why:** Adds warmth to the cool violet palette, creates visual interest
+
+### OmniGaze Gold Dark
+```
+#D4841C
+```
+- Hover states for gold elements
+- Gradient endpoint
+- Depth in gold accents
+
+---
+
+## 3. Supporting Futuristic Colors
 
 These expand flexibility while staying on-brand.
 
@@ -166,6 +190,10 @@ For product launches, hero visuals, or keynote slides.
 --bg-elevated: #191D54;
 --bg-hover: #252966;
 
+/* OmniGaze Gold - Warm Accent */
+--omnigaze-gold: #E8A030;
+--omnigaze-gold-dark: #D4841C;
+
 /* Power Mode (optional) */
 --signal-cyan: #3FF3E0;
 --plasma-rose: #C94A7C;
@@ -181,11 +209,26 @@ For product launches, hero visuals, or keynote slides.
 | Primary CTA | Omni Violet | `#7D67E1` |
 | Hover / Active | Electric Lilac | `#816AE6` |
 | Emphasis | Deep Magenta | `#8B1E5D` |
+| **Warm Accent** | **OmniGaze Gold** | **`#E8A030`** |
 | Primary Text | Pure White | `#FFFFFF` |
-| Secondary Text | Cloud Gray | `#EEF0F4` |
-| Muted Text | Mist Gray | `#C9CCD6` |
-| Cards | Neural Indigo | `#2B2F7F` |
-| Footer/Tables | Graphite Slate | `#3A3F5C` |
+| Secondary Text | Cloud Gray | `#9499AB` |
+| Muted Text | Mist Gray | `#6B7089` |
+| Cards | Dark Indigo | `#0D1042` |
+| Footer/Tables | Graphite Slate | `#252840` |
+
+### OmniGaze Gold Usage (New)
+
+The gold accent creates warmth and brand recognition. Use for:
+
+- **Stats & Metrics** - ROI percentages, savings numbers, key figures
+- **"Free" Badges** - Community tier highlights, free trial callouts
+- **Premium Highlights** - Recommended tier, special features
+- **Testimonial Accents** - Quote marks, customer highlights
+- **Data Visualization** - Secondary chart color (pair with violet/cyan)
+- **Tips & Callouts** - Pro tips, important notes
+- **Logo Integration** - Anywhere the brand mark appears
+
+**Rule:** Gold is the "warm friend" in a cool palette. Use it to draw attention to value and create emotional connection.
 
 ---
 

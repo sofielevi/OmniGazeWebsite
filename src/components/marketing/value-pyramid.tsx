@@ -91,7 +91,7 @@ export function ValuePyramid({ className, showLabels = true, interactive = true 
                       {layer.name}
                     </div>
                     <div className="text-xs text-[var(--text-secondary)] mb-3">
-                      Unlocked in <span className="text-[var(--amber-400)]">{layer.tier}</span> tier
+                      Unlocked in <span className="text-[var(--omnigaze-gold)]">{layer.tier}</span> tier
                     </div>
                     <ul className="space-y-1">
                       {layer.features.map((feature) => (

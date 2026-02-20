@@ -32,7 +32,7 @@ export function SectionHeader({ label, title, description, className, align = "c
       className
     )}>
       {label && (
-        <div className="text-xs uppercase tracking-widest text-[var(--amber-400)] mb-4">
+        <div className="text-xs uppercase tracking-widest text-[var(--omnigaze-gold)] mb-4">
           {label}
         </div>
       )}

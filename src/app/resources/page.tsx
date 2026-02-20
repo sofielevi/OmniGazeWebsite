@@ -3,19 +3,17 @@ import { Footer } from "@/components/marketing/footer";
 import { Section, SectionHeader } from "@/components/marketing/section";
 import { ButtonLink } from "@/components/ui/button";
 import {
-  FileSpreadsheet,
   Calculator,
   Eye,
   ChevronRight
 } from "lucide-react";
 
 export const metadata = {
-  title: "Free Resources - Templates, Tools & Guides | OmniGaze",
+  title: "Free Resources - Tools & Guides | OmniGaze",
   description:
-    "Free IT resources: EA templates, ROI calculator, visibility assessment quiz, and more. Tools to help you understand and optimize your IT landscape.",
+    "Free IT resources: ROI calculator, visibility assessment quiz, and more. Tools to help you understand and optimize your IT landscape.",
   keywords: [
     "IT resources",
-    "EA templates",
     "infrastructure tools",
     "free IT assessment",
     "ROI calculator",
@@ -23,14 +21,6 @@ export const metadata = {
 };
 
 const resources = [
-  {
-    title: "EA Starter Kit Templates",
-    description: "Free Excel templates for Application Portfolio, Infrastructure Inventory, Dependency Mapping, and Business Capability Map.",
-    icon: FileSpreadsheet,
-    href: "/resources/templates",
-    cta: "Download Templates",
-    stats: "5,000+ downloads",
-  },
   {
     title: "ROI Calculator",
     description: "Calculate the hidden cost of poor IT visibility. Find out what your 'IT darkness' costs your organization.",
@@ -62,7 +52,7 @@ export default function ResourcesPage() {
             description="Free resources to understand, document, and optimize your IT infrastructure."
           />
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {resources.map((resource) => (
               <div
                 key={resource.href}

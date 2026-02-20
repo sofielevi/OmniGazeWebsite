@@ -98,7 +98,7 @@ export default function HomePage() {
                 See All Features
               </ButtonLink>
               <ButtonLink href="/pricing" variant="primary">
-                View Pricing
+                View Plans
                 <ChevronRight size={16} />
               </ButtonLink>
             </div>
@@ -170,15 +170,11 @@ export default function HomePage() {
             {/* Trust signals */}
             <div className="flex flex-wrap justify-center gap-4 mb-8 relative z-10">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-deep)]/60 rounded-full text-sm text-[var(--text-secondary)] border border-[var(--border-subtle)]">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                No sales calls required
-              </span>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-deep)]/60 rounded-full text-sm text-[var(--text-secondary)] border border-[var(--border-subtle)]">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                <span className="w-1.5 h-1.5 bg-[var(--success)] rounded-full" />
                 No payment required
               </span>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-deep)]/60 rounded-full text-sm text-[var(--text-secondary)] border border-[var(--border-subtle)]">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-deep)]/60 rounded-full text-sm text-[var(--omnigaze-gold)] border border-[var(--omnigaze-gold)]/30">
+                <span className="w-1.5 h-1.5 bg-[var(--omnigaze-gold)] rounded-full" />
                 50 servers free forever
               </span>
             </div>
@@ -187,7 +183,7 @@ export default function HomePage() {
                 Start Free Today
               </ButtonLink>
               <ButtonLink
-                href="https://calendly.com/omnigaze/introductory-call"
+                href="https://www.cal.eu/sofielevi/30min?user=sofielevi"
                 variant="secondary"
                 size="lg"
                 target="_blank"
@@ -253,12 +249,12 @@ function FeatureCard({ title, description, icon: Icon, tier }: {
 }) {
   return (
     <div className="p-6 bg-[var(--bg-elevated)] rounded-xl border border-[var(--border-subtle)] hover:border-[var(--border-warm)] transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl">
-      <div className="w-12 h-12 rounded-lg bg-[var(--amber-400)]/10 flex items-center justify-center mb-4">
-        <Icon className="w-6 h-6 text-[var(--amber-400)]" />
+      <div className="w-12 h-12 rounded-lg bg-[var(--omnigaze-gold)]/10 flex items-center justify-center mb-4">
+        <Icon className="w-6 h-6 text-[var(--omnigaze-gold)]" />
       </div>
       <h3 className="font-display text-lg mb-2">{title}</h3>
       <p className="text-sm text-[var(--text-secondary)] mb-4">{description}</p>
-      <span className="inline-block px-2 py-1 bg-[var(--bg-card)] rounded text-xs text-[var(--amber-400)]">
+      <span className="inline-block px-2 py-1 bg-[var(--bg-card)] rounded text-xs text-[var(--omnigaze-gold)]">
         {tier}+
       </span>
     </div>

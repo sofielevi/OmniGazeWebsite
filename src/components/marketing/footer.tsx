@@ -26,7 +26,7 @@ export function Footer() {
               href="https://www.linkedin.com/company/omnigaze/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--text-muted)] hover:text-[var(--amber-400)] transition-colors duration-200"
+              className="text-[var(--text-muted)] hover:text-[var(--omnigaze-gold)] transition-colors duration-200"
               aria-label="Follow OmniGaze on LinkedIn"
             >
               <Linkedin size={20} />

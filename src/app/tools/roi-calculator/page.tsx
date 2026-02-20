@@ -225,7 +225,7 @@ export default function ROICalculatorPage() {
               </div>
             </div>
             <p className="text-xs text-[var(--text-muted)] mt-6">
-              Sources: Gartner IT Budget Benchmark, Flexera State of IT Report, Faddom ROI Analysis
+              Sources: Gartner IT Budget Benchmark, Forrester TEI Studies, McKinsey Digital Operations
             </p>
           </div>
         </Section>
@@ -294,7 +294,7 @@ export default function ROICalculatorPage() {
                 View All Plans
               </ButtonLink>
               <ButtonLink
-                href="https://calendly.com/omnigaze/introductory-call"
+                href="https://www.cal.eu/sofielevi/30min?user=sofielevi"
                 variant="ghost"
                 size="lg"
                 target="_blank"

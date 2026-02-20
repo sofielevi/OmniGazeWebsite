@@ -126,29 +126,29 @@ const tierUIMetadata: Record<string, {
 }> = {
   Community: {
     description: "Free Forever",
-    cta: "Download Free",
+    cta: "Get Started",
     ctaVariant: "secondary",
     disabledFeatures: ["Process mapping", "API access"],
   },
   Starter: {
     description: "Small Teams",
-    cta: "Subscribe Now",
+    cta: "Get a Quote",
     ctaVariant: "secondary",
   },
   Professional: {
     description: "Growing Teams",
-    cta: "Subscribe Now",
+    cta: "Get a Quote",
     ctaVariant: "primary",
     featured: true,
   },
   Business: {
     description: "Operations",
-    cta: "Subscribe Now",
+    cta: "Get a Quote",
     ctaVariant: "secondary",
   },
   Enterprise: {
     description: "Full Platform",
-    cta: "Contact Sales",
+    cta: "Get a Quote",
     ctaVariant: "secondary",
   },
 };
@@ -157,7 +157,7 @@ const tierUIMetadata: Record<string, {
 function enrichTierWithUI(tier: TierInfo, index: number, allTiers: TierInfo[]): UITier {
   const metadata = tierUIMetadata[tier.name] || {
     description: tier.description || tier.name,
-    cta: "Get Started",
+    cta: "Get a Quote",
     ctaVariant: "secondary" as const,
   };
 
@@ -191,7 +191,6 @@ function enrichTierWithUI(tier: TierInfo, index: number, allTiers: TierInfo[]): 
 }
 
 export default function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
   const [pricingTiers, setPricingTiers] = useState<UITier[]>([]);
   const [featureMatrix, setFeatureMatrix] = useState<FeatureMatrixCategory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -250,52 +249,21 @@ export default function PricingPage() {
         {/* Pricing Section */}
         <Section>
           <div className="text-center mb-16">
-            <span className="inline-block px-3 py-1 text-xs uppercase tracking-wider bg-[var(--amber-400)]/10 text-[var(--amber-400)] rounded-full mb-6">
-              Pricing
+            <span className="inline-block px-3 py-1 text-xs uppercase tracking-wider bg-[var(--omnigaze-gold)]/10 text-[var(--omnigaze-gold)] rounded-full mb-6">
+              Plans
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium mb-4">
               <span className="inline-block">Plans That</span>{" "}
               <span className="inline-block relative">
-                <span className="relative z-10 bg-gradient-to-r from-[var(--amber-400)] via-[var(--amber-300)] to-[var(--amber-500)] bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">
+                <span className="relative z-10 bg-gradient-to-r from-[var(--omnigaze-gold)] via-[var(--omni-violet)] to-[var(--omnigaze-gold-dark)] bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">
                   Grow With You
                 </span>
-                <span className="absolute -inset-1 bg-gradient-to-r from-[var(--amber-400)]/20 via-[var(--amber-300)]/10 to-[var(--amber-500)]/20 blur-xl animate-gradient-x bg-[length:200%_auto] -z-10" />
+                <span className="absolute -inset-1 bg-gradient-to-r from-[var(--omnigaze-gold)]/20 via-[var(--omni-violet)]/10 to-[var(--omnigaze-gold-dark)]/20 blur-xl animate-gradient-x bg-[length:200%_auto] -z-10" />
               </span>
             </h2>
             <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
-              Start free, scale when you need to. No credit card required.
+              Start free with the Community tier. Contact us for paid tier pricing.
             </p>
-          </div>
-
-          {/* Billing Toggle */}
-          <div className="flex justify-center mb-12">
-            <div className="inline-flex bg-[var(--bg-card)] p-1 rounded-lg">
-              <button
-                className={cn(
-                  "px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-300",
-                  billingCycle === "monthly"
-                    ? "bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-                )}
-                onClick={() => setBillingCycle("monthly")}
-              >
-                Monthly
-              </button>
-              <button
-                className={cn(
-                  "px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-300 flex items-center gap-2",
-                  billingCycle === "annual"
-                    ? "bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-                )}
-                onClick={() => setBillingCycle("annual")}
-              >
-                Annual
-                <span className="px-2 py-0.5 bg-[var(--success-muted)] text-[var(--success)] text-xs rounded">
-                  Save 17%
-                </span>
-              </button>
-            </div>
           </div>
 
           {/* Pricing Cards */}
@@ -344,11 +312,17 @@ export default function PricingPage() {
                 <PricingCard
                   key={tier.id}
                   tier={tier}
-                  billingCycle={billingCycle}
                 />
               ))}
             </div>
           )}
+
+          {/* Trust banner */}
+          <div className="mt-12 text-center">
+            <p className="text-sm text-[var(--text-secondary)] max-w-2xl mx-auto bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl px-6 py-4 inline-block">
+              We maintain a standard price list for all tiers. Pricing may be adjusted as we expand capabilities. Contact us for current pricing.
+            </p>
+          </div>
         </Section>
 
         {/* Feature Matrix */}
@@ -367,7 +341,7 @@ export default function PricingPage() {
                           key={tier.id}
                           className={cn(
                             "text-center py-4 text-xs uppercase tracking-wider",
-                            tier.featured ? "text-[var(--amber-400)]" : "text-[var(--text-muted)]"
+                            tier.featured ? "text-[var(--omnigaze-gold)]" : "text-[var(--text-muted)]"
                           )}
                         >
                           {tier.name}
@@ -381,7 +355,7 @@ export default function PricingPage() {
                         <tr key={category.category}>
                           <td
                             colSpan={pricingTiers.length + 1}
-                            className="pt-6 pb-2 text-xs uppercase tracking-wider text-[var(--amber-400)]"
+                            className="pt-6 pb-2 text-xs uppercase tracking-wider text-[var(--omnigaze-gold)]"
                           >
                             {category.category}
                           </td>
@@ -392,9 +366,9 @@ export default function PricingPage() {
                             {feature.tiers.slice(0, pricingTiers.length).map((available, i) => (
                               <td key={i} className="text-center py-3">
                                 {available ? (
-                                  <span className="text-[var(--success)]">✓</span>
+                                  <span className="text-[var(--success)]">&#10003;</span>
                                 ) : (
-                                  <span className="text-[var(--text-muted)] opacity-30">—</span>
+                                  <span className="text-[var(--text-muted)] opacity-30">&mdash;</span>
                                 )}
                               </td>
                             ))}
@@ -435,28 +409,24 @@ export default function PricingPage() {
 // FAQs
 const faqs = [
   {
+    question: "How do I get pricing?",
+    answer: "Contact our sales team for the standard price list. We offer transparent, published pricing for all paid tiers. Reach out via our contact page and we'll respond within one business day.",
+  },
+  {
+    question: "Is there a free tier?",
+    answer: "Yes! The Community tier is free forever and includes network discovery, asset inventory, server diagrams, and tag management for up to 50 servers. No credit card required.",
+  },
+  {
     question: "What counts as a \"server\"?",
     answer: "Any discovered device with an IP address that runs services - Windows servers, Linux servers, VMs, containers with IPs. Network devices (switches, routers) and endpoints (workstations) are counted separately.",
   },
   {
-    question: "Can I upgrade or downgrade anytime?",
-    answer: "Yes, changes take effect on your next billing cycle. When upgrading, you get immediate access with prorated billing. Note that downgrading is not available for self-service - please contact support.",
-  },
-  {
-    question: "Can I switch between monthly and annual billing?",
-    answer: "Yes, you can switch from monthly to annual billing at any time to save 17%. Switching from annual to monthly takes effect at the end of your current billing period.",
-  },
-  {
-    question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, Mastercard, American Express) and can arrange invoicing for Enterprise customers. Payments are processed securely through Stripe.",
+    question: "Can I upgrade later?",
+    answer: "Yes, you can upgrade at any time. Contact our team to discuss the right tier for your needs. Your existing data and configurations are preserved when you upgrade.",
   },
   {
     question: "What happens if I exceed my server limit?",
     answer: "You'll receive a notification and have 14 days to upgrade or remove servers. Discovery continues but new servers won't be added until you're within limits.",
-  },
-  {
-    question: "How does payment work for paid tiers?",
-    answer: "Payment is processed securely through Stripe when you subscribe. Your subscription activates immediately after successful payment.",
   },
   {
     question: "Do you offer discounts for nonprofits or education?",

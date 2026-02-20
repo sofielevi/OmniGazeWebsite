@@ -97,7 +97,7 @@ export function Hero() {
         <div
           className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-30 animate-float"
           style={{
-            background: "radial-gradient(circle, var(--amber-500) 0%, transparent 70%)",
+            background: "radial-gradient(circle, var(--omnigaze-gold) 0%, transparent 70%)",
             top: "-200px",
             right: "-100px",
           }}
@@ -105,7 +105,7 @@ export function Hero() {
         <div
           className="absolute w-[400px] h-[400px] rounded-full blur-[120px] opacity-20 animate-float"
           style={{
-            background: "radial-gradient(circle, var(--amber-600) 0%, transparent 70%)",
+            background: "radial-gradient(circle, var(--omnigaze-gold-dark) 0%, transparent 70%)",
             bottom: "20%",
             left: "-100px",
             animationDelay: "-7s",
@@ -115,8 +115,8 @@ export function Hero() {
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--bg-elevated)] border border-[var(--border-warm)] rounded-full text-xs text-[var(--amber-300)] mb-8 animate-fade-up">
-          <span className="w-1.5 h-1.5 bg-[var(--amber-400)] rounded-full animate-blink" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--bg-elevated)] border border-[var(--omnigaze-gold)]/30 rounded-full text-xs text-[var(--omnigaze-gold)] mb-8 animate-fade-up">
+          <span className="w-1.5 h-1.5 bg-[var(--omnigaze-gold)] rounded-full animate-blink" />
           Now with 3D Architecture Visualization
         </div>
 
@@ -139,7 +139,7 @@ export function Hero() {
             <ChevronRight size={18} />
           </ButtonLink>
           <ButtonLink
-            href="https://calendly.com/omnigaze/introductory-call"
+            href="https://www.cal.eu/sofielevi/30min?user=sofielevi"
             variant="secondary"
             size="lg"
             target="_blank"
@@ -166,7 +166,7 @@ export function Hero() {
         <div className="flex flex-wrap gap-12 pt-10 border-t border-[var(--border-subtle)] animate-fade-up" style={{ animationDelay: "0.4s" }}>
           {siteConfig.stats.map((stat) => (
             <div key={stat.label} className="text-left">
-              <div className="font-display text-3xl md:text-4xl font-semibold text-[var(--amber-300)]">
+              <div className="font-display text-3xl md:text-4xl font-semibold text-[var(--omnigaze-gold)]">
                 {stat.value}
               </div>
               <div className="text-xs uppercase tracking-wider text-[var(--text-muted)] mt-1">

@@ -1,8 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { Header } from "@/components/marketing/header";
 import { Footer } from "@/components/marketing/footer";
 import { Section, SectionHeader } from "@/components/marketing/section";
+import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button";
-import { DownloadButton } from "@/components/marketing/download-button";
 import { siteConfig } from "@/config/site";
 import {
   Download,
@@ -14,42 +17,14 @@ import {
   Check,
   FileText,
   ArrowRight,
+  Loader2,
+  Linkedin,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Download OmniGaze for Windows - Free Infrastructure Discovery",
-  description:
-    "Download OmniGaze free for Windows 10, 11, and Server 2016+. Agentless infrastructure discovery, network scanning, and 3D visualization. Start with 50 free servers.",
-  keywords: [
-    "download OmniGaze",
-    "infrastructure discovery software",
-    "free CMDB tool",
-    "network discovery Windows",
-    "IT asset management download",
-    "server discovery tool",
-    "agentless scanning software",
-  ],
-  openGraph: {
-    title: "Download OmniGaze - Free Infrastructure Discovery for Windows",
-    description:
-      "Get OmniGaze free. Auto-discover servers, map dependencies, visualize in 3D. No agents required. Windows 10, 11, Server 2016+.",
-    url: "https://omnigaze.com/download",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Download OmniGaze for Windows",
-      },
-    ],
-  },
-  alternates: {
-    canonical: "https://omnigaze.com/download",
-  },
-};
-
-// Use centralized download config
+// Metadata must be in layout.tsx since this is now a client component
 const { version, releaseDate, fileSize } = siteConfig.download;
+
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function DownloadPage() {
   return (
@@ -74,25 +49,8 @@ export default function DownloadPage() {
               and bridge the gap from servers to strategy.
             </p>
 
-            {/* Download Card */}
-            <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl p-8 md:p-10 max-w-xl mx-auto">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[var(--amber-400)] to-[var(--amber-500)] flex items-center justify-center">
-                  <Monitor className="w-8 h-8 text-[var(--bg-deep)]" />
-                </div>
-              </div>
-
-              <h2 className="font-display text-2xl mb-2">OmniGaze for Windows</h2>
-              <p className="text-[var(--text-muted)] text-sm mb-6">
-                Windows 10/11, Windows Server 2016+
-              </p>
-
-              <DownloadButton className="w-full mb-4" />
-
-              <p className="text-xs text-[var(--text-muted)]">
-                v{version} &bull; {releaseDate} &bull; {fileSize}
-              </p>
-            </div>
+            {/* Lead Capture Form */}
+            <LeadCaptureForm />
           </div>
         </Section>
 
@@ -190,13 +148,13 @@ export default function DownloadPage() {
             <div className="space-y-6">
               <InstallStep
                 number={1}
-                title="Download and Install"
-                description="Run the installer and follow the setup wizard. Administrator rights required."
+                title="Request Your License"
+                description="Fill out the form above. We'll verify your details and send your Community license."
               />
               <InstallStep
                 number={2}
-                title="Register Your Account"
-                description="Create a free account or enter your existing license key to activate."
+                title="Download and Install"
+                description="Once approved, download the installer and follow the setup wizard. Administrator rights required."
               />
               <InstallStep
                 number={3}
@@ -267,31 +225,166 @@ export default function DownloadPage() {
             </ButtonLink>
           </div>
         </Section>
-
-        {/* CTA */}
-        <Section>
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4">
-              Ready to see your infrastructure clearly?
-            </h2>
-            <p className="text-lg text-[var(--text-secondary)] mb-8">
-              Start with the free Community tier. No credit card required.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <DownloadButton>
-                <Download className="w-5 h-5" />
-                Download Now
-              </DownloadButton>
-              <ButtonLink href="/register" variant="secondary" size="lg">
-                Create Free Account
-              </ButtonLink>
-            </div>
-          </div>
-        </Section>
       </main>
 
       <Footer />
     </>
+  );
+}
+
+function LeadCaptureForm() {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMsg("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const fullName = (formData.get("fullName") as string).trim();
+    const nameParts = fullName.split(/\s+/);
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || firstName;
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "community_download",
+          firstName,
+          lastName,
+          email: formData.get("email"),
+          company: formData.get("company"),
+          linkedinUrl: formData.get("linkedinUrl"),
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        const data = await res.json();
+        setErrorMsg(data.error || "Something went wrong. Please try again.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMsg("Network error. Please try again.");
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl p-8 md:p-10 max-w-xl mx-auto text-center">
+        <div className="w-16 h-16 rounded-full bg-[var(--success)]/10 flex items-center justify-center mx-auto mb-6">
+          <Check className="w-8 h-8 text-[var(--success)]" />
+        </div>
+        <h2 className="font-display text-2xl mb-3">Request Received!</h2>
+        <p className="text-[var(--text-secondary)] mb-2">
+          Thanks! We&apos;ll verify your details and send your Community license within 1 business day.
+        </p>
+        <p className="text-xs text-[var(--text-muted)]">
+          Check your email for confirmation.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl p-8 md:p-10 max-w-xl mx-auto">
+      <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[var(--amber-400)] to-[var(--amber-500)] flex items-center justify-center">
+          <Monitor className="w-8 h-8 text-[var(--bg-deep)]" />
+        </div>
+      </div>
+
+      <h2 className="font-display text-2xl mb-2">OmniGaze for Windows</h2>
+      <p className="text-[var(--text-muted)] text-sm mb-6">
+        v{version} &bull; {releaseDate} &bull; {fileSize}
+      </p>
+
+      <form onSubmit={handleSubmit} className="space-y-4 text-left">
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
+            Full Name<span className="text-[var(--omnigaze-gold)]">*</span>
+          </label>
+          <input
+            type="text"
+            name="fullName"
+            required
+            placeholder="Jane Smith"
+            className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--omnigaze-gold)] transition-colors"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
+            Business Email<span className="text-[var(--omnigaze-gold)]">*</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="jane@company.com"
+            className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--omnigaze-gold)] transition-colors"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
+            Company<span className="text-[var(--omnigaze-gold)]">*</span>
+          </label>
+          <input
+            type="text"
+            name="company"
+            required
+            placeholder="Acme Corp"
+            className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--omnigaze-gold)] transition-colors"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
+            <span className="flex items-center gap-1.5">
+              <Linkedin className="w-4 h-4" />
+              LinkedIn Profile URL<span className="text-[var(--omnigaze-gold)]">*</span>
+            </span>
+          </label>
+          <input
+            type="url"
+            name="linkedinUrl"
+            required
+            placeholder="https://linkedin.com/in/janesmith"
+            className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--omnigaze-gold)] transition-colors"
+          />
+        </div>
+
+        {status === "error" && (
+          <p className="text-sm text-red-400">{errorMsg}</p>
+        )}
+
+        <Button type="submit" variant="primary" className="w-full justify-center" disabled={status === "submitting"}>
+          {status === "submitting" ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Submitting...
+            </>
+          ) : (
+            <>
+              <Download className="w-5 h-5" />
+              Request Free License
+            </>
+          )}
+        </Button>
+      </form>
+
+      <p className="text-xs text-[var(--text-muted)] mt-4 text-center">
+        We verify LinkedIn profiles to maintain a quality community.
+      </p>
+    </div>
   );
 }
 

@@ -71,7 +71,7 @@ export function ComparisonTable({ className }: ComparisonTableProps) {
                 <th className="text-center p-4 border-b border-[var(--border-subtle)] text-[var(--text-muted)] font-mono text-sm uppercase tracking-wider">
                   Traditional Tools
                 </th>
-                <th className="text-center p-4 border-b border-[var(--border-subtle)] text-[var(--amber-400)] font-mono text-sm uppercase tracking-wider">
+                <th className="text-center p-4 border-b border-[var(--border-subtle)] text-[var(--omnigaze-gold)] font-mono text-sm uppercase tracking-wider">
                   OmniGaze
                 </th>
               </tr>
@@ -89,7 +89,7 @@ export function ComparisonTable({ className }: ComparisonTableProps) {
                     {row.traditional}
                   </td>
                   <td className="p-4 border-b border-[var(--border-subtle)] text-center">
-                    <span className="inline-flex items-center gap-2 text-[var(--amber-400)] font-medium">
+                    <span className="inline-flex items-center gap-2 text-[var(--omnigaze-gold)] font-medium">
                       {row.omnigaze}
                     </span>
                   </td>
