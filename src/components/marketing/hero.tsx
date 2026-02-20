@@ -150,6 +150,18 @@ export function Hero() {
           <DownloadButton size="lg" />
         </div>
 
+        {/* SKI Trust Badge */}
+        <div className="flex items-center gap-4 mb-10 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+          <img
+            src="/images/ski-leverandor.jpg"
+            alt="SKI Leverandør – Standard software for the public sector"
+            className="h-16 w-auto rounded"
+          />
+          <span className="text-sm text-[var(--text-secondary)] max-w-xs">
+            Standard software for the public sector
+          </span>
+        </div>
+
         {/* Stats */}
         <div className="flex flex-wrap gap-12 pt-10 border-t border-[var(--border-subtle)] animate-fade-up" style={{ animationDelay: "0.4s" }}>
           {siteConfig.stats.map((stat) => (
