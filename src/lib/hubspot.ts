@@ -1,4 +1,4 @@
-export type LeadSource = "quote" | "demo" | "community_download";
+export type LeadSource = "quote" | "demo" | "community_download" | "resource_download";
 
 export interface HubSpotContactData {
   firstName: string;

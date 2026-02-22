@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/button";
 import {
   Calculator,
   Eye,
+  FileText,
   ChevronRight
 } from "lucide-react";
 
@@ -21,6 +22,14 @@ export const metadata = {
 };
 
 const resources = [
+  {
+    title: "How to Present Technical Risk to the Board",
+    description: "Stop losing credibility in the boardroom. A practical framework for translating technology risk into the language boards understand and act on.",
+    icon: FileText,
+    href: "/resources/board-template",
+    cta: "Read the Guide",
+    stats: "Free guide + template",
+  },
   {
     title: "ROI Calculator",
     description: "Calculate the hidden cost of poor IT visibility. Find out what your 'IT darkness' costs your organization.",
@@ -52,7 +61,7 @@ export default function ResourcesPage() {
             description="Free resources to understand, document, and optimize your IT infrastructure."
           />
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {resources.map((resource) => (
               <div
                 key={resource.href}

@@ -1,5 +1,5 @@
 export interface LeadNotificationData {
-  type: "quote" | "demo" | "community_download";
+  type: "quote" | "demo" | "community_download" | "resource_download";
   firstName: string;
   lastName: string;
   email: string;
@@ -28,6 +28,7 @@ export async function sendLeadNotification(data: LeadNotificationData): Promise<
     quote: "New Quote Request",
     demo: "New Demo Request",
     community_download: "New Community Download Request",
+    resource_download: "New Resource Download",
   };
 
   const subject = `${typeLabels[data.type] || "New Lead"} - ${data.company}`;
