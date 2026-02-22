@@ -111,7 +111,7 @@ export default function BoardTemplatePage() {
               you don&apos;t have the number ready.
             </p>
             <p>
-              I&apos;ve watched this happen to smart, capable technology leaders
+              We&apos;ve watched this happen to smart, capable technology leaders
               who know their systems inside out. They walk out wondering why
               nobody seemed to care. The answer is almost always the same: they
               were speaking the wrong language.
@@ -269,7 +269,7 @@ export default function BoardTemplatePage() {
                 />
 
                 <p className="text-lg text-[var(--text-secondary)] mb-4">
-                  I&apos;m just going to be bluntly honest: the technical detail
+                  We&apos;re just going to be bluntly honest: the technical detail
                   you love? The board doesn&apos;t want it. They want to know three
                   things: <strong className="text-[var(--text-primary)]">what&apos;s the risk, what&apos;s the cost,
                   and what do you need from us.</strong> Everything else goes in the appendix.
@@ -289,7 +289,7 @@ export default function BoardTemplatePage() {
                   The 5 mistakes that kill your credibility
                 </h2>
                 <p className="text-lg text-[var(--text-secondary)] mb-10">
-                  I&apos;ve seen all of these, sometimes in the same meeting.
+                  We&apos;ve seen all of these, sometimes in the same meeting.
                   Based on Gartner, NACD, FAIR Institute, and a lot of CIOs being
                   refreshingly honest about what went wrong.
                 </p>
@@ -456,7 +456,7 @@ export default function BoardTemplatePage() {
                   Metrics that actually land
                 </h2>
                 <p className="text-lg text-[var(--text-secondary)] mb-8">
-                  I used to think the problem was having enough data. It&apos;s not.
+                  We used to think the problem was having enough data. It&apos;s not.
                   The problem is presenting the <em>right</em> data. Based on FAIR
                   Institute, Gartner&apos;s Outcome-Driven Metrics, and McKinsey&apos;s
                   Tech Debt Score, here are the numbers boards actually respond to.
@@ -536,7 +536,7 @@ export default function BoardTemplatePage() {
                   The one-page board template
                 </h2>
                 <p className="text-lg text-[var(--text-secondary)] mb-4">
-                  I built this by combining Gartner&apos;s 7-slide framework, NACD
+                  We built this by combining Gartner&apos;s 7-slide framework, NACD
                   governance principles, and McKinsey&apos;s tech debt balance sheet concept.
                   It gives the board everything they need on a single page.
                 </p>
